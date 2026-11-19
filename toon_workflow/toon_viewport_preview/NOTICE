@@ -1,0 +1,130 @@
+NOTICE
+======
+
+Package: 二维描边 · 自动视口预览 (toon_viewport_preview)
+Version: 0.2.27
+Archive: toon_viewport_preview-0.2.27.zip
+Archive integrity: supplied in the external PACKAGE.json / FINAL-INTEGRITY.json; omitted here to avoid a self-referential archive checksum.
+Files: 120 (110 Python source files; final distribution metadata included)
+Declared licence: GNU General Public License, version 3 or later (GPL-3.0-or-later)
+
+Copyright
+---------
+Implementation copyright holder / first author: NOASSERTION.
+
+No implementation copyright notice was found in the 110 Python files or in the
+13 copied source files. The copyright notice in the GNU GPL text
+("Copyright (C) 2007 Free Software Foundation, Inc.") applies to that licence
+text; it is not an authorship or copyright notice for this add-on. The package
+manifest and bl_info name "Blender AI" are attribution labels, not proof of
+legal ownership. Do not replace NOASSERTION with a named holder without
+evidence.
+
+Licence and source
+------------------
+The package metadata declares GPL-3.0-or-later, and every one of the 110 Python
+files begins with:
+
+    # SPDX-License-Identifier: GPL-3.0-or-later
+
+The complete GPLv3 licence text is retained in this package at:
+
+    LICENSE                 SHA-256 0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b
+    _object_core/LICENSE    SHA-256 0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b
+
+Both copies are byte-identical full GPLv3 texts (35821 bytes,
+674 lines). This NOTICE does not replace either licence text.
+The archive contains the complete source for its 110 Python files.
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with
+this program. If not, see <https://www.gnu.org/licenses/>.
+
+Local GPL source copies (13 files)
+----------------------------------
+These are local project source copies, not separately versioned upstream
+packages. Exact upstream commit/tag/release identifiers are NOASSERTION.
+
+Object core (GPL-3.0-or-later; 8 copied modules, 4 modified):
+  _object_core/geometry.py
+  _object_core/analytic_visibility.py
+  _object_core/analytic_batches.py
+  _object_core/visibility.py
+  _object_core/hidden_categories.py
+  _object_core/occlusion.py
+  _object_core/intervals.py
+  _object_core/contract.py
+  Source project: tools/toon_image_backend/
+  Modifications: geometry (signed orthographic viewport depth policy);
+  analytic_visibility (explicit tangent policy and clipped support identities);
+  analytic_batches (exact rational replay for collapsed intervals);
+  hidden_categories (explicit same-domain support and optional cover witness).
+  Full base/current/package SHA-256 and diff evidence: _object_core/SOURCES.json
+  (inside the package), plus the accompanying SOURCES.json and SBOM.spdx.json.
+
+Support (GPL-3.0-or-later; 5 byte-identical copies):
+  _support/smoothing_flags.py       <- tools/toon_image_cpu/smoothing_flags.py
+  _support/relative_size.py         <- tools/toon_image_cpu/relative_size.py
+  _support/paint_editor_state.py    <- tools/toon_image_session_ui_c4/paint_editor_state.py
+  _support/geometry_exact.py        <- tools/toon_image_backend/intersections/geometry_exact.py
+  _support/chain_policy.py          <- tools/toon_image_chain_policy/policy.py
+
+chain_policy origin is inferred from byte equality; the package does not prove
+the historical copy direction. All 13 files carry the GPL-3.0-or-later SPDX
+header. Their source LICENSE files contain the same GPLv3 text: three are
+byte-identical to the package text, the session-ui copy differs only in line
+endings/format, and the chain-policy copy is prefixed with the SPDX line.
+
+Runtime dependencies (not distributed)
+--------------------------------------
+Blender 5.2.0 or newer is required. Blender's embedded Python and NumPy,
+bpy/bmesh/mathutils/gpu and other Blender modules are host-provided. They are
+not included in this ZIP and must not be described as shipped package content.
+The background worker invokes bpy.app.binary_path; no Blender executable is
+bundled. No network calls were found in the audited source.
+
+Design / interface references (not bundled)
+------------------------------------------
+The project cites the OpenEXR File Layout, Pencil+ PLD/File Output documentation,
+the Pencil-4-Line-for-Blender-pyd-source repository, fogleman/ln, the public
+v4.1.5 bridge behaviour and PENumbra as design/interface references. No code,
+binary, SDK, vendor preset, PLD serializer or external source tree from those
+references is included. The external materials were not fetched or
+independently compared in this audit. PLD is reported unavailable; no .pld file
+is fabricated. These references do not grant a licence to the add-on and do not
+make the add-on equivalent to the commercial product.
+
+Excluded user and commercial material
+-------------------------------------
+The package contains zero binary files and no images, fonts, meshes, .blend
+files or commercial RenderApp/PLD payload. Character meshes, textures, fonts,
+test workfiles, rendered frames and audit reports are external user/audit
+material and are not part of the 115-file archive. The two project-owned CPU
+DLLs in tools/toon_image_cpu/ are not copied into this package.
+
+Scope and limitations
+---------------------
+This NOTICE and the accompanying SOURCES.json/SBOM are a material proposal, not
+legal advice and not a legal guarantee. They support a local source-available
+GPL-3.0-or-later distribution of the exact 115-file archive, conditional on the
+distributor having authority to license the project-local code. They do not
+establish a copyright holder, first author, exact upstream commit, public
+upstream availability, legal clearance, commercial equivalence or user visual
+approval. Unknown history is recorded as NOASSERTION, never invented.
+
+For the complete file-level manifest, SHA-256 values and SPDX identifiers, see
+the accompanying SBOM.spdx.json and SOURCES.json.
+
+Final 0.2.27 distribution changes
+--------------------------------
+The original audit above covers 109 Python files from .26. Final .27 adds viewport_scope.py (GPL-3.0-or-later) and integrates its per-Screen saved per-space visibility into addon.py; __init__.py changes version. This new local implementation follows the saved-layout behavior identified in the official GPL Pencil4.1.5 viewport source as a design reference, without including commercial binaries or copying that implementation. All 110 final Python files retain GPL-3.0-or-later identifiers.
+
+This NOTICE and the embedded SBOM do not contain the checksum of their own enclosing ZIP. The SBOM excludes only its own file from its package verification code; the external final package manifest covers all 120 shipped files.

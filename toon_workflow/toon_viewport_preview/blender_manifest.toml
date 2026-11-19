@@ -1,0 +1,13 @@
+schema_version = "1.0.0"
+id = "toon_viewport_preview"
+version = "0.2.27"
+name = "二维描边 · 自动视口预览"
+tagline = "自动描边、参数动画与后台序列线图"
+maintainer = "Blender AI"
+type = "add-on"
+tags = ["3D View"]
+blender_version_min = "5.2.0"
+license = ["SPDX:GPL-3.0-or-later"]
+
+[permissions]
+files = "载入样式，建立请求的场景工作副本并保存线图"
