@@ -144,8 +144,9 @@ def input_documents(command, params):
     return rows
 
 
-def accept(job, request, data, stack, checkpoint):
-    from filesystem import FileGuard
+def accept(job, request, data, stack, checkpoint, *, guard_type=None):
+    if guard_type is None:
+        from filesystem import FileGuard as guard_type
     inspect_sequence = domain('joint_sequence').inspect_sequence
     fingerprint = domain('workflow_contract').fingerprint
     validate_completed_state = domain('joint_workflow').validate_completed_state
@@ -169,7 +170,7 @@ def accept(job, request, data, stack, checkpoint):
     for row in outputs:
         path=_ordinary(row['file'])
         if not path.resolve().is_relative_to(job):raise Failure('VALIDATION_FAILED','Domain output escaped job')
-        guard=stack.enter_context(FileGuard(path))
+        guard=stack.enter_context(guard_type(path))
         if guard.sha256(checkpoint)!=row['expected_sha256']:
             raise Failure('CONFLICT','Domain output changed before parent acceptance')
     report=read_json(job/'toon-workflow-report.json')

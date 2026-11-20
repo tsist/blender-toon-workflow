@@ -247,8 +247,13 @@ def _execute_worker(job, parent_checkpoint=None):
     artifacts = {"job_directory": str(job), "request": str(job / "request.json"),
                  "stdout_log": str(job / "stdout.log"), "stderr_log": str(job / "stderr.log")}
     limits=launch.get('limits');usage={};last_resource_check=0;memory_observations=[]
+    source_inspect = (sys.platform == "linux" and request["command"] == "toon-workflow.inspect"
+                      and "file" in request["params"])
+    guard_checkpoint = None
     def checkpoint():
         nonlocal last_resource_check
+        if source_inspect and guard_checkpoint is not None:
+            guard_checkpoint()
         if parent_checkpoint:
             parent_checkpoint()
         if (job / "cancel.request").exists():
@@ -452,6 +457,16 @@ def _execute_worker(job, parent_checkpoint=None):
         if request['command'].startswith('toon-workflow.'):
             from toon_workflow_public import anchors, input_documents
             from filesystem import FileGuard
+            if source_inspect:
+                if limits or request['params']['resources']:
+                    raise Failure('UNSUPPORTED','Linux source inspect requires a self-contained project without resource limits')
+                from functools import partial
+                try:
+                    from linux_file_guard import LinuxFileGuard, LinuxGuardMonitor, check_all_guards
+                except ImportError as exc:
+                    raise Failure("UNSUPPORTED", "Selected CLI core lacks the Linux read-guard monitor") from exc
+                guard_checkpoint = check_all_guards
+                FileGuard = partial(LinuxFileGuard, monitor=input_guards.enter_context(LinuxGuardMonitor()))
             for document in anchors(request['command'],request['params']):
                 filename=document['file']
                 guard=input_guards.enter_context(FileGuard(filename))
@@ -530,7 +545,7 @@ def _execute_worker(job, parent_checkpoint=None):
         data = result["data"]
         if request['command'].startswith('toon-workflow.'):
             from toon_workflow_public import accept
-            data=accept(job,request,data,input_guards,checkpoint)
+            data=accept(job,request,data,input_guards,checkpoint,guard_type=FileGuard)
         if request['command'] in ('toon.template-save','toon.template-edit','toon.template-apply'):
             from toon_templates_host import accept
             data=accept(job,request,data,input_guards,checkpoint)
@@ -653,7 +668,12 @@ def _execute_worker(job, parent_checkpoint=None):
             atomic_json(job/'telemetry.json',{'memory_samples':memory_observations,'gpu':gpu_sample(),'hard_memory':'Windows Job committed bytes','hard_disk':False,'hard_vram':False,'disk':'sampling and cancellation; no per-job filesystem quota'})
             atomic_json(job/'resources.json',{'limits':limits,'usage':usage,'memory_semantics':'Windows Job Object committed memory for bootstrap and all descendants','disk_semantics':'sampled budget; may overshoot, partial files retained','gpu_semantics':'scheduler reservation only, not a VRAM allocator limit'})
             artifacts['resources']=str(job/'resources.json')
-        input_guards.close()
+        try:
+            input_guards.close()
+        except Failure as exc:
+            if not source_inspect:
+                raise
+            error = error or {"code": exc.code, "message": str(exc)}
     code = CODES[error["code"]] if error else 0
     state.update(state=("cancelled" if code == 7 else "timed_out" if code == 6 else "failed" if code else "succeeded"),
                  exit_code=code, worker_exit_code=worker_exit, finished_at=time.time(), heartbeat_at=time.time(),
