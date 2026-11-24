@@ -1,0 +1,5 @@
+interface:
+  display_name: "Blender 三渲二工作流"
+  short_description: "通过 Toon Workflow 插件与 blenderctl 制作区域着色、面部 SDF、法向高光、二维描边与线稿通道"
+  default_prompt: "先用 blenderctl 查询 Toon Workflow 可用命令，再在独立工作副本上完成三渲二着色、二维描边与连续帧验收，输出分离通道交下游合成。"
+  default_prompt: "Use $blender-toon-workflow for this Blender workflow task."

@@ -11,3 +11,7 @@ Rebuild the release ZIP locally with `python build.py toon_workflow-0.52.1.zip`.
 The technical qualification covers installation, cold startup, upgrade-copy and reopen, plus Beauty, Line and Combined from a generated fixture. The optional `toon_workflow_cli_v1` adapter uses an external compatible blenderctl core with explicit installation identity. The installable UI package can register without that optional host runner. Character style tuning and interactive Vulkan line output have separate qualification.
 
 The source and embedded line modules are released under GPL-3.0-or-later. See the retained licence and line-engine attribution notices.
+
+## Companion Skill
+
+See [skills/blender-toon-workflow/SKILL.md](skills/blender-toon-workflow/SKILL.md) for the Blender 5.3 cel-shading, SDF face shadow, hair specular, and 2D line workflow guide.
