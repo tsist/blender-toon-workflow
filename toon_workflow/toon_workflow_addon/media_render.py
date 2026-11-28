@@ -557,9 +557,8 @@ def inspect(report_path):
         raise ValueError('Invalid native camera settings')
     _closed(report['author_setup'],{'head_normals','camera_shot'},'author setup')
     _closed(report['blender'],{'version','build_hash'},'Blender identity')
-    from .runtime_compat import JOINT_BUILDS
-    if report['blender']['build_hash'] not in {build for _, build in JOINT_BUILDS}:
-        raise ValueError('Unqualified native-media Blender build')
+    from .runtime_compat import require_joint_receipt
+    require_joint_receipt(report['blender'])
     if report['limits']!=_LIMITS: raise ValueError('Native-media limitations changed')
     if type(report['elapsed_seconds']) not in (int,float) or not math.isfinite(report['elapsed_seconds']) or report['elapsed_seconds']<0:
         raise ValueError('Invalid elapsed time')

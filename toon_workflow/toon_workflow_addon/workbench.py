@@ -22,6 +22,10 @@ from bpy.props import (BoolProperty, EnumProperty, FloatProperty, IntProperty, P
 
 from . import camera_correction, camera_shots, joint_ownership, joint_request, joint_sequence
 from .backend import pencil as pencil_backend
+from .._ui_kit import ensure_object_mode, get_theme
+
+DOMAIN = 'toon'
+THEME = get_theme(DOMAIN)
 
 PROP = 'toon_workbench'
 _registered = False
@@ -33,7 +37,7 @@ _TERMINAL = {'succeeded', 'failed', 'cancelled', 'canceled', 'timed_out', 'aband
 
 
 def _write(path, value):
-    temporary=path.with_name('.'+path.name+'.'+uuid.uuid4().hex+'.tmp')
+    temporary=path.with_name('.w-'+uuid.uuid4().hex[:12]+'.tmp')
     try:
         with temporary.open('x',encoding='utf8') as stream:
             stream.write(json.dumps(value,ensure_ascii=False,indent=2,allow_nan=False))
@@ -60,10 +64,11 @@ def _project_root():
         if not root.is_absolute() or not (root/'blenderctl.ps1').is_file():
             raise ValueError('公共工作目录须包含 blenderctl.ps1')
         return root.resolve(strict=True)
-    root = Path(__file__).resolve().parents[2]
-    if not (root/'blenderctl.ps1').is_file():
-        raise ValueError('请在联合渲染区选择包含 blenderctl.ps1 的公共工作目录')
-    return root
+    roots = (Path(__file__).resolve().parents[2], *Path(bpy.app.binary_path).resolve().parents)
+    for root in roots:
+        if (root/'blenderctl.ps1').is_file():
+            return root
+    raise ValueError('请在输出进阶设置中选择工程目录')
 
 
 def _submission_root(record):
@@ -133,7 +138,7 @@ def _prepare(context, operation='run', *, activate=True):
     if context.mode != 'OBJECT':
         raise ValueError('请先退出编辑／雕刻模式，再保存联合渲染快照')
     if scene.render.engine != 'BLENDER_EEVEE':
-        raise ValueError('当前实验联合配置需要 EEVEE')
+            raise ValueError('线色联合渲染需要 EEVEE')
     if scene.camera is None:
         raise ValueError('请指定场景相机')
     mode = settings.render_mode
@@ -403,6 +408,21 @@ def _camera_poll(_self, obj):
 
 
 class TOONWORKBENCH_Settings(bpy.types.PropertyGroup):
+    stage: EnumProperty(name='工序', items=(
+        ('SHADING', '着色', '色阶着色、材质混合与配方'),
+        ('FACE', '面影', '面部 SDF、头部法向、眼部与发影'),
+        ('LINES', '描边', '视口描边、笔刷、参数动画与镜头修形'),
+        ('OUTPUT', '输出', '分层渲染、矢量线稿和环绕预览'),
+    ), default='SHADING')
+    level: EnumProperty(name='操控档位', items=(
+        ('DAILY', '日常', '显示当前工序的高频控制'),
+        ('ADVANCED', '进阶', '展开当前工序的完整选项'),
+    ), default='DAILY')
+    last_report: StringProperty(options={'SKIP_SAVE'})
+    last_report_kind: StringProperty(default='INFO', options={'SKIP_SAVE'})
+    range_start: FloatProperty(name='起始帧', default=1.0, min=-1048574.0, max=1048574.0)
+    range_end: FloatProperty(name='结束帧', default=12.0, min=-1048574.0, max=1048574.0)
+    range_step: FloatProperty(name='步长', default=1, min=0.001)
     project_directory: StringProperty(name='公共工作目录', subtype='DIR_PATH',
         description='包含 blenderctl.ps1 的工程目录，用于现有公共作业监管')
     show_head_normals: BoolProperty(name='头部整体法向', default=True)
@@ -452,7 +472,8 @@ class TOONWORKBENCH_OT_prepare_joint(bpy.types.Operator):
     bl_description = '保存可编辑副本与公共CLI请求，保持当前工程路径不变'
     def execute(self, context):
         try:
-            _prepare(context)
+            with ensure_object_mode(context):
+                _prepare(context)
             self.report({'INFO'}, '联合渲染快照与请求已保存')
             return {'FINISHED'}
         except Exception as error:
@@ -470,7 +491,8 @@ class TOONWORKBENCH_OT_joint_render(bpy.types.Operator):
         try:
             if settings.job_state in {'submitting', 'submitted', 'queued', 'running'}:
                 raise ValueError('当前工作台已有进行中的公共作业')
-            record = _prepare(context,activate=False)
+            with ensure_object_mode(context):
+                record = _prepare(context,activate=False)
             command = _command(record, '--timeout', str(settings.timeout_seconds),
                 '--async', 'request', record['request'])
             _launch(record, command, 'submit')
@@ -491,7 +513,8 @@ class TOONWORKBENCH_OT_author_candidate(bpy.types.Operator):
     def execute(self, context):
         settings = getattr(context.scene, PROP)
         try:
-            record = _prepare(context, operation='edit',activate=False)
+            with ensure_object_mode(context):
+                record = _prepare(context, operation='edit',activate=False)
             _launch(record, _command(record, '--timeout', str(settings.timeout_seconds),
                 '--async', 'request', record['request']), 'submit')
             _activate_record(context,record)
@@ -762,176 +785,19 @@ def _draw_pencil_sections(layout, context, settings):
 
 
 def draw_contents(layout, context):
-    settings = getattr(context.scene, PROP)
-    pencil = context.scene.toon_viewport_preview
-    layout.label(text='二维描边与 EEVEE 联合工作台')
-    layout.prop(pencil, 'enabled')
-    layout.prop(pencil, 'style_mode')
-    if pencil.style_mode == 'BASIC':
-        layout.prop(pencil, 'line_width')
-        layout.prop(pencil, 'line_color')
-        layout.prop(pencil, 'opacity')
-    else:
-        layout.prop(pencil, 'width_multiplier')
-    from . import line_template_ui, head_ui, normal_ui, face_ui, sdf_ui, surface_ui, cel_ui, finish_ui, eye_overlay_ui, hair_map_ui
-    box=layout.box()
-    box.prop(settings,'show_head_normals',icon='TRIA_DOWN' if settings.show_head_normals else 'TRIA_RIGHT',emboss=False)
-    if settings.show_head_normals:
-        if hasattr(context.scene,head_ui.PROP):head_ui.draw_contents(box,context)
-        else:box.label(text='头部法向尚未就绪，请重新启用三渲二插件',icon='INFO')
-    box=layout.box()
-    box.prop(settings,'show_face_threshold',icon='TRIA_DOWN' if settings.show_face_threshold else 'TRIA_RIGHT',emboss=False)
-    if settings.show_face_threshold:
-        if hasattr(context.scene,face_ui.PROP):face_ui.draw_contents(box,context)
-        else:box.label(text='方向面影尚未就绪，请重新启用三渲二插件',icon='INFO')
-    box=layout.box()
-    box.prop(settings,'show_face_sdf',icon='TRIA_DOWN' if settings.show_face_sdf else 'TRIA_RIGHT',emboss=False)
-    if settings.show_face_sdf:
-        if hasattr(context.scene,sdf_ui.PROP):sdf_ui.draw_contents(box,context)
-        else:box.label(text='SDF面影尚未就绪，请重新启用三渲二插件',icon='INFO')
-    box=layout.box()
-    box.prop(settings,'show_normal_advanced',icon='TRIA_DOWN' if settings.show_normal_advanced else 'TRIA_RIGHT',emboss=False)
-    if settings.show_normal_advanced:
-        if hasattr(context.scene,normal_ui.PROP):normal_ui.draw_contents(box,context)
-        else:box.label(text='单部件法向尚未就绪，请重新启用三渲二插件',icon='INFO')
-    box=layout.box()
-    box.prop(settings,'show_surface_slots',icon='TRIA_DOWN' if settings.show_surface_slots else 'TRIA_RIGHT',emboss=False)
-    if settings.show_surface_slots:
-        if hasattr(context.scene,surface_ui.PROP):surface_ui.draw_contents(box,context)
-        from . import component_ui
-        if hasattr(context.scene,component_ui.PROP):component_ui.draw_contents(box,context)
-        from . import style_set_ui
-        if hasattr(context.scene,style_set_ui.PROP):style_set_ui.draw_contents(box,context)
-        from . import shot_look_ui
-        if hasattr(context.scene,shot_look_ui.PROP):shot_look_ui.draw_contents(box,context)
-        from . import media_render_ui
-        if hasattr(context.scene,media_render_ui.PROP):media_render_ui.draw_contents(box,context)
-        else:box.label(text='活动槽表面控件尚未就绪，请重新启用三渲二插件',icon='INFO')
-    box=layout.box()
-    box.prop(settings,'show_cel_recipe',icon='TRIA_DOWN' if settings.show_cel_recipe else 'TRIA_RIGHT',emboss=False)
-    if settings.show_cel_recipe:
-        if hasattr(context.scene,cel_ui.PROP):cel_ui.draw_contents(box,context)
-        else:box.label(text='CEL配方尚未就绪，请重新启用三渲二插件',icon='INFO')
-    box=layout.box()
-    box.prop(settings,'show_line_template',icon='TRIA_DOWN' if settings.show_line_template else 'TRIA_RIGHT',emboss=False)
-    if settings.show_line_template:line_template_ui.draw_contents(box,context)
-    from . import style_family_ui
-    box=layout.box()
-    box.label(text='CEL 风格家族')
-    if hasattr(context.scene,style_family_ui.PROP):style_family_ui.draw_contents(box,context)
-    box=layout.box()
-    box.prop(settings,'show_line_material',icon='TRIA_DOWN' if settings.show_line_material else 'TRIA_RIGHT',emboss=False)
-    if settings.show_line_material:
-        from . import line_material_ui
-        line_material_ui.draw_contents(box,context)
-    box=layout.box()
-    box.prop(settings,'show_finish',icon='TRIA_DOWN' if settings.show_finish else 'TRIA_RIGHT',emboss=False)
-    if settings.show_finish:
-        if hasattr(context.scene,finish_ui.PROP):finish_ui.draw_contents(box,context)
-        else:box.label(text='高光与边缘光尚未就绪，请重新启用三渲二插件',icon='INFO')
-    box=layout.box()
-    box.prop(settings,'show_eye_layers',icon='TRIA_DOWN' if settings.show_eye_layers else 'TRIA_RIGHT',emboss=False)
-    if settings.show_eye_layers:eye_overlay_ui.draw_contents(box,context)
-    box=layout.box()
-    box.prop(settings,'show_hair_map',icon='TRIA_DOWN' if settings.show_hair_map else 'TRIA_RIGHT',emboss=False)
-    if settings.show_hair_map:
-        if hasattr(context.scene,hair_map_ui.PROP):hair_map_ui.draw_contents(box,context)
-        else:box.label(text='HM 控件尚未就绪，请重新启用三渲二插件',icon='INFO')
-        from . import hair_sdf_ui
-        if hasattr(context.scene,hair_sdf_ui.PROP):hair_sdf_ui.draw_contents(box,context)
-    from . import omni_preview_ui
-    box=layout.box()
-    box.label(text='环绕光照与多机位快速预览')
-    if hasattr(context.scene,omni_preview_ui.PROP):omni_preview_ui.draw_contents(box,context)
-    _draw_pencil_sections(layout, context, settings)
-    box = layout.box()
-    box.label(text='联合作业：快照、候选与显式接收')
-    box.label(text='联合采样与 EEVEE 样本数独立')
-    box.prop(settings, 'project_directory')
-    box.prop(settings, 'output_directory')
-    box.prop(settings, 'render_mode')
-    if settings.render_mode == 'SEQUENCE':
-        box.prop(settings, 'sequence_times')
-        box.label(text='请求时刻与实际子帧将一同记录')
-        box.label(text='允许子帧，按输入顺序渲染')
-    box.prop(settings, 'samples_per_axis')
-    box.prop(settings, 'lighting_samples')
-    box.prop(settings, 'memory_budget_mb')
-    box.prop(settings, 'timeout_seconds')
-    box.label(text='每层AA由共同网格控制；羽化与后滤波保留')
-    row = box.row(align=True)
-    row.operator('toon_workbench.prepare_joint', text='保存快照')
-    row.operator('toon_workbench.joint_render', text='后台渲染')
-    box.prop(settings, 'style_file')
-    row = box.row(align=True)
-    row.operator('toon_workbench.author_candidate', text='制作作者候选')
-    row.operator('toon_workbench.receive_author', text='接收候选')
-    row=box.row(align=True)
-    row.operator('toon_workbench.inspect_job',text='公共检查')
-    row.operator('toon_workbench.recover_job',text='恢复原快照')
-    box.label(text='状态：' + settings.job_state)
-    if settings.job_id:
-        row = box.row()
-        row.enabled = False
-        row.prop(settings, 'job_id')
-    row = box.row(align=True)
-    row.operator('toon_workbench.refresh')
-    row.operator('toon_workbench.cancel_job')
-    if settings.artifact_path:
-        box.prop(settings, 'artifact_path')
-    if settings.message:
-        box.label(text=settings.message[:110])
-    box = layout.box()
-    box.label(text='镜头修形／透视校正（实验）')
-    if context.object is not None and context.object.type == 'MESH':
-        try:
-            modifier = _correction(context.object)
-            if modifier is not None:
-                ids = json.loads(modifier.node_group[camera_correction._INTERFACE])
-                for key, label in (('camera', '修形相机'),
-                                   ('reference', '深度参考'), ('weight', '权重属性')):
-                    row = box.row()
-                    row.enabled = False
-                    row.prop(getattr(modifier.properties.inputs, ids[key]), 'value', text=label)
-                box.prop(getattr(modifier.properties.inputs, ids['strength']), 'value', text='修形强度')
-                box.prop(modifier, 'show_viewport', text='视口修形')
-                box.prop(modifier, 'show_render', text='渲染修形')
-            else:
-                box.prop(settings, 'correction_camera')
-                box.prop(settings, 'correction_reference')
-                box.prop(settings, 'weight_attribute')
-                row = box.row(align=True)
-                row.operator('toon_workbench.zero_weight')
-                row.operator('toon_workbench.create_correction')
-            box.operator('toon_workbench.inspect_correction')
-        except (ValueError, KeyError, AttributeError) as error:
-            box.label(text=str(error)[:100], icon='ERROR')
-    else:
-        box.label(text='选择本地网格以编辑镜头修形')
-    box=layout.box()
-    box.label(text='逐镜头修形方案')
-    box.label(text='选择全部已建修形网格，保存当前配置')
-    box.prop(settings,'correction_camera')
-    box.prop(settings,'correction_reference')
-    box.prop(settings,'shot_strength')
-    box.prop(settings,'shot_replace')
-    box.operator('toon_workbench.define_shot')
-    root=context.scene.get(camera_shots.KEY)
-    if isinstance(root,bpy.types.Collection):
-        for shot in root.children:
-            camera=shot.get('toon_shots_camera')
-            if camera is not None and 'toon_shots_strength' in shot:
-                box.prop(shot,'["toon_shots_strength"]',text=camera.name)
-        box.operator('toon_workbench.apply_shot')
-        box.label(text='切镜头后显式预览；后台逐帧自动匹配')
+    """Compatibility draw entry for the unified phase workspace."""
+    from . import workspace_ui
+
+    workspace_ui.draw(layout, context)
 
 
 class TOONWORKBENCH_PT_workbench(bpy.types.Panel):
     bl_label = '三渲二工作台'
     bl_idname = 'TOONWORKBENCH_PT_workbench'
-    bl_space_type = 'VIEW_3D'
+    bl_space_type = THEME.editor_space
     bl_region_type = 'UI'
-    bl_category = '三渲二'
+    bl_category = THEME.tab_label
+    bl_options = {'HIDE_HEADER'}
     bl_order = -20
     def draw(self, context):
         draw_contents(self.layout, context)
@@ -959,7 +825,7 @@ def register():
             prop = bpy.types.Scene.bl_rna.properties['toon_viewport_preview']
             if (not pencil_core._registered or not hasattr(bpy.types.Scene, 'toon_author_files')
                     or prop.fixed_type.as_pointer() != pencil_core.PreviewSettings.bl_rna.as_pointer()):
-                raise RuntimeError('已有描边 RNA 不属于当前完整0.2.27实例，未接管或替换')
+                raise RuntimeError('已有描边 RNA 不属于当前完整后端实例')
         joint_ownership.acquire(_PENCIL_LEASE)
         for cls in _CLASSES:
             bpy.utils.register_class(cls)
@@ -969,6 +835,8 @@ def register():
         _registered = True
         bpy.app.handlers.load_post.append(_load_post)
         bpy.app.timers.register(_timer, first_interval=.5, persistent=True)
+        from . import workspace_ui
+        workspace_ui.register()
     except Exception:
         unregister()
         raise
@@ -977,6 +845,8 @@ def register():
 def unregister():
     global _registered, _descriptor
     _registered = False
+    from . import workspace_ui
+    workspace_ui.unregister()
     if bpy.app.timers.is_registered(_timer):
         bpy.app.timers.unregister(_timer)
     if _load_post in bpy.app.handlers.load_post:

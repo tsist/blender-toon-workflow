@@ -568,6 +568,9 @@ def apply_plan(plan, expectation, baseline=None, progress=None, frame_evidence=N
     action_pool = None
     if plan['mode'] == 'create':
         collection = bpy.data.collections.new(plan['collection_name'])
+        from .._ui_kit import apply_collection_theme
+
+        apply_collection_theme(collection, 'toon')
         collection[SCOPE] = scope; collection[ROLE] = 'scope_root'
         scene.collection.children.link(collection)
         # Retain former Mesh and already orphaned input IDs by references on

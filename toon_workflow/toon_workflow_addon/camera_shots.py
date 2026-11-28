@@ -241,8 +241,11 @@ def inspect(scene):
 
 
 def _new(name, owner, role, created):
+    from .._ui_kit import apply_collection_theme
+
     value = _bpy().data.collections.new(name)
     created.append(value)
+    apply_collection_theme(value, 'toon')
     value[_SCHEMA], value[_OWNER], value[_ROLE] = PROFILE, owner, role
     return value
 

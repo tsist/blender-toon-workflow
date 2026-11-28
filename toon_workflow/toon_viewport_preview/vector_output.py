@@ -1227,7 +1227,7 @@ def save_eps_new(path, payload, *, file_type):
     if path.exists() or path.is_symlink():
         raise FileExistsError('Vector file already exists; choose a new name: ' + str(path))
     path.parent.mkdir(parents=True, exist_ok=True)
-    staged = path.with_name('.toon-vector-' + uuid.uuid4().hex + '.tmp')
+    staged = path.with_name('.v-' + uuid.uuid4().hex[:12] + '.tmp')
     created = False
     published = False
     cleanup_warning = None

@@ -44,13 +44,16 @@ def describe(operation=None,schema=False):
     if schema:return parameter_schema(operation)
     __version__ = domain().__version__
     code_inventory = domain('joint_request').code_inventory
+    compatibility = domain('runtime_compat')
     return dict(domain='toon-workflow',version=__version__,manifest='toon-workflow-manifest.v2',
         legacy_manifests=['toon-workflow-manifest.v1'],
         state='toon-workflow-state.v1',operations=['run','inspect','edit','recover'],
         source_mode='SAVED_DISK_V1; no implicit live GUI synchronization',
-        blender=dict(version='5.2.1 LTS',build_hash='9e2066aef7ef'),
-        joint_renderer_builds=[dict(version='.'.join(map(str, version)), build_hash=build)
-                               for version, build in sorted(domain('runtime_compat').JOINT_BUILDS)],
+        blender=dict(minimum_version='5.3.0'),
+        joint_host_policy=dict(
+            minimum_version='.'.join(map(str, compatibility.MINIMUM_JOINT_VERSION)),
+            build_hash='observed in every render receipt',
+            qualification='joint_renderer_builds lists builds with existing render evidence'),
         output_profile='eevee_joint_grid.v3; explicit native_media_artline.v1; eevee_joint_sequence.v2; legacy eevee_joint_sequence.v1',
         style_families=['toon-style-family.v1 (unchanged)', 'toon-style-family.v2 (CEL/GAME/MANGA with explicit Look)'],
         media_profile=dict(selection='saved Scene toon_native_media.enabled',
@@ -67,7 +70,7 @@ def describe(operation=None,schema=False):
                                     line_width='absolute static pixel width0.1..32; BASIC only; rejects animation/driver references and META NLA',
                                     example=dict(schema='toon-basic-line-width-edit.v1',line_width=1.21)),
                          baseline='expected_author_sha256 from matching source inspect; no implicit mode conversion'),
-        claims=['opaque local EEVEE mesh workflow on the qualified Blender build',
+        claims=['opaque local EEVEE mesh workflow with per-profile render checks',
                 'new2D domain; legacy toon geometry manifests/states are rejected',
                 'public supervisor owns cancellation/timeout/process tree',
                 'recovery reuses verified complete prefix only; source/resources/settings/pin must match'],

@@ -17,7 +17,7 @@ from processes import ProcessTree
 
 
 def job_path(root, job_id):
-    if not re.fullmatch(r"[0-9a-f]{32}", job_id):
+    if not re.fullmatch(r"(?:[0-9a-f]{12}|[0-9a-f]{32})", job_id):
         raise Failure("INVALID_REQUEST", "job ID must be 32 lowercase hex characters")
     root = Path(root).resolve()
     path = (root / job_id).resolve()
@@ -81,7 +81,7 @@ def prepare(request, blender=DEFAULT_BLENDER, root=DEFAULT_JOBS, timeout=120, tr
     modeling_host=request['command']=='modeling.run' and request['params']['manifest']['operation']!='import_local'
     if request['command'] != 'toon-image.inspect' and not blender.is_file() and not modeling_host and request["command"] not in (*OPERATIONS,*DEPTH_COMMANDS,*ESTIMATE_COMMANDS,*RELIGHT_COMMANDS,*SESSION_COMMANDS,*SEQUENCE_COMMANDS,"transaction.status", "transaction.rollback", "transaction.recover", "compositing.encode"):
         raise Failure("NOT_FOUND", f"Blender executable not found: {blender}")
-    job = Path(root).resolve() / uuid.uuid4().hex
+    job = Path(root).resolve() / uuid.uuid4().hex[:12]
     job.mkdir(parents=True, exist_ok=False)
     atomic_json(job / "request.json", request)
     atomic_json(job / "launch.json", {"blender": str(blender), "timeout_seconds": timeout,
@@ -236,14 +236,12 @@ def _execute_worker(job, parent_checkpoint=None):
     state = read_json(job / "status.json")
     state.update(state="running", supervisor_pid=os.getpid(), started_at=time.time())
     source = request["params"].get("file")
-    if request['command']=='sculpt.replay':source=request['params']['manifest']['source']['file']
     before = None
     error = None
     data = None
     worker_exit = None
     input_guards = ExitStack()
     input_hashes = {}
-    sculpt_runtime_hashes={}
     artifacts = {"job_directory": str(job), "request": str(job / "request.json"),
                  "stdout_log": str(job / "stdout.log"), "stderr_log": str(job / "stderr.log")}
     limits=launch.get('limits');usage={};last_resource_check=0;memory_observations=[]
@@ -270,19 +268,6 @@ def _execute_worker(job, parent_checkpoint=None):
     try:
         checkpoint()
         atomic_json(job / "status.json", state)
-        if request['command']=='sculpt.replay':
-            from reviews import protect
-            d=request['params']['manifest']['source']
-            protect(d,input_guards,checkpoint);input_hashes[d['file']]=d['expected_sha256']
-            from sculpt_host import runtime_files
-            from filesystem import FileGuard
-            for p in runtime_files(launch['blender']):
-                guard=input_guards.enter_context(FileGuard(p));sculpt_runtime_hashes[str(p)]=guard.sha256(checkpoint)
-        if request['command']=='sculpt.review':
-            from reviews import protect
-            for d in (request['params']['manifest']['before'],request['params']['manifest']['after']):
-                protect(d,input_guards,checkpoint)
-                input_hashes[d['file']]=d['expected_sha256']
         if request["command"] in ("modeling.run", "compositing.run", "compositing.inspect", "compositing.template-save", "compositing.template-run", "compositing.batch", "compositing.study", "lighting.run", "lighting.inspect", "lighting.template-save", "lighting.template-edit", "lighting.batch", "geometry.run", "geometry.inspect", "toon.run", "toon.inspect", "toon.template-save", "toon.template-edit", "toon.template-apply", "inspect", "project.verify", "project.prepare_copy", "tracking.prepare", "tracking.inspect", "tracking.solve", "asset.preview.prepare", "query", "diff", "dependency.audit", "dependency.plan-relink", "dependency.prepare", "project.link.prepare", "project.override.prepare", "project.override.resync", "validate", "identity.prepare", "asset.prepare", "asset.index", "scene.prepare", "scene.inspect", "model.prepare", "model.inspect", "node.prepare", "node.inspect", "material.preview", "material.run", "material.template-save", "material.batch", "material.study", "material.procedural-run", "material.procedural-export", "texture.bake", "rig.prepare", "rig.inspect", "rig.package", "animation.sample", "simulation.prepare", "simulation.inspect", "simulation.bake", "render.run", "media.prepare", "media.export", "exchange.analyze", "exchange.export", "exchange.import", "exchange.convert", "extension.run", "extension.prepare"):
             from filesystem import FileGuard
             for key, expected in (("file", "expected_sha256"), ("other", "other_sha256")):
@@ -484,10 +469,6 @@ def _execute_worker(job, parent_checkpoint=None):
             command = [launch["blender"], "--background", "--factory-startup", "--disable-autoexec",
                        "--offline-mode", "--threads", str(limits['cpu_threads'] if limits else 2), "--python-exit-code", "23",
                        "--python", str(Path(__file__).with_name("worker.py")), "--", str(job)]
-            if request['command']=='sculpt.replay':
-                command.remove('--background')
-                command[command.index('--python')+1]=str(Path(__file__).with_name('sculpt_worker.py'))
-                command[1:1]=['--window-geometry','0','0','1024','768']
         atomic_json(job / "command.json", command)
         with (job / "stdout.log").open("wb") as out, (job / "stderr.log").open("wb") as err:
             bootstrap = command if isolation else [sys.executable, str(core_directory()/'bootstrap.py'), str(job), *command]
@@ -523,7 +504,7 @@ def _execute_worker(job, parent_checkpoint=None):
             raise Failure(code if code in CODES else "WORKER_FAILED", f"Worker exit={worker_exit}; {details or 'no result'}")
         result = read_json(result_file)
         if not result.get("ok"):
-            if request['command'] in ('modeling.run','sculpt.replay','material.run','material.template-save','material.batch','material.study','material.procedural-run','material.procedural-export','geometry.run','geometry.inspect','toon.run','toon.inspect','lighting.run','lighting.inspect','lighting.template-save','lighting.template-edit','lighting.batch'):
+            if request['command'] in ('modeling.run','material.run','material.template-save','material.batch','material.study','material.procedural-run','material.procedural-export','geometry.run','geometry.inspect','toon.run','toon.inspect','lighting.run','lighting.inspect','lighting.template-save','lighting.template-edit','lighting.batch'):
                 detail=result.get('error') or {}
                 raise Failure(detail.get('code') if detail.get('code') in CODES else 'WORKER_FAILED',str(detail.get('message',detail)))
             raise Failure("VALIDATION_FAILED", str(result.get("error")))
@@ -537,9 +518,6 @@ def _execute_worker(job, parent_checkpoint=None):
         if request['command'] in ('toon.run','toon.inspect'):
             from toon_host import accept
             data=accept(job,request,data,input_guards,checkpoint)
-        if request['command']=='sculpt.replay':
-            from sculpt_host import accept
-            data=accept(job,request,data,input_guards,checkpoint,sculpt_runtime_hashes)
         if source and digest(source, checkpoint) != before:
             raise Failure("CONFLICT", "Input changed during inspection; result not accepted")
         if source:
@@ -603,13 +581,9 @@ def _execute_worker(job, parent_checkpoint=None):
             for pattern in ('dependency-*.json','dependency-*.blend'):
                 for path in job.glob(pattern):
                     if path.is_file():artifacts[path.name]=str(path)
-        if request['command']=='sculpt.replay':
-            from sculpt_host import OUTPUTS
-            for name in ('sculpt-error.log','sculpt-progress.json','sculpt-verifier.log',*(OUTPUTS if error is None and data else ())):
-                if (job/name).is_file():artifacts[name]=str(job/name)
-        if request['command'].startswith(('exchange.','extension.','sculpt.')) and request['command']!='sculpt.replay' and not isolated_requested:
+        if request['command'].startswith(('exchange.','extension.')) and not isolated_requested:
             for path in job.rglob('*'):
-                if path.is_file() and (path.name.startswith(('exchange-','extension-','export.','sculpt-')) or path.parent==job and path.name in request['params'].get('manifest',{}).get('outputs',[])):
+                if path.is_file() and (path.name.startswith(('exchange-','extension-','export.')) or path.parent==job and path.name in request['params'].get('manifest',{}).get('outputs',[])):
                     artifacts[str(path.relative_to(job))]=str(path)
         for pattern in ('render-*.json','render-*.png','render-*.jpg','render-*.exr','media-*.json','media-*.blend','media-*.png','video.mp4','audio.wav'):
             for path in job.glob(pattern):

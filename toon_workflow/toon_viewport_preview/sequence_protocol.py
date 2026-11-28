@@ -108,7 +108,7 @@ def atomic_json(path,value,*,create_only=False):
     import os
     import uuid
     from pathlib import Path
-    path=Path(path);temporary=path.with_name(path.name+'.tmp-'+uuid.uuid4().hex)
+    path=Path(path);temporary=path.with_name('.s-'+uuid.uuid4().hex[:12]+'.tmp')
     try:
         with temporary.open('x',encoding='utf8') as stream:
             json.dump(value,stream,ensure_ascii=False,indent=2,allow_nan=False)

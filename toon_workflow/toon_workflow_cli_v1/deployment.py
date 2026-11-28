@@ -14,7 +14,7 @@ def _bundle_root():
 def core_directory():
     """The shared scheduler stays external; never substitute a private core."""
     configured = os.environ.get('TOON_WORKFLOW_CLI_CORE_ROOT')
-    path = Path(configured) if configured else Path(__file__).resolve().parent.parent / 'blenderctl'
+    path = Path(configured) if configured else Path(__file__).resolve().parents[3] / 'blenderctl'
     if not path.is_absolute():
         raise RuntimeError('TOON_WORKFLOW_CLI_CORE_ROOT must be an absolute CLI core directory')
     path = path.resolve(strict=True)

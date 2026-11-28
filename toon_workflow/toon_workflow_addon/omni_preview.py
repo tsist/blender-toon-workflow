@@ -38,7 +38,7 @@ def _read(path):return json.loads(Path(path).read_text('utf-8-sig'))
 
 
 def _write(path,value):
-    path=Path(path);temporary=path.with_name(path.name+'.'+uuid.uuid4().hex+'.tmp')
+    path=Path(path);temporary=path.with_name('.o-'+uuid.uuid4().hex[:12]+'.tmp')
     temporary.write_text(json.dumps(value,ensure_ascii=False,indent=2,allow_nan=False),'utf8')
     for attempt in range(3):
         try:temporary.replace(path);return
@@ -657,7 +657,7 @@ def _worker_main(request_path):
         _write(directory/'job.json',dict(status='failed',worker_terminal=True,error=str(exc)));raise
 
 
-def status(directory):
+def status(directory, *, include_report=True):
     directory=Path(directory);submission=_read(directory/'submission.json')
     _need(submission.get('schema')==SCHEMA and Path(submission['directory'])==directory,'Not an owned omni submission')
     result=_read(directory/'job.json') if (directory/'job.json').is_file() else dict(status=submission['status'],completed=0,total=submission.get('total'))
@@ -665,7 +665,7 @@ def status(directory):
     result['process_observation']='owned in this UI session' if process is not None else 'file evidence only; process not owned in this UI session'
     if result['status'] in ('completed','cancelled') and not result.get('worker_terminal',False):result['status']='finalizing'
     if process is not None and result['process_exit_code'] is not None and result['process_exit_code']!=0:result['status']='failed'
-    if result.get('report') and Path(result['report']).is_file():
+    if include_report and result.get('report') and Path(result['report']).is_file():
         report=_read(result['report']);result['pages']=report['pages'];result['restoration']=report.get('restoration')
     return result
 

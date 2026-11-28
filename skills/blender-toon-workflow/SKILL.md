@@ -7,6 +7,8 @@ metadata:
 
 # Blender 三渲二工作流
 
+用 `blenderctl --edition toon@1.0.0 toon-workflow describe` 读回 1.0 的包清单。保存场景的联合输出分别核对 Beauty、Line、OpticalLine、Combined。既有 0.52.1 和 0.52.3 作业显式选择原发行版，再使用保存的请求与原作业目录恢复。
+
 本技能负责把定稿角色、道具或镜头做成可控的三渲二画面与独立线稿通道，属于 [渲染与风格化部门](https://github.com/tsist/blender-ai-workflow/blob/main/skills/blender-work-methodology/references/departments/render.md)。工作聚焦着色、影形、描边、镜头修形与联合输出，保留上游传入的原网格、UV、法向、权重、形态键、骨架与动作；公共 CLI 的批次目录、SHA 校验与长作业等待见 [blender-cli](https://github.com/tsist/blenderctl/blob/main/skills/blender-cli/SKILL.md)。
 
 ## 第一步：查真实入口，摸清场景与分层
@@ -18,12 +20,15 @@ $ctl = './blenderctl.ps1'
 
 # 查看 Toon 产品入口与当前宿主环境
 & $ctl discover --product toon
+& $ctl discover --product toon --edition 0.52.3 --action 'toon53.bind#DIRECTIONAL_FACE'
 
 # 查看工作流契约与子命令帮助（纯查询，直接返回）
-& $ctl toon-workflow describe
+& $ctl --edition toon@0.52.3 toon-workflow describe
 & $ctl toon-workflow --help
 & $ctl toon-workflow viewport-lines --help
 ```
+
+本流程的制作基线为 Windows Blender 5.3.0 `02f0899d78e3` 与已签收的 Toon 0.52.3。磁盘作业用 `--edition toon@版本` 选择同版实现；`lighting-author` 在请求内指定 `edition`。旧作业使用其原版实现指纹。核对新版部署、候选范围与保存稿交接时，见 [公共 CLI 交接](references/cli-ops-and-handoff.md)。
 
 建好独立批次目录并在工作副本上只读摸底，留好源文件对照：
 
@@ -46,7 +51,7 @@ $ctl = './blenderctl.ps1'
 
 角色观感八成看头脸。所有定位贴图（面部 SDF、高光遮罩、固定发影、眼层）先核对真实消费的 UV、表面锚点与镜像，位置对了再调软硬和光照。
 
-1. **面部影形优先走 SDF**：用 `toon-workflow sdf-face` 在明确面部槽建立前投 UV、载体与 SDF 着色，按主光范围选水平或三维方向模式；前侧光入影时机难以兼顾时，先画二值关键光角图再调用 `compile-keys` 编译高精度贴图绑定。
+1. **面部影形优先走 SDF**：已有 5.3 方向场时，从 `lighting-author` 的 `directional-face-inspect` 开始，核对头轴、实际采样 UV、脸域和原 Surface；首次连续面影绑定可登记主光、副光和轮廓光。需制作传统方向贴图时，用 `toon-workflow sdf-face` 建立前投 UV，并从真实模型画二值关键光角再用 `compile-keys` 编译。两种路径使用各自的输入契约。
 2. **按需挂艺术投影接受层**：单主光平涂皮肤受杂乱投影干扰时，用 `sdf-face` 的 `bind-cast-art` 在原 SDF 上游挂入默认零强度的接受层；鼻影面片支持同对象独立槽单独绑定 SDF。
 3. **整头与局部法向做体积辅助**：用 `toon-workflow surface-slot --normal` 为脸、眉、睫、发与附属物分别配参考方向与顶点权重，修饰平滑受光体积。
 4. **分清眼层、固定发影与单一受光高光**：用 `surface-slot` 的 `eye-create` 建深度一致的眼影平面与瞳孔高光小片；用 `hair-shadow-attach` 在动态色阶后正片叠底固定发影 B；用 `hair-map-attach` 和 `hair-map-mask-attach` 把遮罩高光融进同一受光权重并只着色一次，避免双亮带打架。需发束独立方向影形时，再评估 `toon-workflow sdf-hair`。
@@ -68,18 +73,20 @@ $ctl = './blenderctl.ps1'
 
 每次实质改动后，都在同机位、同光向下看新图对照，确认转光与转头都稳住再交付。
 
-1. **多光向批量查影形**：用 `toon-workflow omni-preview` 输出 9/16/36/64 格环绕图集，集中排查极点突变、鼻颊团块与高光跨发束。
-2. **后台联合渲染与恢复**：配齐 `resources` 外部依赖清单后，用 `toon-workflow run` 产出带 `Beauty`、`Line`、`BeautyLineInteraction` 和 `Combined` 的联合结果；长作业中断后用 `toon-workflow recover` 指向原持久请求续算未完帧。
-3. **连续帧查穿线防抖与冷重开**：先抽代表帧核对视口描边与后台线稿一致，再跑一段含转头或遮挡变化的连续帧查轮廓抖动、穿进五官与脸影闪跳；定稿后跑独立 `toon-workflow inspect` 冷重开核验源保护与外链。
+1. **固定机位拆变量**：用同一半身持物镜头依次做只转头、只移主光、只开关副光。对照角色脸颈、眼发、衣料和道具。用环绕图集定位斜角、纯顶底及背缝疑点，再实渲疑点的邻角。
+2. **按实际配置交接通道**：原生媒体艺术线使用 `OpticalLine`，不透明相关采样使用 `BeautyLineInteraction`。两路均交 `Beauty`、`Line`、`Combined`。续跑传原持久请求和同版 `implementation`，并核对复用帧和补帧。
+3. **连续播放并冷重开**：审查目标分辨率下的脸影跳变、短线断裂、错误遮挡和高光闪烁。独立进程重开同一交付稿，核对依赖、原数据保护与代表帧，再按约定等级填写 G1–G5。
 
 详见 [参考校准、镜头修形、环绕检查与排错闭环](references/calibration-shots-and-qa.md) 与 [公共 CLI 执行、现场接手、恢复与合成交接](references/cli-ops-and-handoff.md)。
+
+正式交付按 [三渲二商业验收](references/commercial-acceptance.md) 配置审片矩阵，另存 [评分模板](assets/quality-scorecard.template.json) 为交付批次的 `quality-scorecard.json`。同角度逐值一致、连续帧稳定和风格对标各有独立证据。
 
 ## 交给下游
 
 移交合成部门或提交用户审看前，给齐五样内容并分别写明冷重开结果、画面观察与待确认项：
 
 - **可编辑工作副本**：最终 `.blend` 路径、SHA256 与完整外部贴图/资源清单。
-- **分离渲染通道**：按镜头编号命名的多层线性 EXR（或标明色彩空间与 Alpha 口径的序列），列出 `Beauty`、`Line`、`BeautyLineInteraction` 与 `Combined`；不透明相关采样按 `Combined = Line + Beauty - BeautyLineInteraction` 精确重建，原生媒体艺术线按 `OpticalLine` 显式叠加，漫画风附 `Look`。
+- **分离渲染通道**：按镜头编号命名，注明分辨率、帧率、编号、色彩空间及 Alpha 口径。不透明相关采样附 `BeautyLineInteraction`，原生媒体艺术线附 `OpticalLine`，漫画风按约定附 `Look`。交接时核对所用配置的合成公式。
 - **对照审看图**：代表帧完整 `Combined`、白底 `Line` 与关键面部/高光局部裁切。
 - **连续帧防抖结果**：含转头或遮挡变化的连续短段检查记录。
 - **恢复与复用入口**：原 `toon-workflow-request.json`、状态回执路径及可复用配方/线模板。

@@ -84,7 +84,7 @@ def save_png_new(path, pixels, *, pixel_aspect=None):
     result = dict(path=str(path), width=pixels.shape[1], height=pixels.shape[0],
                   sha256=hashlib.sha256(encoded).hexdigest(), color_space='sRGB',
                   source_color_space='scene_linear_Rec709', alpha_mode='STRAIGHT', bit_depth=8)
-    staged = path.with_name('.toon-' + uuid.uuid4().hex + '.tmp')
+    staged = path.with_name('.p-' + uuid.uuid4().hex[:12] + '.tmp')
     created = False
     published = False
     try:

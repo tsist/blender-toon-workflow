@@ -2,7 +2,9 @@
 """Workstation entry for the Blender 5.3 native Toon controls."""
 import bpy
 
+from .host_compat import is_supported_host
 from . import lighting_53 as lighting
+from . import directional_face_53 as directional
 
 
 _registered = False
@@ -23,6 +25,9 @@ LABELS = {
     'toon53_face_threshold': '脸影界线',
     'toon53_face_feather': '脸影过渡',
 }
+AXIS_ITEMS = [(axis, axis, '') for axis in directional.AXES]
+DIRECTION_LABELS = ('启用比例', '亮部颜色', '暗部颜色', '灯光增益', '实时投影比重',
+                    '副光染色', '轮廓光提边', '脸部 UV 缩放', '脸部 UV 偏移', '底色乘色')
 
 
 class TOON53_PG_authoring(bpy.types.PropertyGroup):
@@ -30,13 +35,26 @@ class TOON53_PG_authoring(bpy.types.PropertyGroup):
                                    poll=lambda self, obj: obj.type == 'LIGHT' and obj.data.type == 'SUN')
     fill: bpy.props.PointerProperty(name='副光', type=bpy.types.Object,
                                     poll=lambda self, obj: obj.type == 'LIGHT')
+    rim: bpy.props.PointerProperty(name='轮廓光', type=bpy.types.Object,
+                                   poll=lambda self, obj: obj.type == 'LIGHT')
     role: bpy.props.EnumProperty(name='使用方式', items=[
         (lighting.ROLE_FACE, '面部', '复用现有 SDF 并加入可调整刘海影'),
+        (lighting.ROLE_DIRECTIONAL_FACE, '连续面影', '按头部空间和独立 UV 读取方向距离场'),
         (lighting.ROLE_HAIR, '发束', '为已画遮罩添加随主光与视角响应的亮带'),
         (lighting.ROLE_COLOR, '校色', '仅继承项目色板和明暗'),
     ])
     mask: bpy.props.PointerProperty(name='亮带遮罩', type=bpy.types.Image)
     uv: bpy.props.StringProperty(name='遮罩 UV')
+    face_uv: bpy.props.StringProperty(name='脸部 UV')
+    face_field: bpy.props.PointerProperty(name='方向距离场', type=bpy.types.NodeTree,
+                                          poll=lambda self, group: directional.valid_field(group))
+    face_head: bpy.props.PointerProperty(name='随头部运动的参照', type=bpy.types.Object,
+                                         poll=lambda self, obj: obj.type == 'EMPTY')
+    face_right: bpy.props.EnumProperty(name='右轴', items=AXIS_ITEMS, default='X')
+    face_up: bpy.props.EnumProperty(name='上轴', items=AXIS_ITEMS, default='Y')
+    face_front: bpy.props.EnumProperty(name='前轴', items=AXIS_ITEMS, default='Z')
+    face_scope: bpy.props.StringProperty(name='脸域权重属性', description='整槽都是脸时可留空')
+    face_valid: bpy.props.StringProperty(name='脸域有效性属性', description='无独立有效性遮罩时可留空')
 
 
 class TOON53_OT_save(bpy.types.Operator):
@@ -74,7 +92,7 @@ class TOON53_OT_prepare(bpy.types.Operator):
         scene = context.scene
         state = getattr(scene, PROP)
         try:
-            lighting.prepare(scene, state.key, context.active_object, fill=state.fill)
+            lighting.prepare(scene, state.key, context.active_object, fill=state.fill, rim=state.rim)
         except (RuntimeError, ValueError) as exc:
             self.report({'ERROR'}, str(exc))
             return {'CANCELLED'}
@@ -97,8 +115,60 @@ class TOON53_OT_bind(bpy.types.Operator):
         obj = context.active_object
         state = getattr(scene, PROP)
         try:
-            lighting.bind(scene, obj, obj.active_material_index, state.role,
-                          mask=state.mask, uv_name=state.uv)
+            if state.role == lighting.ROLE_DIRECTIONAL_FACE:
+                directional.bind(scene, obj, obj.active_material_index, head=state.face_head,
+                                 axes=(state.face_right, state.face_up, state.face_front),
+                                 uv_name=state.face_uv, field=state.face_field,
+                                 scope_name=state.face_scope, valid_name=state.face_valid)
+            else:
+                lighting.bind(scene, obj, obj.active_material_index, state.role,
+                              mask=state.mask, uv_name=state.uv)
+        except (RuntimeError, ValueError) as exc:
+            self.report({'ERROR'}, str(exc))
+            return {'CANCELLED'}
+        return {'FINISHED'}
+
+
+class TOON53_OT_witness_surface(bpy.types.Operator):
+    bl_idname = 'toon53.witness_surface'
+    bl_label = '核验活动材质的原生逐灯表面'
+    bl_description = '保留节点位置和连线，核验活动材质的漫反射与光泽逐灯支路'
+    bl_options = {'REGISTER', 'UNDO'}
+
+    @classmethod
+    def poll(cls, context):
+        obj = context.active_object
+        material = obj.active_material if obj and obj.type == 'MESH' else None
+        return bool(context.mode == 'OBJECT' and material and material.node_tree
+                    and any(node.bl_idname == 'ShaderNodeLightAccumulation'
+                            for node in material.node_tree.nodes))
+
+    def execute(self, context):
+        from . import native_surface_witness
+        try:
+            count = native_surface_witness.qualify(context.scene, context.active_object.active_material)
+        except (ValueError, RuntimeError) as error:
+            self.report({'ERROR'}, str(error))
+            return {'CANCELLED'}
+        self.report({'INFO'}, f'已核验 {count} 个逐灯表面')
+        return {'FINISHED'}
+
+
+class TOON53_OT_unbind_directional_face(bpy.types.Operator):
+    bl_idname = 'toon53.unbind_directional_face'
+    bl_label = '解除连续面影并恢复原材质'
+    bl_options = {'REGISTER', 'UNDO'}
+
+    @classmethod
+    def poll(cls, context):
+        obj = context.active_object
+        return bool(context.mode == 'OBJECT' and obj and obj.type == 'MESH'
+                    and directional.active_stage(obj.active_material))
+
+    def execute(self, context):
+        obj = context.active_object
+        try:
+            directional.unbind(context.scene, obj, obj.active_material_index)
         except (RuntimeError, ValueError) as exc:
             self.report({'ERROR'}, str(exc))
             return {'CANCELLED'}
@@ -256,7 +326,7 @@ class TOON53_PT_lighting(bpy.types.Panel):
 
     @classmethod
     def poll(cls, context):
-        return bpy.app.version[:2] == (5, 3) and context.scene.render.engine == 'BLENDER_EEVEE'
+        return is_supported_host(bpy.app.version) and context.scene.render.engine == 'BLENDER_EEVEE'
 
     def draw(self, context):
         scene = context.scene
@@ -266,6 +336,7 @@ class TOON53_PT_lighting(bpy.types.Panel):
         lights = layout.column(align=True)
         lights.prop(state, 'key')
         lights.prop(state, 'fill')
+        lights.prop(state, 'rim')
         lights.operator(TOON53_OT_prepare.bl_idname)
         control = scene.get(lighting.CONTROLLER)
         if not control:
@@ -275,6 +346,8 @@ class TOON53_PT_lighting(bpy.types.Panel):
             lights.label(text='当前主光 · ' + scene[lighting.KEY_LIGHT].name)
         if scene.get(lighting.FILL_LIGHT) != state.fill and scene.get(lighting.FILL_LIGHT):
             lights.label(text='当前副光 · ' + scene[lighting.FILL_LIGHT].name)
+        if scene.get(lighting.RIM_LIGHT) != state.rim and scene.get(lighting.RIM_LIGHT):
+            lights.label(text='当前轮廓光 · ' + scene[lighting.RIM_LIGHT].name)
         panel = layout.box()
         panel.label(text='相机影形控制')
         if control.parent != scene.camera:
@@ -305,9 +378,34 @@ class TOON53_PT_lighting(bpy.types.Panel):
         for name, label in LABELS.items():
             palette.prop(scene, f'["{name}"]', text=label)
         target = layout.box()
+        if TOON53_OT_witness_surface.poll(context):
+            target.operator(TOON53_OT_witness_surface.bl_idname)
         target.label(text='活动材质槽')
         target.prop(state, 'role')
         obj = context.active_object
+        mat = obj.active_material if obj and obj.type == 'MESH' else None
+        stage = directional.active_stage(mat)
+        if stage:
+            for (name, _, _), label in zip(directional.CONTROLS, DIRECTION_LABELS):
+                socket = stage.inputs[name]
+                if name == 'Base Tint' and socket.is_linked:
+                    target.label(text='底色 · 使用原材质接线')
+                else:
+                    target.prop(socket, 'default_value', text=label)
+            target.operator(TOON53_OT_unbind_directional_face.bl_idname)
+            return
+        if state.role == lighting.ROLE_DIRECTIONAL_FACE:
+            target.prop(state, 'face_field')
+            target.prop(state, 'face_head')
+            row = target.row(align=True)
+            for name in ('face_right', 'face_up', 'face_front'):
+                row.prop(state, name)
+            if obj and obj.type == 'MESH':
+                target.prop_search(state, 'face_uv', obj.data, 'uv_layers')
+            else:
+                target.prop(state, 'face_uv')
+            target.prop(state, 'face_scope')
+            target.prop(state, 'face_valid')
         if state.role == lighting.ROLE_HAIR:
             target.prop(state, 'mask')
             if obj and obj.type == 'MESH':
@@ -315,7 +413,6 @@ class TOON53_PT_lighting(bpy.types.Panel):
             else:
                 target.prop(state, 'uv')
         target.operator(TOON53_OT_bind.bl_idname)
-        mat = obj.active_material if obj and obj.type == 'MESH' else None
         if mat and mat.get(lighting.PALETTE_REF):
             stage = mat.node_tree.nodes.get(mat.get(lighting.STAGE))
             if stage is None or stage.bl_idname != 'ShaderNodeGroup' or stage.node_tree is None:
@@ -341,15 +438,18 @@ class TOON53_PT_lighting(bpy.types.Panel):
 
 
 _CLASSES = (TOON53_PG_authoring, TOON53_OT_save, TOON53_OT_prepare,
-            TOON53_OT_bind, TOON53_OT_repair_normal, TOON53_OT_select_control, TOON53_OT_eyelid, TOON53_OT_key_control,
+            TOON53_OT_bind, TOON53_OT_witness_surface, TOON53_OT_unbind_directional_face, TOON53_OT_repair_normal,
+            TOON53_OT_select_control, TOON53_OT_eyelid, TOON53_OT_key_control,
             TOON53_OT_toggle_override, TOON53_PT_lighting)
 
 
-def register():
+def register(*, include_panel=True):
     global _registered, _descriptor
     if _registered:
         return
     for cls in _CLASSES:
+        if cls is TOON53_PT_lighting and not include_panel:
+            continue
         bpy.utils.register_class(cls)
         _classes_registered.append(cls)
     setattr(bpy.types.Scene, PROP, bpy.props.PointerProperty(type=TOON53_PG_authoring))

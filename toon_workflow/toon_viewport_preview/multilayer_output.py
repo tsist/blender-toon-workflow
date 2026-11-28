@@ -104,7 +104,7 @@ def save_multilayer_new(path, passes, *, pixel_aspect=(1, 1)):
         fmt.use_preview = False
         fmt.color_management = 'OVERRIDE'
         fmt.linear_colorspace_settings.name = 'Linear Rec.709'
-        work = Path(tempfile.mkdtemp(prefix='.toon-multilayer-', dir=path.parent))
+        work = Path(tempfile.mkdtemp(prefix='.m-', dir=path.parent))
         staged = work/'pixels.exr'
         render.filepath = str(staged)
 

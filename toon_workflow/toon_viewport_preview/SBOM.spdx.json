@@ -1,0 +1,3268 @@
+{
+  "spdxVersion": "SPDX-2.3",
+  "dataLicense": "CC0-1.0",
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "name": "toon_viewport_preview-0.2.27",
+  "documentNamespace": "urn:uuid:9ebe16ee-3f18-4184-b5fb-5aad3f4492e3",
+  "creationInfo": {
+    "created": "2026-11-05T09:28:51Z",
+    "creators": [
+      "Tool: Blender-AI-local-release-audit-1.0"
+    ],
+    "comment": "Local source inventory. Copyright and unknown history remain NOASSERTION. Runtime host packages are not shipped. No archive self checksum is embedded."
+  },
+  "documentDescribes": [
+    "SPDXRef-Package-toon-viewport-preview-0.2.27"
+  ],
+  "packages": [
+    {
+      "SPDXID": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "name": "toon_viewport_preview",
+      "versionInfo": "0.2.27",
+      "packageFileName": "toon_viewport_preview-0.2.27.zip",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": true,
+      "packageVerificationCode": {
+        "packageVerificationCodeValue": "831ea0795281993a74cddfed9c8f368e4d83dd6f",
+        "packageVerificationCodeExcludedFiles": [
+          "./SBOM.spdx.json"
+        ]
+      },
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseDeclared": "GPL-3.0-or-later",
+      "licenseInfoFromFiles": [
+        "GPL-3.0-or-later",
+        "NOASSERTION"
+      ],
+      "copyrightText": "NOASSERTION",
+      "supplier": "NOASSERTION",
+      "originator": "NOASSERTION",
+      "sourceInfo": "Existing local project sources and 13 traced GPL source copies; exact records in SOURCES.json. No new upstream identity or legal ownership assertion.",
+      "summary": "110 Python source files with 10 distribution/support documents, 120 shipped files total.",
+      "comment": "This package verification code covers 119 files excluding this SBOM only. External PACKAGE.json covers all 120 files and enclosing ZIP.",
+      "primaryPackagePurpose": "APPLICATION"
+    }
+  ],
+  "files": [
+    {
+      "SPDXID": "SPDXRef-File-0001",
+      "fileName": "./__init__.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "9fe3d567279577125bab7a602f713da43f83ba17c155319c4df1d5fa2bd2bdb9"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "a38a73f45af485b47f08df998c1e24783937c66c"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0002",
+      "fileName": "./_object_core/__init__.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "f7e1bda1fad24cae7bae2253a5e7d27f30e12c9c49e4cca5c6bfaf1fec27ea3f"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "0313eb10391189782e3122f7c7d49b5085d188f3"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0003",
+      "fileName": "./_object_core/analytic_batches.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "2d9ee3a9e9f9eebeb365c2488c8f46bb7fbfe90c79101dd02d18e63ab8950edd"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "5d231837129a882af876d38bb8ab17de53fbe362"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0004",
+      "fileName": "./_object_core/analytic_visibility.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "cd6e60f291a466a0f667e01ea68ea5ed052fe119c5dd895a3889895b19d17760"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "665e5777f35c0958de4735ef62328fcd62c4f358"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0005",
+      "fileName": "./_object_core/contract.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "71458f2a58ecd423a358ecf9901ed5fd8248e16009cef27db6b357d6b1737a69"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "7e1be5cf7a1013daf838b7c8e3be6ec2a8cbf059"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0006",
+      "fileName": "./_object_core/geometry.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "3d7e763a633ba7a164593dd02d0ea1bb40d79e38aa71185a1e3947736fcbaee2"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "0ccaf76df9f46c92df7b4e81fafecbea3f6c1cf6"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0007",
+      "fileName": "./_object_core/hidden_categories.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "5a8482579a70fd0f8e9c76731975309c7e6e231ce78b2b850d1c2fa5447164fa"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "52a6fa8e61473f66903dd3afb34375161c777a2a"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0008",
+      "fileName": "./_object_core/intervals.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "2118281eed4818accb443604b821c0d048ba2a442b2867c4f82de46e24371272"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "cc7f35d29035a0c0faaf597f71359c5fa0f7d983"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0009",
+      "fileName": "./_object_core/LICENSE",
+      "fileTypes": [
+        "TEXT"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "7713a1753ce88f2c7e6b054ecc8e4c786df76300"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0010",
+      "fileName": "./_object_core/occlusion.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "18b2b1b4173d2935ae9ca060b6a441f5dde2bd1784049bb83aca1e3c43ae51ab"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "8155e93201e50353b26ae803368cb764b146e6a5"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0011",
+      "fileName": "./_object_core/SOURCES.json",
+      "fileTypes": [
+        "TEXT"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "8cee0d8403d2b821234da78744eac1c073f95efa4340b781ccdd369e63250350"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "dfad42ebc6fa269f90ccc20c5b0a66becdabb2a2"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0012",
+      "fileName": "./_object_core/visibility.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "5aa2bc11a66397fd07f113a5ea46c405b8343914531b91b924da8c509cf55423"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "65f57b86bb1d63b67e0e0823c34d113a98769b12"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0013",
+      "fileName": "./_support/chain_policy.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "880e19e930b1aa85a32d6fcc31e15a21d60d60c3df15f58f51f160578ca6badc"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "250d4b1c451f27cb08499564eea3837132516e42"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0014",
+      "fileName": "./_support/geometry_exact.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "36beb29191c3770ed54bd25c1c03c6c1c82aa5c00fb54cd5d26e305571b0139a"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "a25fb64d5412ded324a9c61d80027cd8a1cf86fc"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0015",
+      "fileName": "./_support/paint_editor_state.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "c6a7f7bd112b573d784c700fa5a7a20ee02d33ad5247f8e1c84d297d47c57006"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "149b3139f1d9a667d1bb5829afcfb233788ccff5"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0016",
+      "fileName": "./_support/relative_size.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "8b7685a926e899e82311c5314ec84f1b8299e09bd3246fe984d9b77c0e3676b2"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "1d1561f5a9750231cde194d7554ec5fb09c4c8c1"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0017",
+      "fileName": "./_support/smoothing_flags.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "737d09ec1b96e4cdf8cec1fdfe6fcdabe9071332b13158eac5eb3fa525e2217b"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "fc72918548aab782a2b8c58bbf22e0af0e3bec65"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0018",
+      "fileName": "./addon.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "a23cfcc3d1157542c30eddb943524c642d7287ae7a4459f5cad19e1d3cf24380"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "dd53c82963124a0ca9f41fb100d28358d9ea607e"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0019",
+      "fileName": "./alpha_function.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "3efbb715c7236c3448fadf54dec0096a2a41daa830d19839fec8f69f1527cd87"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "69e4ee3d13bd7a85285474941e4e8aecca25095a"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0020",
+      "fileName": "./amount_animation.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "8486162106ce5886b6d9b7ccb50b79e3740b9b3284d007c5f8c4b86b08fe3225"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "b0bcbdccb8e9a05811ea4164ec6e81429f2c4a6f"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0021",
+      "fileName": "./amount_animation_ui.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "a7ae8e9e5877b708e257e486a29e8fa80fb61d8206c4a6fd85bbc93507b6bb0b"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "50c3c6694dccf7b6e9d52d8d873d4f17d9da18c0"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0022",
+      "fileName": "./author_channels.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "4bd693f5a055d1d784b4f0aba7b99164af13d482ad21ae78284017e15a58e648"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "3330c383af1ce6215df2a84e6fbf5a13dcb8c91d"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0023",
+      "fileName": "./author_cli.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "dd6f36f26a07897ef3245189da0edb57cccdb5015c1cc6b859b3e2ac9b250cf6"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "5b84029b6d2ae2e8c08e066e5f5b613d9cf099d1"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0024",
+      "fileName": "./author_graph.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "73bc2c6ebf2622cb475e28479a55668e20f0db1eff7242cc9b80bac1d647e192"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "9060d99f348bfd92099c983d68f36a3269737608"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0025",
+      "fileName": "./author_helpers.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "038fb8bc924a724dcea05f2e6a90558dc534a49defca1248303ed064be17b1f5"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "369702fa4d97a9b2ab0c479c4cd252abf350733f"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0026",
+      "fileName": "./blender_manifest.toml",
+      "fileTypes": [
+        "TEXT"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "449d0a79550274218aa25b3e4b13d96a82ffb19c16dd829946de857df8fcd0a2"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "6a4065996ddb383eb0b50ebfef359a7f023311ad"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0027",
+      "fileName": "./boundary_sources.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "0d0bd636a0d67946b4b8cf1570b13b13710bf3c90ee9b4142e76ea4f7a55fa3f"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "bbed941a17b6e7ea2650d014c3e6932298ca18e3"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0028",
+      "fileName": "./brush_authoring.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "cb70c1b11e0dcb244780fdde2e906705227d8c2cfe45d241e287e9426fafbb80"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "eb0bd0f6c829271d754c2dc23ad781b2e21aaf85"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0029",
+      "fileName": "./brush_effects.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "c089970d6378fcc19af880a98e4c39bf72f55c793119cbe4552ffafb969ed25d"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "9275be6d2483f0e37cfebfc755c364fa73bbe28a"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0030",
+      "fileName": "./brush_engine.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "a6802cae182bfa992b0d5cd1956458afc5d99c9402d27e2921459552b6c79550"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "da617d1a1a52da5a41333c0dd825d54146ac5f33"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0031",
+      "fileName": "./brush_gpu.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "3a53d6c4932c3e584759568d83308de5a8e932e83e00f02ae30d076d72d3237f"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "df31120ea94e56b6fa5db169f1f284c2e438c47c"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0032",
+      "fileName": "./brush_preview.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "c495345cc4701185fec480e4ec37a868130a12e4c0365d119022331a383774ce"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "826ff90e2277d6358254ea69ad55160f2db6ca82"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0033",
+      "fileName": "./brush_ui.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "25b946f1f166f556b2d4749000ca68a8119a198b090560a264c928a11b4c390d"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "61deb4190e017f78985b99ede6dae1bc0941a628"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0034",
+      "fileName": "./camera.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "386899fd3a0a41eb0015c42110ff18fdd73766fc57139599b14bda11ca85fc51"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "40e4f79dcf7d95ba93594084bb567bc8081bfa24"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0035",
+      "fileName": "./captured_copy.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "9fcee2e19af8b022f546a3bec0d040322c197157a31e0bd65649e465a0348b7f"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "009259ad35b99b5cb520e29fd0644bf1bbb596c3"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0036",
+      "fileName": "./chain_compute.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "c325778813b0f8a5719f9196b324b64b14602d17b38b76bc4d874eea27d60c3c"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "afaca38e89e2a1c9c3c204260cf0d0370573831c"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0037",
+      "fileName": "./chain_controls.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "4dff8f6797e3577104f41f9cf38a54d7ff85959139bf523103540bdcf289b2d6"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "ec3e68018bf552f2bd217e0900f1d9fb4ce0f287"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0038",
+      "fileName": "./chain_snapshot.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "de61845ec75780a99d9f45b8904f69a9103ed5e686ece6f5e431eec9d0f5fe37"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "4286271169ebc14a466e893ddee7e88fd30b9443"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0039",
+      "fileName": "./chain_ui.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "4896cd83c6093bbcda22c2ca1a3bfa0c4a00cdf09172a1b5e5218fdd6037557a"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "efc6f169ebe1fd7bf6df3a760e4e2ae5c9d305f2"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0040",
+      "fileName": "./coverage.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "03a8b8f1dbc3f377c9468bfd9ed7183c9f63f76615f169633af4dba7a192564e"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "1bfa9766ce1d60d53af8e33183e37020613d5c35"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0041",
+      "fileName": "./curve_editor.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "187ddc1e4315d07e398452f129b70dca1fab81143b8c4b231e310003cf9d5d52"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "1434aa8de75535cf2201a8c699d19632f89940bd"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0042",
+      "fileName": "./dash_controls.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "f61feba4a32e7d753f54dc7d76ba8c7d0c00613e80e26e1d73dd97cdde7f5690"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "52ccbe07e4c2ea295abd95a457ac79db5791f512"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0043",
+      "fileName": "./dash_splitter.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "8ed5d65a6e620814b2a752024fcdfbcc6f896799938bc635ab8893ff755e2e05"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "74524d39d2d4ede5b521cc0b4ed7d5e188a7fa6e"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0044",
+      "fileName": "./dash_ui.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "c5611d6f943a29e146d998b9d8977fed4e7b1b183dfa814999757c0c8b84b0cb"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "838a02a55c978ef4c35524e2c71a9566c1f5d7fc"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0045",
+      "fileName": "./dependencies.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "e5480697a344a1bd95ba14094bef46dbda07ddce2a4e428e504f18d827200f61"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "d230d8c234cb6af8f5c678b490a986a4dddf0bef"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0046",
+      "fileName": "./depth_output.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "39ba1a44021a8d5d98b2d03dae64416042b41e8fe7648cd675bc5df1b76720de"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "ddf487337958d7ec00c94ba1f2ebbf067f8a7554"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0047",
+      "fileName": "./drawing.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "6d95a3be92dc367b3ceb7c76c91c9bf5c82500285f8536425961a6582773efd9"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "0bf89c881bf05c3c8074ff5fd56a72629840f9c5"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0048",
+      "fileName": "./edge_authoring.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "0b1881d3bf75003f3071dbefd140b19450bff92e7ecfc6559a06a07239076925"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "796317c2dec016208dd0deb50d9e1b761b55f5ed"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0049",
+      "fileName": "./edge_sources.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "ce4ee3fed36d63a0cc528041638e54a2b79a7bbb64a6060404c7bbc48f36c09a"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "2595f8d2e0b2de57f7b39dddfee2b8bc0e43a6c6"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0050",
+      "fileName": "./edge_ui.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "9370c6a595ba8d74d0553d4dd3d00fedd06f0ee63b882c6a9cdc10a198e9e1d4"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "8788fdee57bee9bb258bee22587ccc9d9064664b"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0051",
+      "fileName": "./exr_header.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "416b6178b9a8636b080bda0f69d77f5cc9023538979dbd14e506953e5eca2130"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "b2f9e497c1d68d2affdc2b897e69621cf60938ad"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0052",
+      "fileName": "./exr_output.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "87b27a11c714cc69bbd7192dad6804f4251105838cf0a0f7e3ee39a5165e5490"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "d29d85a10af60c7f382c28589c2ce4be486d0ae1"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0053",
+      "fileName": "./file_authoring.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "a55a26279ec33271f5baf9d42072aae4239ba850523f2752a670de0e76b7d974"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "219c698587d96bc103e1d8790b0455df8db84266"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0054",
+      "fileName": "./file_ui.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "be828e9e8c856b08b666256fbd30d214232ecd24b2103742a084f8c9cfeffb1c"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "91dd204d4d230c130963c2bbc8cc131db5a303af"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0055",
+      "fileName": "./geometry.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "0593ab71dd91f6074ec317cedff4ce7cb9aa07a0f5da5fc87ce41cb43bc64880"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "cf513515fe916916e64edf01bd92d55fa1ada347"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0056",
+      "fileName": "./group_lifecycle.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "41b5dfa104df33f5b6b839f314da3f722fd3f0bea99855fc5a85412ecbc891f6"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "3d21181219ac9b8d8cb36bbc2ced4f8b7a3b718b"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0057",
+      "fileName": "./group_ui.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "44ee3589d6e4f88b879ac1acb8df74c509a72adf57ada479ab59ed8a149624c5"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "dbc8b9d633ad284f417f0c7f3e09b472e33cdfa7"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0058",
+      "fileName": "./holdout.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "b5e542d6d7ccf9dbd5ca3edd1e9622d1e8d8e2a1fb5efad5e372230b36d82af9"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "a00eba4195e9f7082f3d4e04f04a561401a9eb5a"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0059",
+      "fileName": "./intersection_chain_compute.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "58900aed989ffffa3659076d04e9027c45c96632129c7465a51efef8d451a49e"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "8f648a366dd2e6c9cd9ec347edb56665bdb37496"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0060",
+      "fileName": "./intersection_gap_linker.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "e5edac9538d60f9b54d255a707cbbe57285ff8d245e3ecc1e32a6a39a8f55608"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "3539f427fef6473bcd703770d795c76f4f29b48e"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0061",
+      "fileName": "./intersection_pairs.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "ace533aae4b937ba3ce0ba157cbb2306b8f78731c6a556b5d6ac0f30e35b6b56"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "02d0c978be9ca9acd8664878d53d8d23cc00c924"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0062",
+      "fileName": "./intersection_phase_adapter.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "ca32c758484ee1f173c552230a34bc4eed59e3205c1b9429a146bb78b0df9902"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "e913cfc2481617d70704526899fc9eb91c7855fc"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0063",
+      "fileName": "./intersection_sources.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "5f72f79d5e6fbcc25e8ee033c0b977ca17e1d2d7d127ab27083d6e40023baf25"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "84cd85500768a9f451e450a90f4207db4da43676"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0064",
+      "fileName": "./intersection_strokes.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "bbc2c76408676cc21d6e1e041d721f5b0a60836ab9c324ed2c3ee940eea73c25"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "85a45f318873c534aea071c3261e5e7aad7c1d58"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0065",
+      "fileName": "./ix_authoring.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "59ac0245dcabf052d434f3095c33c66dbbe1ed52159d86b198cc628c90e84df7"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "b9cd363dc6b08e4df678c09c3092e48d95379056"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0066",
+      "fileName": "./ix_sources.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "760e55efa81c510fd53a0f1e8270cb66e946dfc74831f1d5a6339002737ddd12"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "ee440f2274237c84cfc0ce6905459b0884d82dbd"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0067",
+      "fileName": "./ix_ui.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "7a9557506085fca500b869adf88db720947e3bdc629fa352e5e49e0991468fbd"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "c76a1428b6e25d3372708a72364b270e8bcfba9f"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0068",
+      "fileName": "./LICENSE",
+      "fileTypes": [
+        "TEXT"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "7713a1753ce88f2c7e6b054ecc8e4c786df76300"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0069",
+      "fileName": "./line_function_ui.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "7c426c6bcef4386d373240d9a388a20f4330b6f33e0dec76a9ab374e4b87e43e"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "cc87322fe11c3d6a9c7651aa8d3cadd7b49f9159"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0070",
+      "fileName": "./line_functions.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "e7dee9f6ec4056236cdbc159a40d4ffb3070ed937c00024a60ab940a3f2f604c"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "d808c02f2059b84366e262e5b2d9e49635170d57"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0071",
+      "fileName": "./line_hierarchy.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "e06f921baefe4f3df7d87870e280fccf45fd63dc4764426b5ea024e271aa14e2"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "b147ad98d6347dc957bd3428c26a469a8cb13a08"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0072",
+      "fileName": "./line_ui.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "451825aa0bc7f7c96ac9bc5bfff6db3ffecd6621cc8d1c6ceb6bdc425eff035e"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "f93c767650a4b57a39894256c817ec4bf59dd04c"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0073",
+      "fileName": "./linker.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "249a30a01e459a276902d5007147e365e785bb0f59b55b74b98e009d73b759f3"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "e5304cccfe83acec923b5ffbadae6fa37c830622"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0074",
+      "fileName": "./map_amount_controls.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "552f067e0cd5fde9b94fcac5148040d1e40e6453fffcf4048e918eb0af0216ee"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "d09d3ed1a437e0a2480ca28fe8ab926dbcccca01"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0075",
+      "fileName": "./map_amount_ui.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "810e3cef667c2a39a80f44e7d9bbc0a6065208b67b954050da439b32a7e561e9"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "127b989ec7c8ba66bc18b79468c0b0926276d89d"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0076",
+      "fileName": "./multilayer_output.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "94dc6d7894a3bf3e0f75226237ab9ab43676a482e186e7672979230d7bef58ce"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "665b7c0d7676d2171a28e6278abecf9ac89dc823"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0077",
+      "fileName": "./NOTICE",
+      "fileTypes": [
+        "TEXT"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "100317beacd6a752df0609f99bd5e6919beed14534a906da1d198c1734ae8385"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "fdfefb2821630154bef9e433a6f241ab0ac4db9e"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0078",
+      "fileName": "./object_adapter.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "76b24f2b029492d4d5334b090b939131dec6882796713d3226680a34b2924e1d"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "a7c90c0599a57c96af3ec2fda8bfd95780bcdb49"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0079",
+      "fileName": "./object_fragments.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "c4621bc562900fdd492a0662091fc50c7cd3a38eef2f291f498d1712241965ef"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "cd0b5d50416e5408d8da83a99105adb40ef82231"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0080",
+      "fileName": "./object_view.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "24f3843bc37e6cb8b06c7b1a5a2c1a76b90f7f1d7ecf43cd29dac18e69ab3a55"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "2348d15f66ee2edfd2397e8c98b63813ba4e35ec"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0081",
+      "fileName": "./output.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "81fd0e39dc529bcecb125135a66cd707cff2ad7b7c40c05f7c3d64ab06106ebd"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "6e1c04f4c11ba84babe8ca76c45a4c5fd075c381"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0082",
+      "fileName": "./output_scope.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "50ecf67620856a25acd1eac566483cd712b8e8f993719a67035b5612b672264a"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "901c8783ec6556edfbdcd2fbf8b64d0ae9311350"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0083",
+      "fileName": "./parameter_animation.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "8d981586c52f9f26be5705372606f69651fd14037fc1ca05282ed5b31d38d4ef"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "5566f211752ca2f63f003fca6474d06b80ab2ef1"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0084",
+      "fileName": "./parameter_animation_ui.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "e0e4f0f3324f86b339520d818fc4f52b649ede85527965849931736a876531aa"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "728e5d5e251818079c44e54006ee751f06dc1a06"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0085",
+      "fileName": "./parameter_overlay.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "15d308f51c1f13496fcf585e4aa5313e2ac83a5c672eeb69909fa597adbb90e4"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "88e443f0e24514debd8e91ebfff70e0269859df7"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0086",
+      "fileName": "./phase_adapter.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "f7cb37dd4c59d077df570552fe5c031458b6d0b2b75c6cfd4cd287bc3eb0c15d"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "e03bc52ad132e49b528c29161e1cae8143f72c88"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0087",
+      "fileName": "./phase_jobs.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "2952de8bf9bc8caaea8cf9542a69dfe13c6f8025e52ffb1f52c1d11d904d1a44"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "3b5f1ce702ecd6279832d6d4dfcd5374b53df006"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0088",
+      "fileName": "./phase_worker.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "b2b175844f076b61c523b384b257b424070a2bc73496b047b4cafa2f973a2990"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "989c6c5ba7448d754ca87fcd3514bd47a474ee93"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0089",
+      "fileName": "./preset_catalog.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "4d781da0cc25fbde3d5d9ee43efdd2e8ae19281b3d7934f56f92358518da388e"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "cf8f25e5698a642cb082cdfca64fafb427e1b065"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0090",
+      "fileName": "./PROVENANCE.md",
+      "fileTypes": [
+        "TEXT"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "bdc66a913288c92f3b3f118ef6d5b25e0bd8fe7e472a6e5b669dc3db80cc56a0"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "749019af404948c47a8dffb71170e4ead04eaee9"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0091",
+      "fileName": "./README.md",
+      "fileTypes": [
+        "TEXT"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "6601e2453f5b7f1f4f0a38335fee136c0f59884fdfc478997724b70415c40c5c"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "72f89c3cbedf782834c2ae8b08613227cccb5973"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0092",
+      "fileName": "./RELEASE-NOTES.md",
+      "fileTypes": [
+        "TEXT"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "1194f76899867bee35f89d8565c008d4ca24864072d539469a079685f49cc619"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "58f8088f612c1882c2cf6abf026ce8ab403ef893"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0093",
+      "fileName": "./render_elements.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "c2bfaed0e307b463356f8679a8154c2da52735f7ea6f5c28415df70231ea4bc4"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "8db3fdb8a540f33d190c8a031d53d51e398e53f2"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0094",
+      "fileName": "./render_geometry.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "fe43be59fe3f0a5bbfc351f2ea7ebbd37731c21ac75b1a16e9a877f0a564d818"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "f6c7433ad00e08f6958e1c78ef3eb9aa5c14f687"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0095",
+      "fileName": "./render_output.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "c99113575ef5ee2f7a27770552be5c38f746d136637da73661016123d28844f7"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "a0fb86b78c015c7fe464df75bf445801d02d8790"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0096",
+      "fileName": "./render_worker.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "909d546c4b02fdf5133fe69bb22eba3037dd2efba70ea93ae12725e0fc33761d"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "af349000203e177281e8be2ca890a81c380479d8"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0097",
+      "fileName": "./runtime_preferences.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "ec0b4962ee2cbbec743ffd0f773b9fa622f62b7572ac8626d22ea796e8103035"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "296c48cb6a5cc7628c5ac58d1166762cbbccd52b"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0098",
+      "fileName": "./sampling.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "b8811a2b4cb9592d5a952ece2faff61c80b3f8bd620d675dda21e218f3441f40"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "dec6101ecc1f04eae91460fd33f8f018d0564025"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0099",
+      "fileName": "./selector_bindings.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "490c3418fc9557a2df78fb48e1f889bfbb74be2ed98413532f0afd22e7201c68"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "621ce05396c74e9f10c701c4389a22df550ad54a"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0100",
+      "fileName": "./selector_capture.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "e9b628ac3251fbcbb562871940188c5352440cec1e7f16eab3955b8996a888c7"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "c0e3396a48762de0a65791305450085d4dd85cb4"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0101",
+      "fileName": "./selector_picker.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "c32f4fc392e9e9ea2c643735f176afd86e54a44973693bbaf8210507a7c2575f"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "4bc8f669ca67f726d264105cfb45b30559a549d7"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0102",
+      "fileName": "./selector_ui.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "5ff09775430dd02df246289bb4a349b0269cf12779cbe9d03070d30c824de4b8"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "08474fe46dff54ccac93001b2f282fa1cd58fd7e"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0103",
+      "fileName": "./sequence_output.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "7b8b987b420270e9ed34f83b0903c0b37479684be3b6962ae10e220330766fee"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "9b6fb006b6a596b09382f18bead4e13dc61337e5"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0104",
+      "fileName": "./sequence_protocol.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "a146803230e2407900f9be44ffec80055c916b563268c3fbd48c06ee76ea464a"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "7ee5aa1b84d93bd55e8a9083d9a74601017b26b5"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0105",
+      "fileName": "./source_alpha.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "339e1f55e3ac7a213077201449adbfd6a2f69b31ff40592190d860ea213ba69f"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "0ebf8e2925593a68d3757de8332bbb80ae10a16c"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0106",
+      "fileName": "./source_bindings.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "9c2db3596035dfd29330a41a887a9e08993ff0f30ceff419308263a01252de12"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "f1f92a640a3e63f373938ca922b0e97fbd74373a"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0107",
+      "fileName": "./source_routes.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "3479b2e2bab66c255f19e1c8b3dc517d8686907dd56eef69a45c5ef1364ad9d2"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "c4e2a695d744f40922752c64d82de535190286d8"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0108",
+      "fileName": "./SOURCES.json",
+      "fileTypes": [
+        "TEXT"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "141154caf9ee244557addc068bac16dabb3765a794b0d90d88081c15ccf9b919"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "9f37a97e17c1e97c303821c57cafe0108026d3eb"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0109",
+      "fileName": "./strokes.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "3a81c45975fa368f4595d3108761475f04bd92d2d572b61a460db5706bce6286"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "71a88b0ab51489508327bc014a9440170ec34b7b"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0110",
+      "fileName": "./style.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "da21822fcc3ebacbdb3fc10937d3cf38977fc58632984d65f455cf26f674d439"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "91d97e36ddcc8408a39b96c665ce842b4edd0d78"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0111",
+      "fileName": "./vector_output.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "4f08f747a6f2f5264496d7d91c78f9abaa64418db09296230dbe0204996a2f54"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "c74c23a7d1f45c615180d0f4b5cc0c18c4e5c0db"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0112",
+      "fileName": "./vector_scope.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "7d4fa94acfe5b4c295da2943301680bfff4a009be9786725a22cefba85906657"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "277a11114f176056671389810e788b2653d36360"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0113",
+      "fileName": "./vector_ui.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "c023412cd8ae51fad43afd9a430ad52b15de2188f2136550826c558a67737243"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "e1fbe1e497eec9ba7731c528902ec26ac329de3d"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0114",
+      "fileName": "./viewport_scope.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "f63e72d9366f747e91c57c3007badb728977039c6467ca041eefeb492ee4f8d7"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "57a70f11688b4842872605399b263a9c9d5c1439"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0115",
+      "fileName": "./visibility.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "a7ae129c6b3d9cb3db9460e282e4c63ab1819d6c251d9dcf6ef8cd1df1270ad6"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "c9a37bf9eddd34a197c443584547a8fb4e822417"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0116",
+      "fileName": "./wire_authoring.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "e443f9f1321c91658340d99502d1bb8f6023da50127efb9eee6d8328a38da556"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "446ba83a89232b1de6162800e7968616d8705e47"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0117",
+      "fileName": "./wire_brush_import.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "f89f588bc35eaf70ac2ac14a20041f7758cff813388227fbcc8acedce34648e5"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "4ed5c6bdf2e101ea8dfbe3c8b2558133948260f7"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0118",
+      "fileName": "./wire_sources.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "22517621b64d1e316b2fcfd49eb7d47d24e8b173a16e4bb6646c095ccda23e77"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "a55a89629f9a05da71a9e830f83ba333481b0624"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0119",
+      "fileName": "./wire_ui.py",
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "945fb201693d2ae48c736b7230fe1a23437f746021bd530c037938211acc19ca"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "740c428d89584b690d1e753a1fb314bf36619d63"
+        }
+      ],
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseInfoInFiles": [
+        "GPL-3.0-or-later"
+      ],
+      "copyrightText": "NOASSERTION"
+    }
+  ],
+  "relationships": [
+    {
+      "spdxElementId": "SPDXRef-DOCUMENT",
+      "relationshipType": "DESCRIBES",
+      "relatedSpdxElement": "SPDXRef-Package-toon-viewport-preview-0.2.27"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0001"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0002"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0003"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0004"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0005"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0006"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0007"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0008"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0009"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0010"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0011"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0012"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0013"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0014"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0015"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0016"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0017"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0018"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0019"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0020"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0021"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0022"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0023"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0024"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0025"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0026"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0027"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0028"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0029"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0030"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0031"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0032"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0033"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0034"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0035"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0036"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0037"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0038"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0039"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0040"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0041"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0042"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0043"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0044"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0045"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0046"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0047"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0048"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0049"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0050"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0051"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0052"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0053"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0054"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0055"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0056"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0057"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0058"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0059"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0060"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0061"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0062"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0063"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0064"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0065"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0066"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0067"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0068"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0069"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0070"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0071"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0072"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0073"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0074"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0075"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0076"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0077"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0078"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0079"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0080"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0081"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0082"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0083"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0084"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0085"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0086"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0087"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0088"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0089"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0090"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0091"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0092"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0093"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0094"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0095"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0096"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0097"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0098"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0099"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0100"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0101"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0102"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0103"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0104"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0105"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0106"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0107"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0108"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0109"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0110"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0111"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0112"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0113"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0114"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0115"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0116"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0117"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0118"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-toon-viewport-preview-0.2.27",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0119"
+    }
+  ]
+}

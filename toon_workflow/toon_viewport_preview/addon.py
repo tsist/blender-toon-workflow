@@ -1663,6 +1663,9 @@ class TOONVIEWPORT_OT_add_output_node(bpy.types.Operator):
             # image type and pass sockets. Before this it may report IMAGE /
             # TARGA even though the file is a valid multipart OpenEXR.
             node=target.nodes.new('CompositorNodeImage');node.image=image
+            from .._ui_kit import apply_node_theme
+
+            apply_node_theme(node, 'toon')
             mapping=json.loads(settings.last_output_elements or '[]')
             multi=image.type=='MULTILAYER'
             if multi:

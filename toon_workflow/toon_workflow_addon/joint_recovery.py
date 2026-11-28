@@ -203,7 +203,7 @@ def _check_frame(frame_root, index, requested, settings):
 
 def _write_new_json(path, value):
     """Publish atomically with create-only semantics, including a racing writer."""
-    temporary = path.with_name(path.name + '.' + uuid.uuid4().hex + '.tmp')
+    temporary = path.with_name('.j-' + uuid.uuid4().hex[:12] + '.tmp')
     try:
         with temporary.open('xb') as stream:
             stream.write(sequence._json_bytes(value))

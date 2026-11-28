@@ -189,9 +189,6 @@ def main():
             data=rigging_workflow_disk.run(request['params'],job)
         elif command == "capabilities":
             data = capabilities()
-        elif command=='sculpt.review':
-            import sculpt_review
-            data=sculpt_review.run(request['params'],job)
         elif command in ("inspect", "_inspect_staged"):
             data = inspect_file(request["params"]["file"])
         elif command=='dependency.audit' and request['params'].get('profile',{}).get('closure'):

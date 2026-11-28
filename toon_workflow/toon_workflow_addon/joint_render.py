@@ -758,7 +758,7 @@ def _opaque_materials(scene, *, components=None):
     else:
         from . import component_witness
         component_witness.verify_frozen(components)
-    from . import eye_overlays
+    from . import eye_overlays, native_surface_witness
     eye_layers = eye_overlays.collect(scene)
     eye_slots = {(row['target'],row['slot']) for row in eye_layers}
     visited = set()
@@ -770,6 +770,7 @@ def _opaque_materials(scene, *, components=None):
         if tree in visited:
             return
         visited.add(tree)
+        native_approved = None
         for node in tree.nodes:
             if node.bl_idname == 'ShaderNodeGroup':
                 scan(node.node_tree)
@@ -780,7 +781,9 @@ def _opaque_materials(scene, *, components=None):
                         raise ValueError('Transparent/transmissive surfaces await joint optical qualification')
             elif any(socket.type == 'SHADER' for socket in node.outputs) and node.bl_idname not in allowed:
                 from .lighting_53 import is_owned_group
-                if node.bl_idname != 'ShaderNodeLightAccumulation' or not is_owned_group(tree):
+                if node.bl_idname == 'ShaderNodeLightAccumulation' and native_approved is None:
+                    native_approved = is_owned_group(tree) or native_surface_witness.valid(tree)
+                if node.bl_idname != 'ShaderNodeLightAccumulation' or not native_approved:
                     raise ValueError('Unqualified surface shader in joint opaque profile: '+node.bl_idname)
             if node.bl_idname in {'ShaderNodeOutputMaterial', 'ShaderNodeOutputWorld'}:
                 if node.inputs.get('Volume') and node.inputs['Volume'].is_linked:
@@ -941,7 +944,7 @@ def render(scene, layer, output_directory, *, samples_per_axis=2,
     # Zero spatial filter keeps every inner EEVEE lighting sample at the
     # outer grid position. The opaque line image is invariant under those
     # lighting samples, so averaging beauty before its local over is linear.
-    # Qualification: Blender 5.2.1 / 9e2066aef7ef. Other builds need evidence.
+    # Verify that the selected Blender retains these fixed-position settings.
     scene.eevee.taa_render_samples = lighting_samples
     scene.render.filter_size = 0.0
     if scene.render.filter_size != 0.0 or scene.eevee.taa_render_samples != lighting_samples:

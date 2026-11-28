@@ -10,11 +10,10 @@ import sys
 from deployment import core_directory
 sys.path.append(str(core_directory()))
 
-VERSION = "0.84.0+toon.0.42.0"
+VERSION = "1.0.1"
 SCHEMA = "1.0"
-ROOT = (core_directory().parents[1] if os.environ.get('TOON_WORKFLOW_CLI_CORE_ROOT')
-        else Path(__file__).resolve().parents[2])
-DEFAULT_BLENDER = ROOT / "runtime/blender/releases/5.2.1/blender-5.2.1-windows-x64/blender.exe"
+ROOT = core_directory().parents[1]
+DEFAULT_BLENDER = ROOT / "runtime/blender/releases/5.3.0/blender-5.3.0-windows-x64/blender.exe"
 DEFAULT_JOBS = ROOT / "runtime/blenderctl/jobs"
 DEFAULT_TRANSACTIONS = ROOT / "runtime/blenderctl/transactions"
 CODES = {"INVALID_REQUEST": 2, "NOT_FOUND": 3, "CONFLICT": 4,
@@ -31,7 +30,7 @@ COMMANDS = (*COMMANDS, 'project.verify', 'project.prepare_copy')
 OPERATIONS=('resource.init','resource.status','cache.inspect','cache.plan_clean','project.package','doctor.verify_install')
 REVIEWS=('extension.review','extension.approve')
 HOST_COMMANDS=(*HOST_COMMANDS,*REVIEWS)
-COMMANDS=(*COMMANDS,*REVIEWS,'sculpt.review','sculpt.replay')
+COMMANDS=(*COMMANDS,*REVIEWS)
 HOST_COMMANDS=(*HOST_COMMANDS,*OPERATIONS)
 COMMANDS=(*COMMANDS,*OPERATIONS)
 COMMANDS=(*COMMANDS,'material.run','material.template-save','material.batch','material.study')
@@ -104,7 +103,7 @@ def atomic_json(path, value):
     path = Path(path)
     # Same-directory unique O_EXCL file preserves atomic replacement without
     # inflating a legal Windows destination by its entire basename plus UUID.
-    temp = path.with_name("." + uuid.uuid4().hex + ".tmp")
+    temp = path.with_name("." + uuid.uuid4().hex[:12] + ".tmp")
     with temp.open("x", encoding="utf-8", newline="\n") as stream:
         json.dump(value, stream, ensure_ascii=False, indent=2, allow_nan=False)
         stream.write("\n")
@@ -240,10 +239,7 @@ def validate(request):
     if command=='material.template-save':
         from material_workflow_contract import normalize_template_save_params
         return {'schema_version':SCHEMA,'command':command,'params':normalize_template_save_params(params)}
-    if command=='sculpt.replay':
-        from sculpt_contract import normalize
-        return {'schema_version':SCHEMA,'command':command,'params':normalize(params)}
-    if command in (*REVIEWS,'sculpt.review'):
+    if command in REVIEWS:
         from review_contract import normalize
         return {'schema_version':SCHEMA,'command':command,'params':normalize(params,command)}
     if command=='extension.run' and 'review_receipt' in params:

@@ -59,7 +59,7 @@ def parser():
     work.add_parser('preflight').add_argument('--requests',type=Path,required=True)
     work.add_parser('run').add_argument('--manifest',type=Path,required=True)
     work.add_parser('resume').add_argument('job_id')
-    for group,actions in [('exchange',('formats','export','import','convert','analyze')),('extension',('inspect','prepare','run','review','approve')),('sculpt',('review','replay'))]:
+    for group,actions in [('exchange',('formats','export','import','convert','analyze')),('extension',('inspect','prepare','run','review','approve'))]:
         act=sub.add_parser(group).add_subparsers(dest='action',required=True,parser_class=Parser)
         for action in actions:
             a=act.add_parser(action)
@@ -485,7 +485,7 @@ def main(argv=None):
                     if args.action!='plan':params.update(file=args.file,expected_sha256=args.expected_sha256)
                     command='asset.'+args.action
                 request = {"schema_version": SCHEMA, "command": command, "params": params}
-            elif args.command in ('render','media','exchange','extension','sculpt'):
+            elif args.command in ('render','media','exchange','extension'):
                 params={}
                 for key in ('manifest','resources','simulation_receipt','driver_profile','review_receipt'):
                     if getattr(args,key,None):params[key]=read_json(getattr(args,key))

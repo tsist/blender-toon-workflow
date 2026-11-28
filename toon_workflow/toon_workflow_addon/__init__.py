@@ -1,10 +1,11 @@
 """Toon Workflow domain package. Importing discovery never imports bpy.
 
 SPDX-License-Identifier: GPL-3.0-or-later
-The workbench is a development candidate; import remains bpy-free.
 """
 
-__version__ = '0.52.1'
+from .host_compat import is_supported_host
+
+__version__ = '1.0.1'
 
 bl_info = {'name': '三渲二工作台', 'author': 'Blender AI',
            'version': (0,52,1), 'blender': (5,2,0), 'category': '3D View'}
@@ -35,14 +36,15 @@ def _components():
             ('hair_sdf_ui',hair_sdf_ui,hair_sdf_ui.register,hair_sdf_ui.unregister),
             ('omni_preview_ui',omni_preview_ui,omni_preview_ui.register,omni_preview_ui.unregister),
             ('pencil_ui',pencil_ui,pencil_ui.install,pencil_ui.uninstall)]
-    if bpy.app.version[:2] == (5, 3):
+    if is_supported_host(bpy.app.version):
         from . import lighting_53_ui
-        parts.append(('lighting_53_ui', lighting_53_ui, lighting_53_ui.register, lighting_53_ui.unregister))
+        parts.append(('lighting_53_ui', lighting_53_ui,
+                      lambda: lighting_53_ui.register(include_panel=False), lighting_53_ui.unregister))
     return parts
 
 
 def _live(name,module):
-    if name=='pencil_ui':return bool(module._polls)
+    if name=='pencil_ui':return bool(module._detached)
     if (module._registered or module._classes_registered or module._descriptor is not None):return True
     if name=='workbench':
         from . import joint_ownership

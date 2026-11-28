@@ -146,7 +146,12 @@ def apply(context,settings):
     created_materials=[];created_groups=[];material=None
     try:
         import bpy
+        from .._ui_kit import apply_node_theme
+
         material=materials._build(bpy,desired,'BLENDER_EEVEE',owner,created_materials,created_groups)
+        for tree in (material.node_tree, *created_groups):
+            for node in tree.nodes:
+                apply_node_theme(node, 'toon')
         material[_PROFILE],material[_OWNER],material[_TARGET]=PROFILE,owner,target
         material[_SLOT],material[_LINK],material[_MESH]=index,link,target.data.name
         material[_HAD],material[_HAD_DATA]=previous is not None,data_original is not None

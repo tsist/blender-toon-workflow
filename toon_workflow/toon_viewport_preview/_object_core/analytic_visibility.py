@@ -8,6 +8,7 @@ The ORTHO adapter supplies view-space depth directly; the PERSP adapter supplies
 screen NDC plus a monotone affine function of reciprocal clip-w.
 """
 from fractions import Fraction
+import json
 import numpy as np
 
 from .geometry import _NUMERIC_EPS, _camera_parameters, _require
@@ -108,6 +109,151 @@ def _clip_positive(values0, values1, lo, hi, strict=False, unresolved=None):
         # either restores a representable positive interval or proves it empty.
         alive |= unresolved
     return lo, hi, alive
+
+
+def _visible_back_intervals(g0, g1, lo, hi, domains, source_domain, visible, stats):
+    """Discard a collapsed back hit only when it cannot change a visible line category."""
+    unresolved = np.zeros(len(g0), dtype=bool)
+    blo, bhi, back = _clip_positive(g0, g1, lo, hi, strict=True, unresolved=unresolved)
+    if not np.any(unresolved):
+        return blo, bhi, back
+
+    def exact_piece(j, start, end):
+        a, b = Fraction.from_float(float(g0[j])), Fraction.from_float(float(g1[j]))
+        left = max(start, Fraction.from_float(float(lo[j])))
+        right = min(end, Fraction.from_float(float(hi[j])))
+        if a <= 0 and b <= 0:
+            return None
+        if a < 0:
+            left = max(left, a / (a-b))
+        elif b < 0:
+            right = min(right, a / (a-b))
+        return (left, right) if left < right else None
+
+    exact_visible = [(Fraction.from_float(float(a)), Fraction.from_float(float(b))) for a, b in visible]
+    for hit in np.flatnonzero(unresolved):
+        domain = domains[hit]
+        for start, end in exact_visible:
+            span = exact_piece(hit, start, end)
+            if span is None:
+                continue
+            start, end = span
+            possible = np.flatnonzero(back & (hi >= float(start)) & (lo <= float(end)))
+            covering = domain != source_domain
+            for other in possible:
+                overlap = exact_piece(other, start, end)
+                if overlap is None:
+                    continue
+                if domains[other] != domain:
+                    raise UnresolvedVisibility('Collapsed positive back hit intersects a different visible domain')
+                if not unresolved[other] and overlap == span:
+                    covered_lo = Fraction.from_float(float(blo[other]))
+                    covered_hi = Fraction.from_float(float(bhi[other]))
+                    covering |= covered_lo <= start and end <= covered_hi
+            if not covering:
+                raise UnresolvedVisibility('Collapsed positive back hit can change the visible line category')
+        stats['irrelevant_collapsed_back_hits'] = stats.get('irrelevant_collapsed_back_hits', 0) + 1
+    return blo, bhi, back & ~unresolved
+
+
+def _exact_positive_clip(interval, f0, f1, *, strict):
+    if interval is None or max(f0, f1) < 0 or (strict and max(f0, f1) == 0):
+        return None
+    lo, hi = interval
+    if f0 < 0:
+        lo = max(lo, f0 / (f0 - f1))
+    elif f1 < 0:
+        hi = min(hi, f0 / (f0 - f1))
+    return (lo, hi) if lo < hi else None
+
+
+def _exact_front_interval(index, triangle, edge, interval):
+    """Replay triangle, depth-range and front coverage on the frozen input."""
+    from .analytic_batches import _exact_clip_interval
+
+    vertices = index.xy[triangle]
+    depths = index.depth[triangle]
+    span = _exact_clip_interval(vertices, edge['xy'], interval, index.vertices[triangle])
+    if span is None:
+        return None
+    gaps = [_exact_gap(vertices, depths, point, depth) for point, depth in zip(edge['xy'], edge['depth'])]
+    target = [gap + Fraction.from_float(float(depth)) for gap, depth in zip(gaps, edge['depth'])]
+    near, far = (Fraction.from_float(float(index.cp[key])) for key in ('near', 'far'))
+    span = _exact_positive_clip(span, *(depth - near for depth in target), strict=False)
+    span = _exact_positive_clip(span, *(far - depth for depth in target), strict=False)
+    return _exact_positive_clip(span, *(-gap for gap in gaps), strict=True)
+
+
+def _certify_front_coverage(index, ids, edge, interval, lo, hi, g0, g1, flo, fhi, front, unresolved, stats):
+    """Replay collapsed pairs and retain only proven front coverage."""
+    if not np.any(unresolved):
+        return front
+    ordinary = front & ~unresolved
+    exact = {}
+
+    def replay(j):
+        if j not in exact:
+            exact[j] = _exact_front_interval(index, int(ids[j]), edge, interval)
+        return exact[j]
+
+    for hit in np.flatnonzero(unresolved):
+        span = replay(hit)
+        if span is None:
+            stats['empty_collapsed_front_hits'] = stats.get('empty_collapsed_front_hits', 0) + 1
+            continue
+        start, end = span
+        pieces = []
+        candidates = np.flatnonzero(ordinary & (fhi >= float(start)) & (flo <= float(end)))
+        for other in candidates:
+            witness = replay(other)
+            if witness is None:
+                continue
+            left = max(start, witness[0], Fraction.from_float(float(flo[other])))
+            right = min(end, witness[1], Fraction.from_float(float(fhi[other])))
+            if left < right:
+                pieces.append((left, right))
+        cursor = start
+        for left, right in sorted(pieces):
+            if left > cursor:
+                break
+            cursor = max(cursor, right)
+            if cursor >= end:
+                break
+        if cursor < end:
+            rounded_start, rounded_end = float(start), float(end)
+            if rounded_start < rounded_end:
+                # Clipping the approximate gap against rounded triangle bounds
+                # lost an interval that the exact replay can still represent.
+                flo[hit], fhi[hit] = rounded_start, rounded_end
+                ordinary[hit] = True
+                stats['recovered_collapsed_front_hits'] = stats.get('recovered_collapsed_front_hits', 0) + 1
+                continue
+            triangle = int(ids[hit])
+            error = UnresolvedVisibility('Positive clipped front piece collapsed without certified coverage')
+            error.visibility_context = dict(object_id=edge['object_id'], edge_id=edge['edge_id'],
+                                            stage='front_coverage_certificate', interval=list(interval))
+            note = dict(object_id=str(edge['object_id']), edge_id=str(edge['edge_id']),
+                        source_vertices=[int(v) for v in edge['vertex_ids']], effective_triangle=triangle,
+                        triangle_object=int(index.source_object_index[triangle]),
+                        source_triangle=int(index.source_triangle_index[triangle]),
+                        source_xy=np.asarray(edge['xy']).tolist(), source_depth=np.asarray(edge['depth']).tolist(),
+                        projected_triangle=index.xy[triangle].tolist(), triangle_depth=index.depth[triangle].tolist(),
+                        triangle_vertices=index.vertices[triangle].tolist(),
+                        source_interval=list(map(float, interval)), near_far=[float(index.cp[key]) for key in ('near', 'far')],
+                        clipped_interval=[float(lo[hit]), float(hi[hit])], gap=[float(g0[hit]), float(g1[hit])],
+                        exact_front=[str(start), str(end)], certified_until=str(cursor),
+                        ordinary_candidates=len(candidates))
+            error.add_note(json.dumps(note, allow_nan=False))
+            raise error
+        stats['covered_collapsed_front_hits'] = stats.get('covered_collapsed_front_hits', 0) + 1
+    return ordinary
+
+
+def _front_intervals(index, ids, edge, interval, lo, hi, g0, g1, stats):
+    unresolved = np.zeros(len(ids), dtype=bool)
+    flo, fhi, front = _clip_positive(-g0, -g1, lo, hi, strict=True, unresolved=unresolved)
+    front = _certify_front_coverage(index, ids, edge, interval, lo, hi, g0, g1, flo, fhi, front, unresolved, stats)
+    return flo, fhi, front
 
 
 class _ProjectedIndex:
@@ -284,13 +430,15 @@ def _edge_interval_batches(index, edge_records, cp, margin, max_pairs, batch_edg
         _require(bool(np.all(np.diff(pair_rows) > 0)), 'Pair kernel changed source order')
         result_counts = np.bincount(owners[pair_rows], minlength=len(rows))
         starts = np.r_[0, np.cumsum(result_counts)]
+        unresolved = np.zeros(len(filtered_ids), dtype=bool)
         try:
-            flo, fhi, front = _clip_positive(-g0, -g1, lo, hi, strict=True)
+            flo, fhi, front = _clip_positive(-g0, -g1, lo, hi, strict=True, unresolved=unresolved)
         except UnresolvedVisibility:
             for i, (edge, interval, _) in enumerate(rows):
                 selection = slice(int(starts[i]), int(starts[i+1]))
                 try:
-                    _clip_positive(-g0[selection], -g1[selection], lo[selection], hi[selection], strict=True)
+                    _clip_positive(-g0[selection], -g1[selection], lo[selection], hi[selection],
+                                   strict=True, unresolved=np.zeros(int(result_counts[i]), dtype=bool))
                 except UnresolvedVisibility as error:
                     error.visibility_context = dict(object_id=edge['object_id'], edge_id=edge['edge_id'],
                         stage='batched_forward_scalar_failure_replay', interval=list(interval))
@@ -300,6 +448,11 @@ def _edge_interval_batches(index, edge_records, cp, margin, max_pairs, batch_edg
         stats['largest_pair_batch'] = max(stats['largest_pair_batch'], len(ids))
         for i, (edge, interval, _) in enumerate(rows):
             selection = slice(int(starts[i]), int(starts[i+1]))
+            if np.any(unresolved[selection]):
+                front[selection] = _certify_front_coverage(
+                    index, filtered_ids[selection], edge, interval, lo[selection], hi[selection],
+                    g0[selection], g1[selection], flo[selection], fhi[selection], front[selection],
+                    unresolved[selection], stats)
             yield (edge, interval, *(a[selection] for a in (filtered_ids, lo, hi, g0, g1, flo, fhi, front)))
 
     for edge in edge_records:
@@ -326,8 +479,8 @@ def _edge_interval_batches(index, edge_records, cp, margin, max_pairs, batch_edg
             stats['oversized_scalar_edges'] += 1
             result = _triangle_intervals(index, ids, xy,
                      np.asarray(edge['depth'], dtype=np.float64), interval, stats)
-            _, lo, hi, g0, g1 = result
-            yield (edge, interval, *result, *_clip_positive(-g0, -g1, lo, hi, strict=True))
+            filtered_ids, lo, hi, g0, g1 = result
+            yield (edge, interval, *result, *_front_intervals(index, filtered_ids, edge, interval, lo, hi, g0, g1, stats))
         else:
             pending.append((edge, interval, ids)); pair_count += len(ids)
     if pending:
@@ -377,7 +530,13 @@ def visible_segments(objects, edge_records, camera, sample_step_px=.25, ray_epsi
         elif edge.get('local_surface_domain_both_sides',False):
             regions = [(a,b,'object') for a,b in visible]
         else:
-            blo, bhi, back = _clip_positive(g0, g1, lo, hi, strict=True)
+            try:
+                blo, bhi, back = _visible_back_intervals(
+                    g0, g1, lo, hi, index.domain[ids], same_domain, visible, stats)
+            except UnresolvedVisibility as error:
+                error.visibility_context = dict(object_id=edge['object_id'], edge_id=edge['edge_id'],
+                    source_vertices=list(map(int, edge['vertex_ids'])), stage='visible_back_categories')
+                raise
             # The gap and hit depth have the same ordering for this source edge.
             # Only visible domains need resolving; obscured ambiguous ties do
             # not invalidate an otherwise well-defined foreground result.

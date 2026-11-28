@@ -12,7 +12,7 @@ import time
 import numpy as np
 from .geometry import _camera_parameters, _require
 from .visibility import _screen_interval
-from .analytic_visibility import _ProjectedIndex, _triangle_intervals, _clip_positive
+from .analytic_visibility import _ProjectedIndex, _triangle_intervals, _clip_positive, _front_intervals
 from .occlusion import _validate_sources, _source_span
 from .intervals import union_intervals, subtract_intervals, UnresolvedVisibility
 
@@ -129,10 +129,15 @@ def partition_hidden_categories(objects, edge_records, camera, *,
         stats['support_pairs_excluded']+=int(support.sum());ids=ids[~support]
         try:
             ids,lo,hi,g0,g1=_triangle_intervals(index,ids,xy,depth,interval,stats)
-            flo,fhi,front=_clip_positive(-g0,-g1,lo,hi,strict=True)
+            if witness_profile=='cover':
+                flo,fhi,front=_front_intervals(index,ids,edge,interval,lo,hi,g0,g1,stats)
+            else:
+                flo,fhi,front=_clip_positive(-g0,-g1,lo,hi,strict=True)
         except UnresolvedVisibility as error:
-            error.visibility_context=dict(object_id=edge['object_id'],edge_id=edge['edge_id'],
-                stage='hidden_category_raw_coverage',interval=list(interval));raise
+            if not hasattr(error, 'visibility_context'):
+                error.visibility_context=dict(object_id=edge['object_id'],edge_id=edge['edge_id'],
+                    stage='hidden_category_raw_coverage',interval=list(interval))
+            raise
         same=index.domain[ids]==index.domains[edge['object_id']]
         front_ids,front_lo,front_hi=ids[front],flo[front],fhi[front]
         same_ids,same_lo,same_hi=ids[same],lo[same],hi[same]

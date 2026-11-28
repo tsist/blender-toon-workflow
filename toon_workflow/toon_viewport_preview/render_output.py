@@ -89,7 +89,7 @@ def request(path,context,*,elements=None,memory_budget_bytes=None):
         if _jobs[token]['status']!='QUEUED' and _jobs[token].get('receipt_saved'):del _jobs[token]
     if len(_jobs)>=20:raise ValueError('等待导出的渲染线图过多')
     token=uuid.uuid4().hex
-    work=Path(tempfile.mkdtemp(prefix='.toon-render-',dir=path.parent))
+    work=Path(tempfile.mkdtemp(prefix='.r-',dir=path.parent))
     root=Path(__file__).resolve().parent
     job=dict(id=token,path=str(path),normalized_path=normalized,status='QUEUED',mode='RENDER',
         scene_key=scene_key,scene=scene.name,view_layer=layer.name,work_directory=str(work),stage='SETUP',

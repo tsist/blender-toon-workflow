@@ -11,6 +11,7 @@ import math
 import uuid
 
 from . import face_thresholds as face
+from .host_compat import is_supported_host
 
 PROFILE = 'toon-face-sdf-cast.v1'
 READER_PROFILE = 'toon-face-sdf-cast-reader.v1'
@@ -303,7 +304,7 @@ def _related_animation(tree,sockets,nodes=()):
 def _lighting_normal_links(tree, output, normal):
     """Accept only explicitly validated 5.3 consumers of the existing cast output."""
     import bpy
-    if bpy.app.version[:2] != (5, 3):
+    if not is_supported_host(bpy.app.version):
         return ()
     from . import lighting_53
     try:

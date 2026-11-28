@@ -87,7 +87,7 @@ def request(output_directory,prefix,frames,extension,context,*,elements=None,mem
         del _jobs[token]
     if len(_jobs)>=20:raise ValueError('等待完成的序列记录过多')
     token=uuid.uuid4().hex
-    work=Path(tempfile.mkdtemp(prefix='.toon-sequence-',dir=directory))
+    work=Path(tempfile.mkdtemp(prefix='.s-',dir=directory))
     root=Path(__file__).resolve().parent
     job=dict(id=token,sequence_id=token,status='QUEUED',mode='SEQUENCE',scene_key=scene_key,
         scene=scene.name,view_layer=layer.name,work_directory=str(work),output_directory=str(directory),

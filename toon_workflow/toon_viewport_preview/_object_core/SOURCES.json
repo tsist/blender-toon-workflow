@@ -1,0 +1,90 @@
+{
+  "license": "GPL-3.0-or-later",
+  "files": [
+    {
+      "file": "geometry.py",
+      "sha256": "6fc8e223f05fc152b0711cab6ec5f4546a5432fcab205bf1f30498ede6d4bdf5",
+      "source": "<PROJECT_ROOT>\\tools\\toon_image_backend\\geometry.py",
+      "current_sha256": "3d7e763a633ba7a164593dd02d0ea1bb40d79e38aa71185a1e3947736fcbaee2",
+      "modified": true,
+      "modification": "Explicit signed orthographic viewport depth policy; direct camera defaults unchanged."
+    },
+    {
+      "file": "analytic_visibility.py",
+      "sha256": "11de83ef82c82328dc448944ac45b27c756dc7c7f13827a00cd20c3a6b816eb7",
+      "current_sha256": "cd6e60f291a466a0f667e01ea68ea5ed052fe119c5dd895a3889895b19d17760",
+      "modified": true,
+      "source": "<PROJECT_ROOT>\\tools\\toon_image_backend\\analytic_visibility.py"
+    },
+    {
+      "file": "analytic_batches.py",
+      "sha256": "33ced3b6241cafa101cb335163bf2d51b2fccea56f4853fbdb9a54d68fac8d20",
+      "current_sha256": "2d9ee3a9e9f9eebeb365c2488c8f46bb7fbfe90c79101dd02d18e63ab8950edd",
+      "modified": true,
+      "source": "<PROJECT_ROOT>\\tools\\toon_image_backend\\analytic_batches.py"
+    },
+    {
+      "file": "visibility.py",
+      "sha256": "5aa2bc11a66397fd07f113a5ea46c405b8343914531b91b924da8c509cf55423",
+      "source": "<PROJECT_ROOT>\\tools\\toon_image_backend\\visibility.py",
+      "current_sha256": "5aa2bc11a66397fd07f113a5ea46c405b8343914531b91b924da8c509cf55423",
+      "modified": false
+    },
+    {
+      "file": "hidden_categories.py",
+      "sha256": "0b7b6e2283fd99f6c56aa4cc1a8cb5857163da2ddacb3ec457c85747427c6b89",
+      "current_sha256": "5a8482579a70fd0f8e9c76731975309c7e6e231ce78b2b850d1c2fa5447164fa",
+      "modified": true,
+      "source": "<PROJECT_ROOT>\\tools\\toon_image_backend\\hidden_categories.py"
+    },
+    {
+      "file": "occlusion.py",
+      "sha256": "18b2b1b4173d2935ae9ca060b6a441f5dde2bd1784049bb83aca1e3c43ae51ab",
+      "source": "<PROJECT_ROOT>\\tools\\toon_image_backend\\occlusion.py",
+      "current_sha256": "18b2b1b4173d2935ae9ca060b6a441f5dde2bd1784049bb83aca1e3c43ae51ab",
+      "modified": false
+    },
+    {
+      "file": "intervals.py",
+      "sha256": "2118281eed4818accb443604b821c0d048ba2a442b2867c4f82de46e24371272",
+      "source": "<PROJECT_ROOT>\\tools\\toon_image_backend\\intervals.py",
+      "current_sha256": "2118281eed4818accb443604b821c0d048ba2a442b2867c4f82de46e24371272",
+      "modified": false
+    },
+    {
+      "file": "contract.py",
+      "sha256": "71458f2a58ecd423a358ecf9901ed5fd8248e16009cef27db6b357d6b1737a69",
+      "source": "<PROJECT_ROOT>\\tools\\toon_image_backend\\contract.py",
+      "current_sha256": "71458f2a58ecd423a358ecf9901ed5fd8248e16009cef27db6b357d6b1737a69",
+      "modified": false
+    },
+    {
+      "file": "LICENSE",
+      "sha256": "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b",
+      "source": "<PROJECT_ROOT>\\tools\\toon_image_backend\\LICENSE",
+      "current_sha256": "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b",
+      "modified": false
+    }
+  ],
+  "usage": "Original project Object/Outline interval kernels; base hashes above, local modifications listed separately",
+  "modifications": [
+    {
+      "file": "analytic_visibility.py",
+      "change": "Preserve original predicate defaults; propagate explicit projected_tangent_policy and clipped triangle identities."
+    },
+    {
+      "file": "analytic_batches.py",
+      "change": "Exact rational replay for collapsed spatial intervals; adapter may explicitly select nonblocking only for exact projected determinant zero; nonzero near-degenerate inputs keep the original strict treatment."
+    },
+    {
+      "file": "hidden_categories.py",
+      "change": "Explicit same-domain/clipped support identities plus optional cover witness profile. Full H/O/L interval sets remain unchanged; the output proof still covers each hidden segment and obeys the original cumulative budget."
+    }
+  ],
+  "verification_20261105": {
+    "proof": "WITNESS-PROOF-V002-RESULT.json",
+    "render": "object-integration/RESULT.json",
+    "role": "role-integration/ROLE-DELIVERY.json",
+    "native_equivalence": false
+  }
+}

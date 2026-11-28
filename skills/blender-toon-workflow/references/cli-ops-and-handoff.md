@@ -6,11 +6,20 @@
 
 所有操作先用 `discover --product toon` 和对应 `--help` 核对当前宿主与参数，再构造 UTF-8 JSON 提交。全局选项（`--jobs-dir`、`--transactions-dir`、`--timeout`、`--async`、`--compact`）放在子命令前面。
 
+```powershell
+$ctl = './blenderctl.ps1'
+& $ctl --edition toon@0.52.3 toon-workflow describe
+& $ctl discover --product toon --edition 0.52.3 --action toon_workbench.recover_job
+& $ctl toon-workflow lighting-author --help
+```
+
+已签收的 5.3 制作基线为 0.52.3。磁盘作业用 `--edition toon@0.52.3` 或原作业版号，历史命令形式经 `compat --toon-release <版本>` 使用。0.52.1 的旧契约在 `blender` 字段保留历史信息，当前启动宿主看 `selected_blender`。1.0.0 目前有独立候选的注册、冷读、单帧四层与复用证据，实际生产版号以公共入口即时查询和发布回执为准。 [1.0 候选范围](<work/audit/<batch>/>)
+
 | 命令 | 典型用途 |
 |---|---|
 | `toon-workflow describe` | 查询当前插件契约、模块清单、编辑模式与已选宿主 |
-| `toon-workflow run` | 对已保存工作副本执行联合渲染，产出 `Beauty`/`Line`/`BeautyLineInteraction`/`Combined` 与状态回执 |
-| `toon-workflow inspect` | 源检查取得 `author_sha256`；结果检查传入状态描述符核对独立冷重开 |
+| `toon-workflow run` | 从保存稿出 `Beauty`、`Line`、配置对应的 `OpticalLine` 或 `BeautyLineInteraction`、`Combined` 及状态回执 |
+| `toon-workflow inspect` | 源检查冷开保存稿并取得 `author_sha256`；结果检查传状态描述符核对产物闭包 |
 | `toon-workflow edit` | 按匹配 `expected_author_sha256` 编辑静态 `BASIC` 线宽或完整 `PRESET` 样式并冷验新候选 |
 | `toon-workflow recover` | 指向原作业持久 `toon-workflow-request.json`，复用已验连续前缀并重渲未完帧 |
 | `toon-workflow surface-slot` | 活动槽表面着色（`CEL3`/`GAME_REFLECT`/`INK_FLAT`）、明暗过渡、眼层、固定发影、HM/遮罩高光与 `--normal` 法向 |
@@ -35,8 +44,9 @@
 - **区分源检查与结果检查**：
   - 源检查：传 `run` 同形状参数运行 `toon-workflow inspect`，从返回的 `toon-author.json` 中取出 `author_sha256`。
   - 编辑：在 `run` 参数上附加样式文件描述符 `{file, expected_sha256}` 与匹配源的 `expected_author_sha256`（注意它是作者指纹，与样式 JSON 文件自身 SHA 分开填写）。
-  - 结果检查：只传本域 `state` 描述符与当前 `implementation`，独立核对序列完整度、来源绑定与冷重开一致性。
+  - 结果检查：只传本域 `state` 描述符与当前 `implementation`，独立核对序列完整度、来源绑定和输出媒体。保存稿冷开另走源检查或查写入命令的独立重开回执。
 - **长作业等待与前缀恢复**：提交长渲染后用 `job wait <job_id>` 观察进度与终态；任务被取消或中途失败时，保留原作业目录与终态日志，排查原因后若源、资源与实现指纹均一致，用 `toon-workflow recover` 指向原作业的 `toon-workflow-request.json` 建立新作业，自动复用已完成且通过验证的连续前缀帧、补算剩余帧。源文件或代码有更新时，基于新快照提交全新 `run`。
+- **顶层恢复请求**：`command` 填 `toon-workflow.recover`，`params` 同时包含 `recovery: {file, expected_sha256}` 与原版 `implementation`。以父作业 `succeeded` 和 `result.ok` 作为完成依据。记录复用帧、补帧与独立读回的媒体指纹。 [实际取消与补帧](<work/audit/<batch>/>) · [顶层历史恢复](<work/audit/<batch>/>)
 - **排查父拒收摘要**：遇到顶层候选冷重开拒收提示时，继续下钻阅读其关联的子 `inspect` 报错日志，再决定按独立线作者、家族回执归档还是材质绑定合同处理。
 
 ## 3. 接手现场 Blender 窗口：`viewport-session`
@@ -53,6 +63,15 @@
 - **隔离配置与自有进程**：后台作业使用独立的批次作业目录与隔离 `BLENDER_USER_CONFIG`，保持全局用户偏好不变。任务达到终态后，只核实并清理本任务启动的已无用自有后台进程，保持用户正在使用的 Blender 窗口完好。
 - **保护非目标数据与弱外链**：改前列出共享材质、网格、贴图、节点组与动作的消费者；解绑后仍需留存的旧 Action 按合同明确保留。遇到 `link=False` 追加留下的弱库记录，按原生原始/绝对路径配对核实真实外部文件消费者，打包贴图后用冷重开确认闭包齐全。
 
+### 接手已保存的 5.3 连续面影
+
+在 GUI 另存工作副本，记下源 SHA-256、场景、视图层、帧、对象及材质槽。请求内填 `edition: "0.52.3"`，槽号从 0 起，核对真实材质名和 `OBJECT` 或 `DATA`。以 `directional-face-inspect` 查当前及原始 Surface，再在副本执行 `directional-face-bind` 或 `directional-face-unbind`。变更命令加新的 `--output`，只读命令只传参数；请求的动画或结构冲突由操作回执给出。原生逐灯材质用 `native-surface-inspect` 和 `native-surface-qualify` 验资格及冷开签名。 [Snow 首绑请求](<work/audit/<batch>/>) · [回退重绑证据](<work/audit/<batch>/>) · [雨果保存稿交接](<work/audit/<batch>/>)
+
+```powershell
+& $ctl --jobs-dir $jobs toon-workflow lighting-author --params $inspectRequest
+& $ctl --jobs-dir $jobs toon-workflow lighting-author --params $bindRequest --output $newBlend
+```
+
 ## 5. 与合成部门的线色叠合交接合同
 
 向 [blender-compositing](https://github.com/tsist/blender-compositing-workflow/blob/main/skills/blender-compositing/SKILL.md) 移交三渲二渲染结果时，按实际输出配置标明通道名称、色彩空间、Alpha 口径与重建公式，避免合成端错用普通 Alpha Over 产生黑边或发灰：
@@ -60,7 +79,7 @@
 | 输出配置 | 交付通道 | 色彩与合成重建规则 |
 |---|---|---|
 | 不透明相关联合渲染 | `Beauty`、`Line`、`BeautyLineInteraction`、`Combined`（多层线性 EXR） | 场景线性 Rec.709 预乘层；按 `Combined = Line + Beauty - BeautyLineInteraction` 精确重建，合成端调线色或叠辉光时以这三层拆分控制 |
-| 原生媒体艺术线 | 原生 `Beauty`、`OpticalLine` / `Line`、`Combined` | `OpticalLine` 显式叠加在原生媒体 Beauty 上：`Combined = OpticalLine + Beauty * (1 - OpticalLine.alpha)`；线条作屏幕艺术叠层 |
+| 原生媒体艺术线 | `Beauty`、`Line`、`OpticalLine`、`Combined`；Snow 实拍为四个独立线性 EXR | 预乘口径下 `Combined = OpticalLine + Beauty * (1 - OpticalLine.alpha)`，`Line` 留给合成调线 |
 | 漫画整镜头 Look | `Combined` + `Look`（含纸色、墨色、网点与分区） | 保留原 `Combined` 与 Alpha，`Look` 作为非线性风格成图交付并标明裁剪与 Alpha 状态 |
 | 独立后台相机线稿 | `viewport-lines render-file-output` / `render-camera` 产出的 `COLOR`/`DEPTH` 多层 EXR 或 PNG | 标明每层对应线组、色彩空间与预乘方式，直接接合成节点的线色/辉光支路 |
 

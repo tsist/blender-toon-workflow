@@ -1,0 +1,1984 @@
+{
+  "schema": "pencil.rights.sources.v1",
+  "status": "PROPOSAL_NOT_LEGAL_ADVICE",
+  "generated_utc": "2026-11-05T09:11:05.228960+00:00",
+  "package": {
+    "name": "toon_viewport_preview",
+    "display_name": "二维描边 · 自动视口预览",
+    "version": "0.2.27",
+    "type": "Blender add-on",
+    "archive": "toon_viewport_preview-0.2.27.zip",
+    "file_count": 120,
+    "python_count": 110,
+    "binary_count": 0,
+    "manifest": "blender_manifest.toml",
+    "manifest_sha256": "449d0a79550274218aa25b3e4b13d96a82ffb19c16dd829946de857df8fcd0a2",
+    "license_file": "LICENSE",
+    "license_sha256": "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b",
+    "archive_integrity": "External PACKAGE.json and FINAL-INTEGRITY.json; not embedded recursively"
+  },
+  "license": {
+    "declared": "GPL-3.0-or-later",
+    "spdx_identifier": "GPL-3.0-or-later",
+    "basis": [
+      "blender_manifest.toml license = [\"SPDX:GPL-3.0-or-later\"]",
+      "All 109 .py files have '# SPDX-License-Identifier: GPL-3.0-or-later' as the first line.",
+      "All 13 copied source files have the same SPDX header.",
+      "LICENSE and _object_core/LICENSE contain the complete GNU GPL v3 text and are byte-identical.",
+      "Source LICENSE files for all 13 copies contain the GPL v3 text; three are byte-identical to the package text, one is a line-ending/format variant (session UI), and one is prefixed with the SPDX line (chain policy)."
+    ],
+    "license_text": {
+      "package_license_sha256": "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b",
+      "core_license_sha256": "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b",
+      "both_byte_identical": true,
+      "normalized_source_license_equal_count": 4,
+      "package_license_records": [
+        {
+          "path": "tools/toon_viewport_preview/LICENSE",
+          "sha256": "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b",
+          "bytes": 35821
+        },
+        {
+          "path": "tools/toon_viewport_preview/_object_core/LICENSE",
+          "sha256": "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b",
+          "bytes": 35821
+        }
+      ],
+      "source_license_records": [
+        {
+          "path": "tools/toon_image_cpu/LICENSE",
+          "sha256": "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b",
+          "bytes": 35821,
+          "normalized_equal_to_package_license": true,
+          "normalized_similarity": 1.0
+        },
+        {
+          "path": "tools/toon_image_session_ui_c4/LICENSE",
+          "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+          "bytes": 35147,
+          "normalized_equal_to_package_license": true,
+          "normalized_similarity": 1.0
+        },
+        {
+          "path": "tools/toon_image_backend/LICENSE",
+          "sha256": "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b",
+          "bytes": 35821,
+          "normalized_equal_to_package_license": true,
+          "normalized_similarity": 1.0
+        },
+        {
+          "path": "tools/toon_image_backend/intersections/LICENSE",
+          "sha256": "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b",
+          "bytes": 35821,
+          "normalized_equal_to_package_license": true,
+          "normalized_similarity": 1.0
+        },
+        {
+          "path": "tools/toon_image_chain_policy/LICENSE",
+          "sha256": "bc0bbe28cb125147e93acccc66a1def363dfada5d3752aadeaa0aadc4c58b084",
+          "bytes": 35866,
+          "normalized_equal_to_package_license": false,
+          "normalized_similarity": 0.999359
+        }
+      ]
+    },
+    "copyright": "NOASSERTION",
+    "copyright_basis": "No implementation copyright notice was found in the 109 .py files or the 13 copied sources. The FSF copyright in the GPL text is the licence document's copyright, not the plugin implementation's copyright.",
+    "fsf_license_text_copyright": "Copyright (C) 2007 Free Software Foundation, Inc. (GPL text only)",
+    "legal_advice": false
+  },
+  "scope": {
+    "included": {
+      "files": 120,
+      "python_files": 110,
+      "non_python_files": [
+        "LICENSE",
+        "NOTICE",
+        "PROVENANCE.md",
+        "README.md",
+        "RELEASE-NOTES.md",
+        "SOURCES.json",
+        "SBOM.spdx.json",
+        "_object_core/LICENSE",
+        "_object_core/SOURCES.json",
+        "blender_manifest.toml"
+      ],
+      "suffix_counts": {
+        ".json": 3,
+        ".md": 3,
+        ".py": 110,
+        ".toml": 1,
+        "<none>": 3
+      },
+      "binaries": 0,
+      "bundled_images_fonts_meshes": 0,
+      "all_python_spdx_first_line": true,
+      "integrity": "External final PACKAGE.json covers every shipped member; no self-referential file digest embedded"
+    },
+    "project_local_python": {
+      "count": 97,
+      "definition": "110 final Python files minus the 13 traced local GPL source copies; the additional viewport_scope.py is new local implementation.",
+      "copyright": "NOASSERTION",
+      "files": [
+        "__init__.py",
+        "_object_core/__init__.py",
+        "addon.py",
+        "alpha_function.py",
+        "amount_animation.py",
+        "amount_animation_ui.py",
+        "author_channels.py",
+        "author_cli.py",
+        "author_graph.py",
+        "author_helpers.py",
+        "boundary_sources.py",
+        "brush_authoring.py",
+        "brush_effects.py",
+        "brush_engine.py",
+        "brush_gpu.py",
+        "brush_preview.py",
+        "brush_ui.py",
+        "camera.py",
+        "captured_copy.py",
+        "chain_compute.py",
+        "chain_controls.py",
+        "chain_snapshot.py",
+        "chain_ui.py",
+        "coverage.py",
+        "curve_editor.py",
+        "dash_controls.py",
+        "dash_splitter.py",
+        "dash_ui.py",
+        "dependencies.py",
+        "depth_output.py",
+        "drawing.py",
+        "edge_authoring.py",
+        "edge_sources.py",
+        "edge_ui.py",
+        "exr_header.py",
+        "exr_output.py",
+        "file_authoring.py",
+        "file_ui.py",
+        "geometry.py",
+        "group_lifecycle.py",
+        "group_ui.py",
+        "holdout.py",
+        "intersection_chain_compute.py",
+        "intersection_gap_linker.py",
+        "intersection_pairs.py",
+        "intersection_phase_adapter.py",
+        "intersection_sources.py",
+        "intersection_strokes.py",
+        "ix_authoring.py",
+        "ix_sources.py",
+        "ix_ui.py",
+        "line_function_ui.py",
+        "line_functions.py",
+        "line_hierarchy.py",
+        "line_ui.py",
+        "linker.py",
+        "map_amount_controls.py",
+        "map_amount_ui.py",
+        "multilayer_output.py",
+        "object_adapter.py",
+        "object_fragments.py",
+        "object_view.py",
+        "output.py",
+        "output_scope.py",
+        "parameter_animation.py",
+        "parameter_animation_ui.py",
+        "parameter_overlay.py",
+        "phase_adapter.py",
+        "phase_jobs.py",
+        "phase_worker.py",
+        "preset_catalog.py",
+        "render_elements.py",
+        "render_geometry.py",
+        "render_output.py",
+        "render_worker.py",
+        "runtime_preferences.py",
+        "sampling.py",
+        "selector_bindings.py",
+        "selector_capture.py",
+        "selector_picker.py",
+        "selector_ui.py",
+        "sequence_output.py",
+        "sequence_protocol.py",
+        "source_alpha.py",
+        "source_bindings.py",
+        "source_routes.py",
+        "strokes.py",
+        "style.py",
+        "vector_output.py",
+        "vector_scope.py",
+        "vector_ui.py",
+        "viewport_scope.py",
+        "visibility.py",
+        "wire_authoring.py",
+        "wire_brush_import.py",
+        "wire_sources.py",
+        "wire_ui.py"
+      ]
+    },
+    "copied_python": {
+      "count": 13,
+      "declared": 12,
+      "inferred": 1,
+      "modified": 4,
+      "byte_identical": 9,
+      "records": [
+        {
+          "package_path": "_object_core/analytic_batches.py",
+          "source_path": "tools/toon_image_backend/analytic_batches.py",
+          "origin": "declared",
+          "origin_basis": "_object_core/SOURCES.json declares this source path",
+          "modified": true,
+          "modification": "Exact rational replay for collapsed spatial intervals; adapter may explicitly select nonblocking only for exact projected determinant zero; nonzero near-degenerate inputs keep the original strict treatment.",
+          "base_sha256": "33ced3b6241cafa101cb335163bf2d51b2fccea56f4853fbdb9a54d68fac8d20",
+          "current_source_sha256": "33ced3b6241cafa101cb335163bf2d51b2fccea56f4853fbdb9a54d68fac8d20",
+          "package_sha256": "2d9ee3a9e9f9eebeb365c2488c8f46bb7fbfe90c79101dd02d18e63ab8950edd",
+          "base_equals_current_source": true,
+          "copy_equals_current_source": false,
+          "copy_matches_declared_pin": true,
+          "diff": {
+            "added_lines": 81,
+            "removed_lines": 6,
+            "changed_function_names": [
+              "_exact_clip_interval",
+              "point"
+            ],
+            "evidence_sha256": "e817fc44904032f839baf745d30238795f7543f7d87a044853b94b1e31bb7a35"
+          },
+          "license": "GPL-3.0-or-later",
+          "license_files": [
+            "tools/toon_image_backend/LICENSE"
+          ],
+          "license_sha256": [
+            "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b"
+          ],
+          "license_text_relation": {
+            "normalized_equal_to_package_license": true,
+            "normalized_similarity": 1.0
+          },
+          "source_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "package_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "copyright": "NOASSERTION",
+          "copyright_lines_found": [],
+          "first_author": "NOASSERTION",
+          "upstream_commit": "NOASSERTION",
+          "source_release_version": "NOASSERTION"
+        },
+        {
+          "package_path": "_object_core/analytic_visibility.py",
+          "source_path": "tools/toon_image_backend/analytic_visibility.py",
+          "origin": "declared",
+          "origin_basis": "_object_core/SOURCES.json declares this source path",
+          "modified": true,
+          "modification": "Preserve original predicate defaults; propagate explicit projected_tangent_policy and clipped triangle identities.",
+          "base_sha256": "11de83ef82c82328dc448944ac45b27c756dc7c7f13827a00cd20c3a6b816eb7",
+          "current_source_sha256": "11de83ef82c82328dc448944ac45b27c756dc7c7f13827a00cd20c3a6b816eb7",
+          "package_sha256": "cd6e60f291a466a0f667e01ea68ea5ed052fe119c5dd895a3889895b19d17760",
+          "base_equals_current_source": true,
+          "copy_equals_current_source": false,
+          "copy_matches_declared_pin": true,
+          "diff": {
+            "added_lines": 36,
+            "removed_lines": 9,
+            "changed_function_names": [
+              "_clip_positive"
+            ],
+            "evidence_sha256": "c9709c089c291f8d03978b80ca4bae9fe8a2dbd18e42f00ea1e3bf7d2486f007"
+          },
+          "license": "GPL-3.0-or-later",
+          "license_files": [
+            "tools/toon_image_backend/LICENSE"
+          ],
+          "license_sha256": [
+            "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b"
+          ],
+          "license_text_relation": {
+            "normalized_equal_to_package_license": true,
+            "normalized_similarity": 1.0
+          },
+          "source_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "package_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "copyright": "NOASSERTION",
+          "copyright_lines_found": [],
+          "first_author": "NOASSERTION",
+          "upstream_commit": "NOASSERTION",
+          "source_release_version": "NOASSERTION"
+        },
+        {
+          "package_path": "_object_core/contract.py",
+          "source_path": "tools/toon_image_backend/contract.py",
+          "origin": "declared",
+          "origin_basis": "_object_core/SOURCES.json declares this source path",
+          "modified": false,
+          "modification": "No package-local modification; byte-identical to source.",
+          "base_sha256": "71458f2a58ecd423a358ecf9901ed5fd8248e16009cef27db6b357d6b1737a69",
+          "current_source_sha256": "71458f2a58ecd423a358ecf9901ed5fd8248e16009cef27db6b357d6b1737a69",
+          "package_sha256": "71458f2a58ecd423a358ecf9901ed5fd8248e16009cef27db6b357d6b1737a69",
+          "base_equals_current_source": true,
+          "copy_equals_current_source": true,
+          "copy_matches_declared_pin": true,
+          "diff": null,
+          "license": "GPL-3.0-or-later",
+          "license_files": [
+            "tools/toon_image_backend/LICENSE"
+          ],
+          "license_sha256": [
+            "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b"
+          ],
+          "license_text_relation": {
+            "normalized_equal_to_package_license": true,
+            "normalized_similarity": 1.0
+          },
+          "source_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "package_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "copyright": "NOASSERTION",
+          "copyright_lines_found": [],
+          "first_author": "NOASSERTION",
+          "upstream_commit": "NOASSERTION",
+          "source_release_version": "NOASSERTION"
+        },
+        {
+          "package_path": "_object_core/geometry.py",
+          "source_path": "tools/toon_image_backend/geometry.py",
+          "origin": "declared",
+          "origin_basis": "_object_core/SOURCES.json declares this source path",
+          "modified": true,
+          "modification": "Explicit signed orthographic viewport depth policy; direct camera defaults unchanged.",
+          "base_sha256": "6fc8e223f05fc152b0711cab6ec5f4546a5432fcab205bf1f30498ede6d4bdf5",
+          "current_source_sha256": "6fc8e223f05fc152b0711cab6ec5f4546a5432fcab205bf1f30498ede6d4bdf5",
+          "package_sha256": "3d7e763a633ba7a164593dd02d0ea1bb40d79e38aa71185a1e3947736fcbaee2",
+          "base_equals_current_source": true,
+          "copy_equals_current_source": false,
+          "copy_matches_declared_pin": true,
+          "diff": {
+            "added_lines": 9,
+            "removed_lines": 1,
+            "changed_function_names": [],
+            "evidence_sha256": "d1908dc03bdef31d7ab77caa11d8dc1c3bc2800eebb414bad5aa6426f55949b4"
+          },
+          "license": "GPL-3.0-or-later",
+          "license_files": [
+            "tools/toon_image_backend/LICENSE"
+          ],
+          "license_sha256": [
+            "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b"
+          ],
+          "license_text_relation": {
+            "normalized_equal_to_package_license": true,
+            "normalized_similarity": 1.0
+          },
+          "source_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "package_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "copyright": "NOASSERTION",
+          "copyright_lines_found": [],
+          "first_author": "NOASSERTION",
+          "upstream_commit": "NOASSERTION",
+          "source_release_version": "NOASSERTION"
+        },
+        {
+          "package_path": "_object_core/hidden_categories.py",
+          "source_path": "tools/toon_image_backend/hidden_categories.py",
+          "origin": "declared",
+          "origin_basis": "_object_core/SOURCES.json declares this source path",
+          "modified": true,
+          "modification": "Explicit same-domain/clipped support identities plus optional cover witness profile. Full H/O/L interval sets remain unchanged; the output proof still covers each hidden segment and obeys the original cumulative budget.",
+          "base_sha256": "0b7b6e2283fd99f6c56aa4cc1a8cb5857163da2ddacb3ec457c85747427c6b89",
+          "current_source_sha256": "0b7b6e2283fd99f6c56aa4cc1a8cb5857163da2ddacb3ec457c85747427c6b89",
+          "package_sha256": "5a8482579a70fd0f8e9c76731975309c7e6e231ce78b2b850d1c2fa5447164fa",
+          "base_equals_current_source": true,
+          "copy_equals_current_source": false,
+          "copy_matches_declared_pin": true,
+          "diff": {
+            "added_lines": 47,
+            "removed_lines": 14,
+            "changed_function_names": [
+              "_witness_cover",
+              "partition_hidden_categories"
+            ],
+            "evidence_sha256": "73fe1eb0a281bbeff993a691f14c576999ffc602f7afeab9c3daaead5dba0a8d"
+          },
+          "license": "GPL-3.0-or-later",
+          "license_files": [
+            "tools/toon_image_backend/LICENSE"
+          ],
+          "license_sha256": [
+            "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b"
+          ],
+          "license_text_relation": {
+            "normalized_equal_to_package_license": true,
+            "normalized_similarity": 1.0
+          },
+          "source_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "package_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "copyright": "NOASSERTION",
+          "copyright_lines_found": [],
+          "first_author": "NOASSERTION",
+          "upstream_commit": "NOASSERTION",
+          "source_release_version": "NOASSERTION"
+        },
+        {
+          "package_path": "_object_core/intervals.py",
+          "source_path": "tools/toon_image_backend/intervals.py",
+          "origin": "declared",
+          "origin_basis": "_object_core/SOURCES.json declares this source path",
+          "modified": false,
+          "modification": "No package-local modification; byte-identical to source.",
+          "base_sha256": "2118281eed4818accb443604b821c0d048ba2a442b2867c4f82de46e24371272",
+          "current_source_sha256": "2118281eed4818accb443604b821c0d048ba2a442b2867c4f82de46e24371272",
+          "package_sha256": "2118281eed4818accb443604b821c0d048ba2a442b2867c4f82de46e24371272",
+          "base_equals_current_source": true,
+          "copy_equals_current_source": true,
+          "copy_matches_declared_pin": true,
+          "diff": null,
+          "license": "GPL-3.0-or-later",
+          "license_files": [
+            "tools/toon_image_backend/LICENSE"
+          ],
+          "license_sha256": [
+            "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b"
+          ],
+          "license_text_relation": {
+            "normalized_equal_to_package_license": true,
+            "normalized_similarity": 1.0
+          },
+          "source_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "package_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "copyright": "NOASSERTION",
+          "copyright_lines_found": [],
+          "first_author": "NOASSERTION",
+          "upstream_commit": "NOASSERTION",
+          "source_release_version": "NOASSERTION"
+        },
+        {
+          "package_path": "_object_core/occlusion.py",
+          "source_path": "tools/toon_image_backend/occlusion.py",
+          "origin": "declared",
+          "origin_basis": "_object_core/SOURCES.json declares this source path",
+          "modified": false,
+          "modification": "No package-local modification; byte-identical to source.",
+          "base_sha256": "18b2b1b4173d2935ae9ca060b6a441f5dde2bd1784049bb83aca1e3c43ae51ab",
+          "current_source_sha256": "18b2b1b4173d2935ae9ca060b6a441f5dde2bd1784049bb83aca1e3c43ae51ab",
+          "package_sha256": "18b2b1b4173d2935ae9ca060b6a441f5dde2bd1784049bb83aca1e3c43ae51ab",
+          "base_equals_current_source": true,
+          "copy_equals_current_source": true,
+          "copy_matches_declared_pin": true,
+          "diff": null,
+          "license": "GPL-3.0-or-later",
+          "license_files": [
+            "tools/toon_image_backend/LICENSE"
+          ],
+          "license_sha256": [
+            "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b"
+          ],
+          "license_text_relation": {
+            "normalized_equal_to_package_license": true,
+            "normalized_similarity": 1.0
+          },
+          "source_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "package_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "copyright": "NOASSERTION",
+          "copyright_lines_found": [],
+          "first_author": "NOASSERTION",
+          "upstream_commit": "NOASSERTION",
+          "source_release_version": "NOASSERTION"
+        },
+        {
+          "package_path": "_object_core/visibility.py",
+          "source_path": "tools/toon_image_backend/visibility.py",
+          "origin": "declared",
+          "origin_basis": "_object_core/SOURCES.json declares this source path",
+          "modified": false,
+          "modification": "No package-local modification; byte-identical to source.",
+          "base_sha256": "5aa2bc11a66397fd07f113a5ea46c405b8343914531b91b924da8c509cf55423",
+          "current_source_sha256": "5aa2bc11a66397fd07f113a5ea46c405b8343914531b91b924da8c509cf55423",
+          "package_sha256": "5aa2bc11a66397fd07f113a5ea46c405b8343914531b91b924da8c509cf55423",
+          "base_equals_current_source": true,
+          "copy_equals_current_source": true,
+          "copy_matches_declared_pin": true,
+          "diff": null,
+          "license": "GPL-3.0-or-later",
+          "license_files": [
+            "tools/toon_image_backend/LICENSE"
+          ],
+          "license_sha256": [
+            "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b"
+          ],
+          "license_text_relation": {
+            "normalized_equal_to_package_license": true,
+            "normalized_similarity": 1.0
+          },
+          "source_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "package_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "copyright": "NOASSERTION",
+          "copyright_lines_found": [],
+          "first_author": "NOASSERTION",
+          "upstream_commit": "NOASSERTION",
+          "source_release_version": "NOASSERTION"
+        },
+        {
+          "package_path": "_support/chain_policy.py",
+          "source_path": "tools/toon_image_chain_policy/policy.py",
+          "origin": "inferred",
+          "origin_basis": "byte-identical to the named candidate; package does not declare the historical copy path",
+          "modified": false,
+          "modification": "No package-local modification; byte-identical to source.",
+          "base_sha256": null,
+          "current_source_sha256": "880e19e930b1aa85a32d6fcc31e15a21d60d60c3df15f58f51f160578ca6badc",
+          "package_sha256": "880e19e930b1aa85a32d6fcc31e15a21d60d60c3df15f58f51f160578ca6badc",
+          "base_equals_current_source": null,
+          "copy_equals_current_source": true,
+          "copy_matches_declared_pin": true,
+          "diff": null,
+          "license": "GPL-3.0-or-later",
+          "license_files": [
+            "tools/toon_image_chain_policy/LICENSE"
+          ],
+          "license_sha256": [
+            "bc0bbe28cb125147e93acccc66a1def363dfada5d3752aadeaa0aadc4c58b084"
+          ],
+          "license_text_relation": {
+            "normalized_equal_to_package_license": false,
+            "normalized_similarity": 0.999359
+          },
+          "source_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "package_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "copyright": "NOASSERTION",
+          "copyright_lines_found": [],
+          "first_author": "NOASSERTION",
+          "upstream_commit": "NOASSERTION",
+          "source_release_version": "NOASSERTION"
+        },
+        {
+          "package_path": "_support/geometry_exact.py",
+          "source_path": "tools/toon_image_backend/intersections/geometry_exact.py",
+          "origin": "declared",
+          "origin_basis": "dependencies.py declares this source path",
+          "modified": false,
+          "modification": "No package-local modification; byte-identical to source.",
+          "base_sha256": null,
+          "current_source_sha256": "36beb29191c3770ed54bd25c1c03c6c1c82aa5c00fb54cd5d26e305571b0139a",
+          "package_sha256": "36beb29191c3770ed54bd25c1c03c6c1c82aa5c00fb54cd5d26e305571b0139a",
+          "base_equals_current_source": null,
+          "copy_equals_current_source": true,
+          "copy_matches_declared_pin": true,
+          "diff": null,
+          "license": "GPL-3.0-or-later",
+          "license_files": [
+            "tools/toon_image_backend/intersections/LICENSE",
+            "tools/toon_image_backend/LICENSE"
+          ],
+          "license_sha256": [
+            "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b",
+            "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b"
+          ],
+          "license_text_relation": {
+            "normalized_equal_to_package_license": true,
+            "normalized_similarity": 1.0
+          },
+          "source_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "package_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "copyright": "NOASSERTION",
+          "copyright_lines_found": [],
+          "first_author": "NOASSERTION",
+          "upstream_commit": "NOASSERTION",
+          "source_release_version": "NOASSERTION"
+        },
+        {
+          "package_path": "_support/paint_editor_state.py",
+          "source_path": "tools/toon_image_session_ui_c4/paint_editor_state.py",
+          "origin": "declared",
+          "origin_basis": "dependencies.py declares this source path",
+          "modified": false,
+          "modification": "No package-local modification; byte-identical to source.",
+          "base_sha256": null,
+          "current_source_sha256": "c6a7f7bd112b573d784c700fa5a7a20ee02d33ad5247f8e1c84d297d47c57006",
+          "package_sha256": "c6a7f7bd112b573d784c700fa5a7a20ee02d33ad5247f8e1c84d297d47c57006",
+          "base_equals_current_source": null,
+          "copy_equals_current_source": true,
+          "copy_matches_declared_pin": true,
+          "diff": null,
+          "license": "GPL-3.0-or-later",
+          "license_files": [
+            "tools/toon_image_session_ui_c4/LICENSE"
+          ],
+          "license_sha256": [
+            "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
+          ],
+          "license_text_relation": {
+            "normalized_equal_to_package_license": true,
+            "normalized_similarity": 1.0
+          },
+          "source_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "package_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "copyright": "NOASSERTION",
+          "copyright_lines_found": [],
+          "first_author": "NOASSERTION",
+          "upstream_commit": "NOASSERTION",
+          "source_release_version": "NOASSERTION"
+        },
+        {
+          "package_path": "_support/relative_size.py",
+          "source_path": "tools/toon_image_cpu/relative_size.py",
+          "origin": "declared",
+          "origin_basis": "dependencies.py declares this source path",
+          "modified": false,
+          "modification": "No package-local modification; byte-identical to source.",
+          "base_sha256": null,
+          "current_source_sha256": "8b7685a926e899e82311c5314ec84f1b8299e09bd3246fe984d9b77c0e3676b2",
+          "package_sha256": "8b7685a926e899e82311c5314ec84f1b8299e09bd3246fe984d9b77c0e3676b2",
+          "base_equals_current_source": null,
+          "copy_equals_current_source": true,
+          "copy_matches_declared_pin": true,
+          "diff": null,
+          "license": "GPL-3.0-or-later",
+          "license_files": [
+            "tools/toon_image_cpu/LICENSE"
+          ],
+          "license_sha256": [
+            "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b"
+          ],
+          "license_text_relation": {
+            "normalized_equal_to_package_license": true,
+            "normalized_similarity": 1.0
+          },
+          "source_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "package_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "copyright": "NOASSERTION",
+          "copyright_lines_found": [],
+          "first_author": "NOASSERTION",
+          "upstream_commit": "NOASSERTION",
+          "source_release_version": "NOASSERTION"
+        },
+        {
+          "package_path": "_support/smoothing_flags.py",
+          "source_path": "tools/toon_image_cpu/smoothing_flags.py",
+          "origin": "declared",
+          "origin_basis": "dependencies.py declares this source path",
+          "modified": false,
+          "modification": "No package-local modification; byte-identical to source.",
+          "base_sha256": null,
+          "current_source_sha256": "737d09ec1b96e4cdf8cec1fdfe6fcdabe9071332b13158eac5eb3fa525e2217b",
+          "package_sha256": "737d09ec1b96e4cdf8cec1fdfe6fcdabe9071332b13158eac5eb3fa525e2217b",
+          "base_equals_current_source": null,
+          "copy_equals_current_source": true,
+          "copy_matches_declared_pin": true,
+          "diff": null,
+          "license": "GPL-3.0-or-later",
+          "license_files": [
+            "tools/toon_image_cpu/LICENSE"
+          ],
+          "license_sha256": [
+            "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b"
+          ],
+          "license_text_relation": {
+            "normalized_equal_to_package_license": true,
+            "normalized_similarity": 1.0
+          },
+          "source_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "package_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "copyright": "NOASSERTION",
+          "copyright_lines_found": [],
+          "first_author": "NOASSERTION",
+          "upstream_commit": "NOASSERTION",
+          "source_release_version": "NOASSERTION"
+        }
+      ]
+    }
+  },
+  "source_projects": [
+    {
+      "project": "tools/toon_image_backend",
+      "copied_files": [
+        "_object_core/analytic_batches.py",
+        "_object_core/analytic_visibility.py",
+        "_object_core/contract.py",
+        "_object_core/geometry.py",
+        "_object_core/hidden_categories.py",
+        "_object_core/intervals.py",
+        "_object_core/occlusion.py",
+        "_object_core/visibility.py"
+      ],
+      "license_files": [
+        {
+          "path": "tools/toon_image_backend/LICENSE",
+          "sha256": "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b",
+          "bytes": 35821,
+          "first_line": "                    GNU GENERAL PUBLIC LICENSE",
+          "normalized_equal_to_package_license": true,
+          "normalized_similarity": 1.0
+        }
+      ],
+      "readmes": [
+        {
+          "path": "tools/toon_image_backend/README.md",
+          "sha256": "74b0bb88d8e8025ba6ecb9622271cd8cf8fdc463dac1c5865ef5d800bf43dfa3",
+          "bytes": 12024,
+          "license_mentions": [
+            "Original GPL-3.0-or-later code. LICENSE contains the GPL v3 terms.",
+            "普通原网格边的完整来源绑定与显式链 API 见 [MESH-EDGE-CHAINS.md](MESH-EDGE-CHAINS.md)。以完整场景建立精确可见性候选索引，保留原边方向和顶点身份；该显式入口仍只接原边。",
+            "完整当前选线、虚拟对角边、自动成链及整链分批入口见 [SELECTED-CHAIN-IMAGES.md](SELECTED-CHAIN-IMAGES.md)。内部重读来源、共享场景索引和全局预算，所有批次一次逐样本合并。v028 全部 20,611 条选中来源已产出 FHD 四图；90 秒性能、商业等价、48 帧与公共 GUI/CLI 验收仍未完成。"
+          ]
+        }
+      ],
+      "notes": "Larger research backend; only the eight listed object-core Python modules are copied. Other backend modules and their data are not in the package.",
+      "readme_license_statement": "Original GPL-3.0-or-later code. LICENSE contains the GPL v3 terms."
+    },
+    {
+      "project": "tools/toon_image_backend/intersections",
+      "copied_files": [
+        "_support/geometry_exact.py"
+      ],
+      "license_files": [
+        {
+          "path": "tools/toon_image_backend/LICENSE",
+          "sha256": "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b",
+          "bytes": 35821,
+          "first_line": "                    GNU GENERAL PUBLIC LICENSE",
+          "normalized_equal_to_package_license": true,
+          "normalized_similarity": 1.0
+        },
+        {
+          "path": "tools/toon_image_backend/intersections/LICENSE",
+          "sha256": "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b",
+          "bytes": 35821,
+          "first_line": "                    GNU GENERAL PUBLIC LICENSE",
+          "normalized_equal_to_package_license": true,
+          "normalized_similarity": 1.0
+        }
+      ],
+      "readmes": [
+        {
+          "path": "tools/toon_image_backend/README.md",
+          "sha256": "74b0bb88d8e8025ba6ecb9622271cd8cf8fdc463dac1c5865ef5d800bf43dfa3",
+          "bytes": 12024,
+          "license_mentions": [
+            "Original GPL-3.0-or-later code. LICENSE contains the GPL v3 terms.",
+            "普通原网格边的完整来源绑定与显式链 API 见 [MESH-EDGE-CHAINS.md](MESH-EDGE-CHAINS.md)。以完整场景建立精确可见性候选索引，保留原边方向和顶点身份；该显式入口仍只接原边。",
+            "完整当前选线、虚拟对角边、自动成链及整链分批入口见 [SELECTED-CHAIN-IMAGES.md](SELECTED-CHAIN-IMAGES.md)。内部重读来源、共享场景索引和全局预算，所有批次一次逐样本合并。v028 全部 20,611 条选中来源已产出 FHD 四图；90 秒性能、商业等价、48 帧与公共 GUI/CLI 验收仍未完成。"
+          ]
+        },
+        {
+          "path": "tools/toon_image_backend/intersections/README.md",
+          "sha256": "ba6ecd9614482e291026f0bb620d9708daea3e3b8b89a2b9c540ab610e06a7be",
+          "bytes": 1387,
+          "license_mentions": [
+            "These original GPL-3.0-or-later modules expose exact triangle intersection,",
+            "revision and records the relative-import-only relocation. LICENSE contains",
+            "the GPL v3 terms. No audit-stage code is loaded at runtime."
+          ]
+        }
+      ],
+      "notes": "Only geometry_exact.py is copied; other intersection modules are not in the package.",
+      "readme_license_statement": "These original GPL-3.0-or-later modules expose exact triangle intersection, revision and records the relative-import-only relocation. LICENSE contains the GPL v3 terms."
+    },
+    {
+      "project": "tools/toon_image_chain_policy",
+      "copied_files": [
+        "_support/chain_policy.py"
+      ],
+      "license_files": [
+        {
+          "path": "tools/toon_image_chain_policy/LICENSE",
+          "sha256": "bc0bbe28cb125147e93acccc66a1def363dfada5d3752aadeaa0aadc4c58b084",
+          "bytes": 35866,
+          "first_line": "# SPDX-License-Identifier: GPL-3.0-or-later",
+          "normalized_equal_to_package_license": false,
+          "normalized_similarity": 0.999359
+        }
+      ],
+      "readmes": [
+        {
+          "path": "tools/toon_image_chain_policy/README.md",
+          "sha256": "6c670598347d8840536c052b16ee63ff7ff0eb6f36af4df219ffb6e8e17bebee",
+          "bytes": 5853,
+          "license_mentions": []
+        }
+      ],
+      "notes": "Only policy.py is copied as _support/chain_policy.py. The path is inferred by byte equality, not declared by dependencies.py.",
+      "readme_license_statement": "README does not contain a separate licence section; LICENSE begins with '# SPDX-License-Identifier: GPL-3.0-or-later'."
+    },
+    {
+      "project": "tools/toon_image_cpu",
+      "copied_files": [
+        "_support/relative_size.py",
+        "_support/smoothing_flags.py"
+      ],
+      "license_files": [
+        {
+          "path": "tools/toon_image_cpu/LICENSE",
+          "sha256": "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b",
+          "bytes": 35821,
+          "first_line": "                    GNU GENERAL PUBLIC LICENSE",
+          "normalized_equal_to_package_license": true,
+          "normalized_similarity": 1.0
+        }
+      ],
+      "readmes": [
+        {
+          "path": "tools/toon_image_cpu/README.md",
+          "sha256": "d0b4c492b384d161a51426bab380635963a4f110ac217a817c01ed5071406428",
+          "bytes": 3227,
+          "license_mentions": [
+            "GPL-3.0-or-later. This package contains project-owned code and two project-owned"
+          ]
+        }
+      ],
+      "notes": "Only smoothing_flags.py and relative_size.py are copied. native_stroke.dll and screen_query.dll remain in the source tree and are not shipped.",
+      "readme_license_statement": "GPL-3.0-or-later. This package contains project-owned code and two project-owned Windows x64 CPU DLLs. It includes no commercial Pencil+ drawing implementation."
+    },
+    {
+      "project": "tools/toon_image_session_ui_c4",
+      "copied_files": [
+        "_support/paint_editor_state.py"
+      ],
+      "license_files": [
+        {
+          "path": "tools/toon_image_session_ui_c4/LICENSE",
+          "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+          "bytes": 35147,
+          "first_line": "                    GNU GENERAL PUBLIC LICENSE",
+          "normalized_equal_to_package_license": true,
+          "normalized_similarity": 1.0
+        }
+      ],
+      "readmes": [
+        {
+          "path": "tools/toon_image_session_ui_c4/README.md",
+          "sha256": "bd4a39611f355a5729ad58942eae943816828000d74b256b35dee7668bda12b7",
+          "bytes": 2998,
+          "license_mentions": [
+            "GPL-3.0-or-later；LICENSE 原样继承。无安装、环境或性能算法变更。"
+          ]
+        }
+      ],
+      "notes": "Only paint_editor_state.py is copied. cpu_editor_state.py and paint_settings.py remain source-tree-only; two dormant lookup paths name them.",
+      "readme_license_statement": "GPL-3.0-or-later；LICENSE 原样继承。"
+    }
+  ],
+  "external_imports": [
+    {
+      "module": "numpy",
+      "import_count": 46,
+      "files": [
+        "_object_core/analytic_batches.py",
+        "_object_core/analytic_visibility.py",
+        "_object_core/contract.py",
+        "_object_core/geometry.py",
+        "_object_core/hidden_categories.py",
+        "_object_core/occlusion.py",
+        "_object_core/visibility.py",
+        "_support/geometry_exact.py",
+        "_support/smoothing_flags.py",
+        "addon.py",
+        "alpha_function.py",
+        "boundary_sources.py",
+        "brush_engine.py",
+        "brush_preview.py",
+        "camera.py",
+        "chain_compute.py",
+        "chain_snapshot.py",
+        "dash_splitter.py",
+        "drawing.py",
+        "edge_sources.py",
+        "exr_output.py",
+        "geometry.py",
+        "intersection_chain_compute.py",
+        "intersection_pairs.py",
+        "intersection_phase_adapter.py",
+        "intersection_sources.py",
+        "intersection_strokes.py",
+        "line_functions.py",
+        "multilayer_output.py",
+        "object_adapter.py",
+        "object_fragments.py",
+        "object_view.py",
+        "output.py",
+        "phase_adapter.py",
+        "phase_worker.py",
+        "render_elements.py",
+        "render_geometry.py",
+        "render_worker.py",
+        "selector_bindings.py",
+        "selector_capture.py",
+        "source_alpha.py",
+        "source_routes.py",
+        "strokes.py",
+        "style.py",
+        "vector_output.py",
+        "visibility.py"
+      ],
+      "classification": "Blender runtime-provided",
+      "shipped_in_package": false,
+      "license_obligation_in_this_package": "No bundled copy; Blender distribution supplies NumPy.",
+      "note": "All 46 imports are ordinary NumPy use in project/copy code. The package contains no NumPy wheels or binaries and does not pin a NumPy version."
+    },
+    {
+      "module": "toon_render_package",
+      "import_count": 13,
+      "files": [
+        "render_worker.py"
+      ],
+      "classification": "Self-package alias",
+      "shipped_in_package": true,
+      "license_obligation_in_this_package": "Same GPL-3.0-or-later package source; not a third-party component.",
+      "note": "render_worker.py loads the package's own __init__.py under the synthetic name toon_render_package after hash-checking package_root files. This is not an external distribution."
+    },
+    {
+      "module": "cpu_editor_state",
+      "import_count": 1,
+      "files": [
+        "_support/paint_editor_state.py"
+      ],
+      "classification": "Optional source-tree sibling; not shipped",
+      "shipped_in_package": false,
+      "license_obligation_in_this_package": "No bundled copy and no distribution of that module in this ZIP; no license text is added for it.",
+      "note": "Reached only through _support/paint_editor_state._cpu() for the CPU editor-state schema. The module exists in toon_image_session_ui_c4/ but is not in the package; no Blender run was performed to prove reachability."
+    },
+    {
+      "module": "paint_settings",
+      "import_count": 1,
+      "files": [
+        "_support/paint_editor_state.py"
+      ],
+      "classification": "Optional source-tree sibling; not shipped",
+      "shipped_in_package": false,
+      "license_obligation_in_this_package": "No bundled copy and no distribution of that module in this ZIP; no license text is added for it.",
+      "note": "Reached only through _support/paint_editor_state._api() for capture/restore/read_text/import_file paths. paint_settings.py exists in toon_image_session_ui_c4/ but is not in the package; no Blender run was performed to prove reachability."
+    }
+  ],
+  "runtime_dependencies": {
+    "shipped": false,
+    "blender": {
+      "minimum": "5.2.0",
+      "evidence": "blender_manifest.toml blender_version_min = \"5.2.0\""
+    },
+    "python": "Blender-embedded Python (version not pinned by this package)",
+    "numpy": {
+      "provided_by": "Blender runtime",
+      "import_count": 46,
+      "shipped": false
+    },
+    "blender_builtin_modules": {
+      "bpy": 66,
+      "mathutils": 3,
+      "bpy_extras": 1,
+      "gpu": 1,
+      "gpu_extras": 1
+    },
+    "system_apis": [
+      "Windows kernel32/msvcrt via ctypes in sequence_protocol.py for delete-sharing file reads; OS API only, no bundled library.",
+      "subprocess.Popen uses bpy.app.binary_path for render/sequence workers; no bundled executable."
+    ]
+  },
+  "runtime_loads": {
+    "package_local_binary_or_asset_loads": [],
+    "observed_runtime_io": [
+      {
+        "file": "addon.py",
+        "line": 1652,
+        "operation": "bpy.data.images.load",
+        "target": "settings.last_output_path after SHA-256 check; a previously exported user output, not a packaged asset"
+      },
+      {
+        "file": "brush_preview.py",
+        "line": 55,
+        "operation": "bpy.data.images.load",
+        "target": "newly generated brush-preview PNG; packed as a runtime datablock"
+      },
+      {
+        "file": "output_scope.py",
+        "lines": [
+          173,
+          180
+        ],
+        "operation": "bpy.data.images.load",
+        "target": "existing tagged output path or user-selected image path; not a packaged asset"
+      },
+      {
+        "file": "_object_core/contract.py",
+        "line": 57,
+        "operation": "numpy.load",
+        "target": "caller-supplied absolute geometry .npz with SHA verification; research input, not a packaged asset"
+      },
+      {
+        "file": "render_worker.py",
+        "line": 63,
+        "operation": "bpy.ops.wm.open_mainfile",
+        "target": "private scene.blend snapshot in the job directory, created from the submitted scene; use_scripts=False"
+      }
+    ],
+    "subprocess": {
+      "files": [
+        "render_output.py",
+        "sequence_output.py"
+      ],
+      "binary": "bpy.app.binary_path (the running Blender executable)",
+      "flags": [
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1"
+      ],
+      "shipped_binary": false
+    },
+    "network_calls_found": false,
+    "exec_eval_string_calls_found": false,
+    "dynamic_module_loading": [
+      {
+        "file": "dependencies.py",
+        "mechanism": "importlib.util.spec_from_file_location + exec_module",
+        "target": "packaged _support/<name>.py, with a development-sibling fallback only if the packaged file is absent",
+        "hash_checked_at_load": false
+      },
+      {
+        "file": "render_worker.py",
+        "mechanism": "importlib.util.spec_from_file_location + exec_module",
+        "target": "the package's own __init__.py under the synthetic name toon_render_package",
+        "hash_checked_at_load": true
+      }
+    ],
+    "notes": [
+      "The only literal development-source paths are in dependencies.py fallback lookups; the package first resolves root/_support and all five support copies exist.",
+      "style.py development-sibling strings are descriptive constants/comments, not file loads.",
+      "No package-local PNG, EXR, font, mesh, .blend, DLL, PYD, SO or EXE exists in the 115-file ZIP."
+    ]
+  },
+  "design_interface_references": [
+    {
+      "id": "openexr-file-layout",
+      "reference": "OpenEXR File Layout design reference",
+      "uri": "https://openexr.com/en/latest/OpenEXRFileLayout.html",
+      "evidence": "exr_header.py docstring",
+      "role": "Format/layout design reference for bounded EXR header inspection.",
+      "included_in_package": false,
+      "code_or_binary_included": false,
+      "verification": "Project comment only; external page not fetched in this audit."
+    },
+    {
+      "id": "pencil-plus-pld-docs",
+      "reference": "Pencil+ 4 PLD / File Output documentation",
+      "uri": "https://docs.psoft.co.jp/plb400w/en/latest/reference/FileOutput.html",
+      "evidence": "vector_output.py _PLD_SOURCES and _PLD_REASON",
+      "role": "Interface/format reference; PLD is reported unavailable and no PLD writer is shipped.",
+      "included_in_package": false,
+      "code_or_binary_included": false,
+      "verification": "Project comment only; external page not fetched in this audit."
+    },
+    {
+      "id": "pencil-4-pyd-source",
+      "reference": "Pencil-4-Line-for-Blender-pyd-source",
+      "uri": "https://github.com/psofthouse/Pencil-4-Line-for-Blender-pyd-source",
+      "evidence": "vector_output.py _PLD_SOURCES and _PLD_REASON",
+      "role": "Public interface/limitation reference; the project says the GPL pyd source has no PLD serializer and vector data is passed to a closed render application.",
+      "included_in_package": false,
+      "code_or_binary_included": false,
+      "verification": "Project comment only; external repository not fetched or compared in this audit."
+    },
+    {
+      "id": "fogleman-ln",
+      "reference": "fogleman/ln scene/filter pipeline (design provenance)",
+      "uri": null,
+      "evidence": "tools/toon_image_backend/README.md",
+      "role": "Design provenance for separation of path generation, visibility and projection; project states no source copied and no Go dependency introduced.",
+      "included_in_package": false,
+      "code_or_binary_included": false,
+      "verification": "Project README only; no external comparison performed."
+    },
+    {
+      "id": "public-v415-bridge",
+      "reference": "Public v4.1.5 bridge formula / arithmetic behaviour",
+      "uri": null,
+      "evidence": "tools/toon_image_cpu/relative_size.py and smoothing_flags.py docstrings",
+      "role": "Design reference only; project states no upstream source copied.",
+      "included_in_package": false,
+      "code_or_binary_included": false,
+      "verification": "Project comments only; no external comparison performed."
+    },
+    {
+      "id": "penumbra",
+      "reference": "PENumbra (bounded CSR / affine half-plane design comparison)",
+      "uri": null,
+      "evidence": "_object_core/analytic_visibility.py docstring",
+      "role": "Design comparison; project states no upstream code or empirical filters are included.",
+      "included_in_package": false,
+      "code_or_binary_included": false,
+      "verification": "Project comment only; no external comparison performed."
+    }
+  ],
+  "unknowns": [
+    {
+      "field": "copyright_holder_and_first_author",
+      "value": "NOASSERTION",
+      "reason": "No copyright line or named implementation holder was found; bl_info author/maintainer 'Blender AI' is an attribution label, not proof of legal ownership."
+    },
+    {
+      "field": "upstream_commit_and_source_release",
+      "value": "NOASSERTION",
+      "reason": "SOURCES.json, PROVENANCE.md and source files provide no commit, tag or release identifier for the 13 local copies."
+    },
+    {
+      "field": "chain_policy_copy_origin",
+      "value": "inferred",
+      "reason": "Byte-identical to tools/toon_image_chain_policy/policy.py; the package does not declare the historical copy path or direction."
+    },
+    {
+      "field": "external_reference_comparison",
+      "value": "not_performed",
+      "reason": "No network access and no external repositories were read; project statements about no copied upstream code are recorded, not independently verified."
+    },
+    {
+      "field": "runtime_behavior_and_editor_state_optional_paths",
+      "value": "not_run",
+      "reason": "No Blender/GUI execution was allowed. cpu_editor_state/paint_settings are absent and only referenced by dormant _cpu()/_api() paths; reachability is not claimed."
+    }
+  ],
+  "blocking_assessment": {
+    "blocks_current_local_release": false,
+    "decision": "CONDITIONAL_PASS_LOCAL_SOURCE_AVAILABLE",
+    "scope": "The exact 115-file, 109-Python 0.2.26 ZIP, distributed with GPL-3.0-or-later notices and NOASSERTION copyright.",
+    "authority_confirmation_required": true,
+    "authority_evidence_status": "not_established_by_this_audit",
+    "why_not_blocked": [
+      "All 109 Python files declare GPL-3.0-or-later; the manifest declares GPL-3.0-or-later; the complete GPLv3 text is retained twice.",
+      "All 13 copied files trace to local GPL-3.0-or-later sources; four package-local modifications are documented and their diffs match the stated changes; nine are byte-identical.",
+      "The package contains zero binary files and zero bundled images/fonts/meshes; no incompatible third-party binary or commercial asset was found.",
+      "Runtime dependencies (Blender, NumPy) are not shipped and are materialized from the host application, not represented as package content."
+    ],
+    "conditions": [
+      "The distributor must have authority to license the 96 project-local Python files and the 13 local copies under GPL-3.0-or-later; this audit cannot establish legal authority.",
+      "Keep LICENSE and _object_core/LICENSE with the package; keep the 109 SPDX headers and add the proposed NOTICE/SOURCES/SBOM.",
+      "Do not present NOASSERTION copyright as a named holder; do not invent a first author, commit, tag or public upstream URL.",
+      "Do not claim legal clearance, complete historical originality, commercial equivalence or that runtime dependencies are bundled."
+    ],
+    "not_supported_claims": [
+      "A named copyright holder or first author for the 96 project-local files.",
+      "An exact upstream commit/tag/release for any of the 13 local copies.",
+      "That the byte-identical chain_policy copy has a proven historical copy direction.",
+      "That external design/interface references were fetched or independently compared.",
+      "That Blender/NumPy runtime dependencies are part of the distribution.",
+      "That the package is legally cleared or that this proposal is legal advice."
+    ],
+    "hard_gaps_for_unqualified_public_release": [
+      "No copyright-holder/authority evidence; NOASSERTION is disclosure, not permission.",
+      "No upstream commit/tag/release identifiers for the 13 copies.",
+      "No independent legal review and no external source comparison."
+    ],
+    "legal_advice": false
+  },
+  "evidence": {
+    "scan_summary_sha256": "1a4c8ffffab66dcdd1ebeb6b5bfbefce6463984df62a4bacfbba1a376e960cb8",
+    "files_manifest_sha256": "f2f3a138e54a725b4619d75abf254aa9e8c958088395651000fb6e6cc9a6160e",
+    "python_scan_sha256": "d79fc4ab3c969c3d0cb624545a6174c52b17084c69292637ddc8df49581ec293",
+    "source_verification_sha256": "3c04cc01641a8998c1d05b05fce16011f8411223c796159a5f357e803ae041fa",
+    "license_comparison_sha256": "2499dfd495c226e205d2f5e529cc1c9f22f3b2efc904c104c85df4a2414e41d6",
+    "runtime_references_sha256": "0efe2ff63051cdf6119117a0cecc9152ff028534c4387f0a89728f788c14327e",
+    "phase5_package_json_sha256": "520c3815d1ebce193517b85b0fbeabaedc9050ca72aab93a929fb627e11372e8",
+    "phase5_final_integrity_sha256": "f96ba17d85013367cae600b6fab69433edd507cad8f7381cd087ebb37cc9e713",
+    "phase5_stage5_result_sha256": "03769eeaa5decb09c9d4a83d692a60534f5dc3fcf216daaf27f0a1dc43b3a3ff",
+    "docs_preview_validation_sha256": "856a6f67f8bbfe021a474e1483b6415ea03398d5ac157894c3bf11eaf5909b97"
+  },
+  "audited_baseline_026": {
+    "name": "toon_viewport_preview",
+    "display_name": "二维描边 · 自动视口预览",
+    "version": "0.2.26",
+    "type": "Blender add-on",
+    "formal_source": "tools/toon_viewport_preview",
+    "archive": "work/audit/<batch>/",
+    "archive_sha256": "3731fa5282c5afd02c5cd21b72970e3ce1ba7d699eefe8879c545685a3a09fb3",
+    "file_count": 115,
+    "python_count": 109,
+    "suffix_counts": {
+      ".json": 1,
+      ".md": 2,
+      ".py": 109,
+      ".toml": 1,
+      "<none>": 2
+    },
+    "binary_count": 0,
+    "manifest": "tools/toon_viewport_preview/blender_manifest.toml",
+    "manifest_sha256": "b82de880765e73d4b2f5ea305d9f47ddfd0d0f4d07698c5220da1b04a02eb980",
+    "manifest_license": "GPL-3.0-or-later",
+    "license_file": "LICENSE",
+    "license_sha256": "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b",
+    "core_license_file": "_object_core/LICENSE",
+    "core_license_sha256": "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b",
+    "license_bytes": 35821,
+    "license_lines": 674,
+    "package_json_sha256": "520c3815d1ebce193517b85b0fbeabaedc9050ca72aab93a929fb627e11372e8",
+    "final_integrity_sha256": "f96ba17d85013367cae600b6fab69433edd507cad8f7381cd087ebb37cc9e713",
+    "stage5_result_sha256": "03769eeaa5decb09c9d4a83d692a60534f5dc3fcf216daaf27f0a1dc43b3a3ff",
+    "phase5_evidence": {
+      "package_json": "work/audit/<batch>/",
+      "final_integrity": "work/audit/<batch>/",
+      "stage5_result": "work/audit/<batch>/",
+      "stage5_state": "ENGINEERING_STAGE_COMPLETE",
+      "stage5_ok": true,
+      "final_integrity_checked": "2026-11-05T06:27:57.518575+00:00",
+      "final_integrity_source_frozen_zip_exact": true,
+      "final_integrity_shipped_files": 115,
+      "final_integrity_python_files": 109
+    },
+    "file_manifest_digest_sha256": "24c6905c9d44ec4cb5e72d3977327e026b8cd1c08780a2ca7090e165c4a41a5a",
+    "file_manifest_digest_algorithm": "SHA-256 over sorted lines 'sha256<two spaces>relative/path', UTF-8, final LF omitted",
+    "package_verification_code": "288c512ae38b542e64d51b96820890f85cf83677",
+    "tree_zip_package_json_exact": true
+  },
+  "audited_baseline_026_scope": {
+    "included": {
+      "files": 115,
+      "python_files": 109,
+      "non_python_files": [
+        "LICENSE",
+        "PROVENANCE.md",
+        "README.md",
+        "_object_core/LICENSE",
+        "_object_core/SOURCES.json",
+        "blender_manifest.toml"
+      ],
+      "suffix_counts": {
+        ".json": 1,
+        ".md": 2,
+        ".py": 109,
+        ".toml": 1,
+        "<none>": 2
+      },
+      "binaries": 0,
+      "bundled_images_fonts_meshes": 0,
+      "all_python_spdx_first_line": true,
+      "file_manifest_digest_sha256": "24c6905c9d44ec4cb5e72d3977327e026b8cd1c08780a2ca7090e165c4a41a5a"
+    },
+    "project_local_python": {
+      "count": 96,
+      "definition": "109 Python files minus the 13 declared/inferred copies; no separate external provenance is declared for these files.",
+      "copyright": "NOASSERTION",
+      "files": [
+        "__init__.py",
+        "_object_core/__init__.py",
+        "addon.py",
+        "alpha_function.py",
+        "amount_animation.py",
+        "amount_animation_ui.py",
+        "author_channels.py",
+        "author_cli.py",
+        "author_graph.py",
+        "author_helpers.py",
+        "boundary_sources.py",
+        "brush_authoring.py",
+        "brush_effects.py",
+        "brush_engine.py",
+        "brush_gpu.py",
+        "brush_preview.py",
+        "brush_ui.py",
+        "camera.py",
+        "captured_copy.py",
+        "chain_compute.py",
+        "chain_controls.py",
+        "chain_snapshot.py",
+        "chain_ui.py",
+        "coverage.py",
+        "curve_editor.py",
+        "dash_controls.py",
+        "dash_splitter.py",
+        "dash_ui.py",
+        "dependencies.py",
+        "depth_output.py",
+        "drawing.py",
+        "edge_authoring.py",
+        "edge_sources.py",
+        "edge_ui.py",
+        "exr_header.py",
+        "exr_output.py",
+        "file_authoring.py",
+        "file_ui.py",
+        "geometry.py",
+        "group_lifecycle.py",
+        "group_ui.py",
+        "holdout.py",
+        "intersection_chain_compute.py",
+        "intersection_gap_linker.py",
+        "intersection_pairs.py",
+        "intersection_phase_adapter.py",
+        "intersection_sources.py",
+        "intersection_strokes.py",
+        "ix_authoring.py",
+        "ix_sources.py",
+        "ix_ui.py",
+        "line_function_ui.py",
+        "line_functions.py",
+        "line_hierarchy.py",
+        "line_ui.py",
+        "linker.py",
+        "map_amount_controls.py",
+        "map_amount_ui.py",
+        "multilayer_output.py",
+        "object_adapter.py",
+        "object_fragments.py",
+        "object_view.py",
+        "output.py",
+        "output_scope.py",
+        "parameter_animation.py",
+        "parameter_animation_ui.py",
+        "parameter_overlay.py",
+        "phase_adapter.py",
+        "phase_jobs.py",
+        "phase_worker.py",
+        "preset_catalog.py",
+        "render_elements.py",
+        "render_geometry.py",
+        "render_output.py",
+        "render_worker.py",
+        "runtime_preferences.py",
+        "sampling.py",
+        "selector_bindings.py",
+        "selector_capture.py",
+        "selector_picker.py",
+        "selector_ui.py",
+        "sequence_output.py",
+        "sequence_protocol.py",
+        "source_alpha.py",
+        "source_bindings.py",
+        "source_routes.py",
+        "strokes.py",
+        "style.py",
+        "vector_output.py",
+        "vector_scope.py",
+        "vector_ui.py",
+        "visibility.py",
+        "wire_authoring.py",
+        "wire_brush_import.py",
+        "wire_sources.py",
+        "wire_ui.py"
+      ]
+    },
+    "copied_python": {
+      "count": 13,
+      "declared": 12,
+      "inferred": 1,
+      "modified": 4,
+      "byte_identical": 9,
+      "records": [
+        {
+          "package_path": "_object_core/analytic_batches.py",
+          "source_path": "tools/toon_image_backend/analytic_batches.py",
+          "origin": "declared",
+          "origin_basis": "_object_core/SOURCES.json declares this source path",
+          "modified": true,
+          "modification": "Exact rational replay for collapsed spatial intervals; adapter may explicitly select nonblocking only for exact projected determinant zero; nonzero near-degenerate inputs keep the original strict treatment.",
+          "base_sha256": "33ced3b6241cafa101cb335163bf2d51b2fccea56f4853fbdb9a54d68fac8d20",
+          "current_source_sha256": "33ced3b6241cafa101cb335163bf2d51b2fccea56f4853fbdb9a54d68fac8d20",
+          "package_sha256": "2d9ee3a9e9f9eebeb365c2488c8f46bb7fbfe90c79101dd02d18e63ab8950edd",
+          "base_equals_current_source": true,
+          "copy_equals_current_source": false,
+          "copy_matches_declared_pin": true,
+          "diff": {
+            "added_lines": 81,
+            "removed_lines": 6,
+            "changed_function_names": [
+              "_exact_clip_interval",
+              "point"
+            ],
+            "evidence_sha256": "e817fc44904032f839baf745d30238795f7543f7d87a044853b94b1e31bb7a35"
+          },
+          "license": "GPL-3.0-or-later",
+          "license_files": [
+            "tools/toon_image_backend/LICENSE"
+          ],
+          "license_sha256": [
+            "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b"
+          ],
+          "license_text_relation": {
+            "normalized_equal_to_package_license": true,
+            "normalized_similarity": 1.0
+          },
+          "source_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "package_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "copyright": "NOASSERTION",
+          "copyright_lines_found": [],
+          "first_author": "NOASSERTION",
+          "upstream_commit": "NOASSERTION",
+          "source_release_version": "NOASSERTION"
+        },
+        {
+          "package_path": "_object_core/analytic_visibility.py",
+          "source_path": "tools/toon_image_backend/analytic_visibility.py",
+          "origin": "declared",
+          "origin_basis": "_object_core/SOURCES.json declares this source path",
+          "modified": true,
+          "modification": "Preserve original predicate defaults; propagate explicit projected_tangent_policy and clipped triangle identities.",
+          "base_sha256": "11de83ef82c82328dc448944ac45b27c756dc7c7f13827a00cd20c3a6b816eb7",
+          "current_source_sha256": "11de83ef82c82328dc448944ac45b27c756dc7c7f13827a00cd20c3a6b816eb7",
+          "package_sha256": "cd6e60f291a466a0f667e01ea68ea5ed052fe119c5dd895a3889895b19d17760",
+          "base_equals_current_source": true,
+          "copy_equals_current_source": false,
+          "copy_matches_declared_pin": true,
+          "diff": {
+            "added_lines": 36,
+            "removed_lines": 9,
+            "changed_function_names": [
+              "_clip_positive"
+            ],
+            "evidence_sha256": "c9709c089c291f8d03978b80ca4bae9fe8a2dbd18e42f00ea1e3bf7d2486f007"
+          },
+          "license": "GPL-3.0-or-later",
+          "license_files": [
+            "tools/toon_image_backend/LICENSE"
+          ],
+          "license_sha256": [
+            "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b"
+          ],
+          "license_text_relation": {
+            "normalized_equal_to_package_license": true,
+            "normalized_similarity": 1.0
+          },
+          "source_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "package_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "copyright": "NOASSERTION",
+          "copyright_lines_found": [],
+          "first_author": "NOASSERTION",
+          "upstream_commit": "NOASSERTION",
+          "source_release_version": "NOASSERTION"
+        },
+        {
+          "package_path": "_object_core/contract.py",
+          "source_path": "tools/toon_image_backend/contract.py",
+          "origin": "declared",
+          "origin_basis": "_object_core/SOURCES.json declares this source path",
+          "modified": false,
+          "modification": "No package-local modification; byte-identical to source.",
+          "base_sha256": "71458f2a58ecd423a358ecf9901ed5fd8248e16009cef27db6b357d6b1737a69",
+          "current_source_sha256": "71458f2a58ecd423a358ecf9901ed5fd8248e16009cef27db6b357d6b1737a69",
+          "package_sha256": "71458f2a58ecd423a358ecf9901ed5fd8248e16009cef27db6b357d6b1737a69",
+          "base_equals_current_source": true,
+          "copy_equals_current_source": true,
+          "copy_matches_declared_pin": true,
+          "diff": null,
+          "license": "GPL-3.0-or-later",
+          "license_files": [
+            "tools/toon_image_backend/LICENSE"
+          ],
+          "license_sha256": [
+            "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b"
+          ],
+          "license_text_relation": {
+            "normalized_equal_to_package_license": true,
+            "normalized_similarity": 1.0
+          },
+          "source_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "package_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "copyright": "NOASSERTION",
+          "copyright_lines_found": [],
+          "first_author": "NOASSERTION",
+          "upstream_commit": "NOASSERTION",
+          "source_release_version": "NOASSERTION"
+        },
+        {
+          "package_path": "_object_core/geometry.py",
+          "source_path": "tools/toon_image_backend/geometry.py",
+          "origin": "declared",
+          "origin_basis": "_object_core/SOURCES.json declares this source path",
+          "modified": true,
+          "modification": "Explicit signed orthographic viewport depth policy; direct camera defaults unchanged.",
+          "base_sha256": "6fc8e223f05fc152b0711cab6ec5f4546a5432fcab205bf1f30498ede6d4bdf5",
+          "current_source_sha256": "6fc8e223f05fc152b0711cab6ec5f4546a5432fcab205bf1f30498ede6d4bdf5",
+          "package_sha256": "3d7e763a633ba7a164593dd02d0ea1bb40d79e38aa71185a1e3947736fcbaee2",
+          "base_equals_current_source": true,
+          "copy_equals_current_source": false,
+          "copy_matches_declared_pin": true,
+          "diff": {
+            "added_lines": 9,
+            "removed_lines": 1,
+            "changed_function_names": [],
+            "evidence_sha256": "d1908dc03bdef31d7ab77caa11d8dc1c3bc2800eebb414bad5aa6426f55949b4"
+          },
+          "license": "GPL-3.0-or-later",
+          "license_files": [
+            "tools/toon_image_backend/LICENSE"
+          ],
+          "license_sha256": [
+            "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b"
+          ],
+          "license_text_relation": {
+            "normalized_equal_to_package_license": true,
+            "normalized_similarity": 1.0
+          },
+          "source_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "package_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "copyright": "NOASSERTION",
+          "copyright_lines_found": [],
+          "first_author": "NOASSERTION",
+          "upstream_commit": "NOASSERTION",
+          "source_release_version": "NOASSERTION"
+        },
+        {
+          "package_path": "_object_core/hidden_categories.py",
+          "source_path": "tools/toon_image_backend/hidden_categories.py",
+          "origin": "declared",
+          "origin_basis": "_object_core/SOURCES.json declares this source path",
+          "modified": true,
+          "modification": "Explicit same-domain/clipped support identities plus optional cover witness profile. Full H/O/L interval sets remain unchanged; the output proof still covers each hidden segment and obeys the original cumulative budget.",
+          "base_sha256": "0b7b6e2283fd99f6c56aa4cc1a8cb5857163da2ddacb3ec457c85747427c6b89",
+          "current_source_sha256": "0b7b6e2283fd99f6c56aa4cc1a8cb5857163da2ddacb3ec457c85747427c6b89",
+          "package_sha256": "5a8482579a70fd0f8e9c76731975309c7e6e231ce78b2b850d1c2fa5447164fa",
+          "base_equals_current_source": true,
+          "copy_equals_current_source": false,
+          "copy_matches_declared_pin": true,
+          "diff": {
+            "added_lines": 47,
+            "removed_lines": 14,
+            "changed_function_names": [
+              "_witness_cover",
+              "partition_hidden_categories"
+            ],
+            "evidence_sha256": "73fe1eb0a281bbeff993a691f14c576999ffc602f7afeab9c3daaead5dba0a8d"
+          },
+          "license": "GPL-3.0-or-later",
+          "license_files": [
+            "tools/toon_image_backend/LICENSE"
+          ],
+          "license_sha256": [
+            "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b"
+          ],
+          "license_text_relation": {
+            "normalized_equal_to_package_license": true,
+            "normalized_similarity": 1.0
+          },
+          "source_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "package_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "copyright": "NOASSERTION",
+          "copyright_lines_found": [],
+          "first_author": "NOASSERTION",
+          "upstream_commit": "NOASSERTION",
+          "source_release_version": "NOASSERTION"
+        },
+        {
+          "package_path": "_object_core/intervals.py",
+          "source_path": "tools/toon_image_backend/intervals.py",
+          "origin": "declared",
+          "origin_basis": "_object_core/SOURCES.json declares this source path",
+          "modified": false,
+          "modification": "No package-local modification; byte-identical to source.",
+          "base_sha256": "2118281eed4818accb443604b821c0d048ba2a442b2867c4f82de46e24371272",
+          "current_source_sha256": "2118281eed4818accb443604b821c0d048ba2a442b2867c4f82de46e24371272",
+          "package_sha256": "2118281eed4818accb443604b821c0d048ba2a442b2867c4f82de46e24371272",
+          "base_equals_current_source": true,
+          "copy_equals_current_source": true,
+          "copy_matches_declared_pin": true,
+          "diff": null,
+          "license": "GPL-3.0-or-later",
+          "license_files": [
+            "tools/toon_image_backend/LICENSE"
+          ],
+          "license_sha256": [
+            "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b"
+          ],
+          "license_text_relation": {
+            "normalized_equal_to_package_license": true,
+            "normalized_similarity": 1.0
+          },
+          "source_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "package_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "copyright": "NOASSERTION",
+          "copyright_lines_found": [],
+          "first_author": "NOASSERTION",
+          "upstream_commit": "NOASSERTION",
+          "source_release_version": "NOASSERTION"
+        },
+        {
+          "package_path": "_object_core/occlusion.py",
+          "source_path": "tools/toon_image_backend/occlusion.py",
+          "origin": "declared",
+          "origin_basis": "_object_core/SOURCES.json declares this source path",
+          "modified": false,
+          "modification": "No package-local modification; byte-identical to source.",
+          "base_sha256": "18b2b1b4173d2935ae9ca060b6a441f5dde2bd1784049bb83aca1e3c43ae51ab",
+          "current_source_sha256": "18b2b1b4173d2935ae9ca060b6a441f5dde2bd1784049bb83aca1e3c43ae51ab",
+          "package_sha256": "18b2b1b4173d2935ae9ca060b6a441f5dde2bd1784049bb83aca1e3c43ae51ab",
+          "base_equals_current_source": true,
+          "copy_equals_current_source": true,
+          "copy_matches_declared_pin": true,
+          "diff": null,
+          "license": "GPL-3.0-or-later",
+          "license_files": [
+            "tools/toon_image_backend/LICENSE"
+          ],
+          "license_sha256": [
+            "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b"
+          ],
+          "license_text_relation": {
+            "normalized_equal_to_package_license": true,
+            "normalized_similarity": 1.0
+          },
+          "source_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "package_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "copyright": "NOASSERTION",
+          "copyright_lines_found": [],
+          "first_author": "NOASSERTION",
+          "upstream_commit": "NOASSERTION",
+          "source_release_version": "NOASSERTION"
+        },
+        {
+          "package_path": "_object_core/visibility.py",
+          "source_path": "tools/toon_image_backend/visibility.py",
+          "origin": "declared",
+          "origin_basis": "_object_core/SOURCES.json declares this source path",
+          "modified": false,
+          "modification": "No package-local modification; byte-identical to source.",
+          "base_sha256": "5aa2bc11a66397fd07f113a5ea46c405b8343914531b91b924da8c509cf55423",
+          "current_source_sha256": "5aa2bc11a66397fd07f113a5ea46c405b8343914531b91b924da8c509cf55423",
+          "package_sha256": "5aa2bc11a66397fd07f113a5ea46c405b8343914531b91b924da8c509cf55423",
+          "base_equals_current_source": true,
+          "copy_equals_current_source": true,
+          "copy_matches_declared_pin": true,
+          "diff": null,
+          "license": "GPL-3.0-or-later",
+          "license_files": [
+            "tools/toon_image_backend/LICENSE"
+          ],
+          "license_sha256": [
+            "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b"
+          ],
+          "license_text_relation": {
+            "normalized_equal_to_package_license": true,
+            "normalized_similarity": 1.0
+          },
+          "source_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "package_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "copyright": "NOASSERTION",
+          "copyright_lines_found": [],
+          "first_author": "NOASSERTION",
+          "upstream_commit": "NOASSERTION",
+          "source_release_version": "NOASSERTION"
+        },
+        {
+          "package_path": "_support/chain_policy.py",
+          "source_path": "tools/toon_image_chain_policy/policy.py",
+          "origin": "inferred",
+          "origin_basis": "byte-identical to the named candidate; package does not declare the historical copy path",
+          "modified": false,
+          "modification": "No package-local modification; byte-identical to source.",
+          "base_sha256": null,
+          "current_source_sha256": "880e19e930b1aa85a32d6fcc31e15a21d60d60c3df15f58f51f160578ca6badc",
+          "package_sha256": "880e19e930b1aa85a32d6fcc31e15a21d60d60c3df15f58f51f160578ca6badc",
+          "base_equals_current_source": null,
+          "copy_equals_current_source": true,
+          "copy_matches_declared_pin": true,
+          "diff": null,
+          "license": "GPL-3.0-or-later",
+          "license_files": [
+            "tools/toon_image_chain_policy/LICENSE"
+          ],
+          "license_sha256": [
+            "bc0bbe28cb125147e93acccc66a1def363dfada5d3752aadeaa0aadc4c58b084"
+          ],
+          "license_text_relation": {
+            "normalized_equal_to_package_license": false,
+            "normalized_similarity": 0.999359
+          },
+          "source_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "package_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "copyright": "NOASSERTION",
+          "copyright_lines_found": [],
+          "first_author": "NOASSERTION",
+          "upstream_commit": "NOASSERTION",
+          "source_release_version": "NOASSERTION"
+        },
+        {
+          "package_path": "_support/geometry_exact.py",
+          "source_path": "tools/toon_image_backend/intersections/geometry_exact.py",
+          "origin": "declared",
+          "origin_basis": "dependencies.py declares this source path",
+          "modified": false,
+          "modification": "No package-local modification; byte-identical to source.",
+          "base_sha256": null,
+          "current_source_sha256": "36beb29191c3770ed54bd25c1c03c6c1c82aa5c00fb54cd5d26e305571b0139a",
+          "package_sha256": "36beb29191c3770ed54bd25c1c03c6c1c82aa5c00fb54cd5d26e305571b0139a",
+          "base_equals_current_source": null,
+          "copy_equals_current_source": true,
+          "copy_matches_declared_pin": true,
+          "diff": null,
+          "license": "GPL-3.0-or-later",
+          "license_files": [
+            "tools/toon_image_backend/intersections/LICENSE",
+            "tools/toon_image_backend/LICENSE"
+          ],
+          "license_sha256": [
+            "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b",
+            "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b"
+          ],
+          "license_text_relation": {
+            "normalized_equal_to_package_license": true,
+            "normalized_similarity": 1.0
+          },
+          "source_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "package_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "copyright": "NOASSERTION",
+          "copyright_lines_found": [],
+          "first_author": "NOASSERTION",
+          "upstream_commit": "NOASSERTION",
+          "source_release_version": "NOASSERTION"
+        },
+        {
+          "package_path": "_support/paint_editor_state.py",
+          "source_path": "tools/toon_image_session_ui_c4/paint_editor_state.py",
+          "origin": "declared",
+          "origin_basis": "dependencies.py declares this source path",
+          "modified": false,
+          "modification": "No package-local modification; byte-identical to source.",
+          "base_sha256": null,
+          "current_source_sha256": "c6a7f7bd112b573d784c700fa5a7a20ee02d33ad5247f8e1c84d297d47c57006",
+          "package_sha256": "c6a7f7bd112b573d784c700fa5a7a20ee02d33ad5247f8e1c84d297d47c57006",
+          "base_equals_current_source": null,
+          "copy_equals_current_source": true,
+          "copy_matches_declared_pin": true,
+          "diff": null,
+          "license": "GPL-3.0-or-later",
+          "license_files": [
+            "tools/toon_image_session_ui_c4/LICENSE"
+          ],
+          "license_sha256": [
+            "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
+          ],
+          "license_text_relation": {
+            "normalized_equal_to_package_license": true,
+            "normalized_similarity": 1.0
+          },
+          "source_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "package_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "copyright": "NOASSERTION",
+          "copyright_lines_found": [],
+          "first_author": "NOASSERTION",
+          "upstream_commit": "NOASSERTION",
+          "source_release_version": "NOASSERTION"
+        },
+        {
+          "package_path": "_support/relative_size.py",
+          "source_path": "tools/toon_image_cpu/relative_size.py",
+          "origin": "declared",
+          "origin_basis": "dependencies.py declares this source path",
+          "modified": false,
+          "modification": "No package-local modification; byte-identical to source.",
+          "base_sha256": null,
+          "current_source_sha256": "8b7685a926e899e82311c5314ec84f1b8299e09bd3246fe984d9b77c0e3676b2",
+          "package_sha256": "8b7685a926e899e82311c5314ec84f1b8299e09bd3246fe984d9b77c0e3676b2",
+          "base_equals_current_source": null,
+          "copy_equals_current_source": true,
+          "copy_matches_declared_pin": true,
+          "diff": null,
+          "license": "GPL-3.0-or-later",
+          "license_files": [
+            "tools/toon_image_cpu/LICENSE"
+          ],
+          "license_sha256": [
+            "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b"
+          ],
+          "license_text_relation": {
+            "normalized_equal_to_package_license": true,
+            "normalized_similarity": 1.0
+          },
+          "source_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "package_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "copyright": "NOASSERTION",
+          "copyright_lines_found": [],
+          "first_author": "NOASSERTION",
+          "upstream_commit": "NOASSERTION",
+          "source_release_version": "NOASSERTION"
+        },
+        {
+          "package_path": "_support/smoothing_flags.py",
+          "source_path": "tools/toon_image_cpu/smoothing_flags.py",
+          "origin": "declared",
+          "origin_basis": "dependencies.py declares this source path",
+          "modified": false,
+          "modification": "No package-local modification; byte-identical to source.",
+          "base_sha256": null,
+          "current_source_sha256": "737d09ec1b96e4cdf8cec1fdfe6fcdabe9071332b13158eac5eb3fa525e2217b",
+          "package_sha256": "737d09ec1b96e4cdf8cec1fdfe6fcdabe9071332b13158eac5eb3fa525e2217b",
+          "base_equals_current_source": null,
+          "copy_equals_current_source": true,
+          "copy_matches_declared_pin": true,
+          "diff": null,
+          "license": "GPL-3.0-or-later",
+          "license_files": [
+            "tools/toon_image_cpu/LICENSE"
+          ],
+          "license_sha256": [
+            "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b"
+          ],
+          "license_text_relation": {
+            "normalized_equal_to_package_license": true,
+            "normalized_similarity": 1.0
+          },
+          "source_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "package_spdx_header": [
+            "GPL-3.0-or-later"
+          ],
+          "copyright": "NOASSERTION",
+          "copyright_lines_found": [],
+          "first_author": "NOASSERTION",
+          "upstream_commit": "NOASSERTION",
+          "source_release_version": "NOASSERTION"
+        }
+      ]
+    },
+    "excluded": [
+      {
+        "item": "Blender and NumPy runtime",
+        "reason": "Provided by the host Blender 5.2+ installation; not in the ZIP and not represented as a shipped SBOM package.",
+        "evidence": "blender_manifest.toml blender_version_min; all numpy imports resolve at runtime."
+      },
+      {
+        "item": "toon_image_cpu native DLLs",
+        "reason": "native_stroke.dll and screen_query.dll exist only in the source project; only the two pure-Python files are copied.",
+        "evidence": "source directory listing; package suffix inventory has 0 binary files."
+      },
+      {
+        "item": "Commercial Pencil+ RenderApp / PLD implementation",
+        "reason": "No commercial binary, SDK, PLD serializer or vendor preset code is shipped; PLD is explicitly unavailable.",
+        "evidence": "vector_output.py; preset_catalog.py; README; package binary inventory."
+      },
+      {
+        "item": "User character meshes, textures, fonts and test renders",
+        "reason": "External user inputs and audit outputs are not members of the 115-file ZIP; package contains no image/font/mesh assets.",
+        "evidence": "phase5 DELIVERY.json test_workfile_not_clean_delivery=true; REPORT; package suffix inventory."
+      },
+      {
+        "item": "Audit reports, MP4 previews, test workfiles",
+        "reason": "Kept outside the extension package as evidence, not distribution content.",
+        "evidence": "phase5 package/REPORT paths; ZIP entry list."
+      },
+      {
+        "item": "External design/interface references",
+        "reason": "OpenEXR layout, Pencil+ PLD docs/pyd source, fogleman/ln, public v4.1.5 bridge and PENumbra are cited as references only; no external source is bundled.",
+        "evidence": "source comments/README; no network access used; not independently compared."
+      }
+    ]
+  },
+  "final_distribution_delta": {
+    "baseline_version": "0.2.26",
+    "version": "0.2.27",
+    "baseline_package_sha256": "3731fa5282c5afd02c5cd21b72970e3ce1ba7d699eefe8879c545685a3a09fb3",
+    "Python_behavior_change": "Per-Screen per-space saved preview visibility; add-on draw/tick gate, UI and lifecycle integration.",
+    "Python_version_identity_only": "__init__.py",
+    "added": [
+      "viewport_scope.py",
+      "NOTICE",
+      "SOURCES.json",
+      "SBOM.spdx.json",
+      "RELEASE-NOTES.md"
+    ],
+    "changed_metadata": [
+      "README.md",
+      "PROVENANCE.md",
+      "blender_manifest.toml"
+    ],
+    "original_source_copies_13_unchanged": true,
+    "unknown_copyright_and_history_retained": true,
+    "statement": "GPL-3.0-or-later is the existing project declaration. No new named copyright holder, upstream commit or commercial permission is invented."
+  }
+}

@@ -1,18 +1,31 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 """Build identities and scoped native compositor capture for the Toon worker."""
 from contextlib import contextmanager
+import re
 
 
-JOINT_BUILDS = {
-    ((5, 2, 1), '9e2066aef7ef'),
-    ((5, 3, 0), '02f0899d78e3'),
-}
+from .host_compat import MINIMUM_BLENDER_VERSION as MINIMUM_JOINT_VERSION, is_supported_host
+
+
+def _require_joint_identity(version, build_hash):
+    if not isinstance(build_hash, str) or not re.fullmatch(r'[0-9a-f]{7,64}', build_hash):
+        raise ValueError('Toon joint renderer requires a hexadecimal Blender build hash')
+    if not is_supported_host(version):
+        raise ValueError(f'Unsupported Toon joint renderer build: {(version, build_hash)}')
 
 
 def require_joint_build(app):
-    identity = (tuple(app.version), app.build_hash.decode())
-    if identity not in JOINT_BUILDS:
-        raise ValueError(f'Unsupported Toon joint renderer build: {identity}')
+    _require_joint_identity(tuple(app.version), app.build_hash.decode('ascii', errors='replace'))
+
+
+def require_joint_receipt(host):
+    version = host['version']
+    if not isinstance(version, str) or len(version) > 80:
+        raise ValueError('Native-media receipt requires a Blender version')
+    parsed = re.fullmatch(r'([0-9]+)\.([0-9]+)\.([0-9]+)(?: [A-Za-z0-9 -]+)?', version)
+    if parsed is None:
+        raise ValueError('Native-media receipt requires a Blender version')
+    _require_joint_identity(tuple(map(int, parsed.groups())), host['build_hash'])
 
 
 def signature_inputs(node):

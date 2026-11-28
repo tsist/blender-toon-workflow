@@ -9,6 +9,8 @@ import uuid
 import bpy
 from mathutils import Vector
 
+from .host_compat import is_supported_host
+
 
 PROFILE = 'toon-eevee-lighting-5.3.v1'
 PROJECT = 'toon53_project'
@@ -23,12 +25,17 @@ EYELID_CONTROL = 'toon53_eyelid_control'
 FACE_OBJECT = 'toon53_face_object'
 KEY_LIGHT = 'toon53_key_light'
 FILL_LIGHT = 'toon53_fill_light'
+RIM_LIGHT = 'toon53_rim_light'
 MATERIAL = 'toon53_material'
 PROJECT_REF = 'toon53_scene'
 STAGE = 'toon53_stage'
+DIRECTIONAL_STAGE = 'toon53_directional_stage'
 ROLE_FACE = 'FACE'
 ROLE_HAIR = 'HAIR'
 ROLE_COLOR = 'COLOR'
+ROLE_DIRECTIONAL_FACE = 'DIRECTIONAL_FACE'
+# A value outside both legacy tests (key > .5, fill < -.5).
+RIM_TAG = .25
 FAMILY_ARCHIVE = 'toon53_previous_family'
 FACE_NORMAL = 'Face Shader Normal'
 ARTIST_NORMAL = 'Artist Normal'
@@ -75,7 +82,7 @@ def _present(scene, obj, kind):
 
 
 def _available(scene):
-    _need(bpy.app.version[:2] == (5, 3) and scene.render.engine == 'BLENDER_EEVEE',
+    _need(is_supported_host(bpy.app.version) and scene.render.engine == 'BLENDER_EEVEE',
           '原生逐灯着色需要 Blender 5.3 和 EEVEE')
 
 
@@ -108,6 +115,10 @@ def _tag_lights(scene):
     return 'toon53_' + owner
 
 
+def _tag_directional_lights(scene):
+    return _tag_lights(scene) + '_directional'
+
+
 def _light_available(scene, light):
     return _present(scene, light, 'LIGHT') and _local(light.data) and light.data.users == 1
 
@@ -122,6 +133,9 @@ def _fill_receivers(scene, fill):
         return
     receivers = bpy.data.collections.new('三渲二 5.3 · 脸部收光')
     try:
+        from .._ui_kit import apply_collection_theme
+
+        apply_collection_theme(receivers, 'toon')
         receivers[OWNER] = owner
         receivers.objects.link(face)
         fill.light_linking.receiver_collection = receivers
@@ -132,7 +146,7 @@ def _fill_receivers(scene, fill):
 
 def is_fill_excluded(scene, target, light):
     """Qualify an explicit 5.3 fill that cannot reach the old hair sensor."""
-    if bpy.app.version[:2] != (5, 3) or target is None or scene.get(FILL_LIGHT) != light:
+    if not is_supported_host(bpy.app.version) or target is None or scene.get(FILL_LIGHT) != light:
         return False
     receivers = light.light_linking.receiver_collection
     tag = _tag_lights(scene)
@@ -142,26 +156,32 @@ def is_fill_excluded(scene, target, light):
             and target not in receivers.objects.values())
 
 
-def _setup_lights(scene, key, fill=None):
+def _setup_lights(scene, key, fill=None, rim=None):
     owner = _tag_lights(scene)
+    directional = _tag_directional_lights(scene)
     _need(_light_available(scene, key) and key.data.type == 'SUN',
           '请选择此场景内独立使用灯光数据的本地太阳作主光')
     _need(fill is None or (_light_available(scene, fill) and fill != key),
           '副光须为本场景另一盏使用独立数据的本地灯光')
+    _need(rim is None or (_light_available(scene, rim) and rim not in (key, fill)),
+          '轮廓光须为本场景另一盏使用独立数据的本地灯光')
     next_roles = {key: 1.}
     if fill is not None:
         next_roles[fill] = -1.
+    if rim is not None:
+        next_roles[rim] = RIM_TAG
     old_roles = [obj for obj in scene.objects if obj.type == 'LIGHT'
-                 and (owner in obj or owner in obj.data)]
+                 and any(tag in obj or tag in obj.data for tag in (owner, directional))]
     for light in set(old_roles).union(next_roles):
         _need(_light_available(scene, light), '现有光源已共享或不可编辑')
     if fill is not None:
         _fill_receivers(scene, fill)
     for light in old_roles:
         for block in (light, light.data):
-            if owner in block:
-                del block[owner]
-        if light not in next_roles:
+            for tag in (owner, directional):
+                if tag in block:
+                    del block[tag]
+        if light != fill:
             collection = light.light_linking.receiver_collection
             if collection is not None and collection.get(OWNER) == _identity(scene):
                 light.light_linking.receiver_collection = None
@@ -170,12 +190,15 @@ def _setup_lights(scene, key, fill=None):
     for light, role in next_roles.items():
         for block in (light, light.data):
             block[owner] = role
+            # 5.3 per-light attributes in the directional material use positive role IDs.
+            block[directional] = 1. if light == key else 2. if light == fill else 3.
             block.update_tag()
     scene[KEY_LIGHT] = key
-    if fill is not None:
-        scene[FILL_LIGHT] = fill
-    elif FILL_LIGHT in scene:
-        del scene[FILL_LIGHT]
+    for prop, light in ((FILL_LIGHT, fill), (RIM_LIGHT, rim)):
+        if light is not None:
+            scene[prop] = light
+        elif prop in scene:
+            del scene[prop]
     scene.update_tag()
 
 
@@ -239,7 +262,7 @@ def _new_controls(scene, target, slot):
     return controls
 
 
-def prepare(scene, key, target, *, fill=None, face_slot=None):
+def prepare(scene, key, target, *, fill=None, rim=None, face_slot=None):
     """Author visible, persistent shot controls in the open 5.3 working file."""
     _available(scene)
     _check_copy()
@@ -248,13 +271,13 @@ def prepare(scene, key, target, *, fill=None, face_slot=None):
         _identity(scene)
         _need(scene.get(KEY_LIGHT) == key, '主光已绑定。保留当前键与面影引用')
         _need(scene.get(FACE_OBJECT) == target, '请先选回已绑定的脸部对象')
-        _setup_lights(scene, key, fill)
+        _setup_lights(scene, key, fill, rim)
         return scene[CONTROLLER]
     _need(_light_available(scene, key) and key.data.type == 'SUN'
           and (fill is None or (_light_available(scene, fill) and fill != key)),
           '请指定本地独占太阳主光与可选的独占副光')
     _need(not any(name in scene for name in (*COLORS, *NUMBERS, CONTROLLER, LOCAL_ANCHOR,
-                                            LOCAL_HANDLE, KEY_LIGHT, FILL_LIGHT, FACE_OBJECT)),
+                                            LOCAL_HANDLE, KEY_LIGHT, FILL_LIGHT, RIM_LIGHT, FACE_OBJECT)),
           '场景已有未识别的 5.3 参数')
     scene[PROJECT] = uuid.uuid4().hex
     controls = {}
@@ -266,7 +289,7 @@ def prepare(scene, key, target, *, fill=None, face_slot=None):
         for name, obj in controls.items():
             scene[name] = obj
         scene[FACE_OBJECT] = target
-        _setup_lights(scene, key, fill)
+        _setup_lights(scene, key, fill, rim)
     except Exception:
         for obj in reversed(controls.values()):
             bpy.data.objects.remove(obj, do_unlink=True)
@@ -357,7 +380,7 @@ def is_owned_group(group):
     """Full local graph witness, used by the background opaque-material reader."""
     try:
         return (_local(group) and group.get(STAGE) == PROFILE
-                and group.get(ROLE) in (ROLE_FACE, ROLE_HAIR, ROLE_COLOR)
+                and group.get(ROLE) in (ROLE_FACE, ROLE_HAIR, ROLE_COLOR, ROLE_DIRECTIONAL_FACE)
                 and group.get(SIGNATURE) == _signature(group))
     except (AttributeError, ValueError, TypeError, ReferenceError):
         return False
@@ -657,7 +680,31 @@ def _exclusive_group(instance, material):
     return group
 
 
-def _face_groups(scene, material):
+def _retained_face_wrapper(scene, material, surface, legacy_surface):
+    from . import directional_face_53
+
+    wrapper = directional_face_53.active_stage(material)
+    owner = _identity(scene)
+    _need(wrapper is not None and not wrapper.mute and wrapper.get(OWNER) == owner
+          and surface == wrapper.outputs['Surface'], '连续面影不在当前表面输出')
+    group = _exclusive_group(wrapper, material)
+    _need(is_owned_group(group) and group.get(OWNER) == owner and group.get(PROJECT_REF) == scene
+          and group.get(ROLE) == ROLE_DIRECTIONAL_FACE, '连续面影的作者或签名已经改变')
+    source = _input_source(wrapper.inputs['Original Surface'])
+    visited = set()
+    # These serial Mix Shader inputs are the explicitly retained original branch.
+    # Do not search alternate inputs or traverse nested unrelated shader groups.
+    while source is not None and source != legacy_surface and source.node not in visited:
+        node = source.node
+        if node.bl_idname != 'ShaderNodeMixShader' or node.mute:
+            break
+        visited.add(node)
+        source = _input_source(node.inputs[1])
+    _need(source == legacy_surface, '连续面影未保留受管的原面部法向分支')
+    return wrapper
+
+
+def _face_groups(scene, material, *, retained_surface=False):
     tree = material.node_tree
     owner = _identity(scene)
     stage = tree.nodes.get(material.get(STAGE, ''))
@@ -670,10 +717,14 @@ def _face_groups(scene, material):
           and group.get(PROJECT_REF) == scene and group.get(MATERIAL) == material.name_full,
           '面部逐灯组的作者、材质或签名已经改变')
     output = tree.get_output_node('EEVEE')
-    _need(output and _input_source(output.inputs['Surface']) == stage.outputs['Surface']
-          and _input_source(stage.inputs['Original Surface']) is not None,
+    surface = _input_source(output.inputs['Surface']) if output else None
+    _need(surface is not None and _input_source(stage.inputs['Original Surface']) is not None,
           '面部逐灯组的表面连接已经改变')
-    keys = [node for node in tree.nodes if node.bl_idname == 'ShaderNodeGroup' and node != stage
+    wrapper = None
+    if surface != stage.outputs['Surface']:
+        _need(retained_surface, '面部逐灯组的表面连接已经改变')
+        wrapper = _retained_face_wrapper(scene, material, surface, stage.outputs['Surface'])
+    keys = [node for node in tree.nodes if node.bl_idname == 'ShaderNodeGroup' and node not in (stage, wrapper)
             and (node.get(OWNER) == owner or KEY_DIFFUSE in node or node.label == KEY_LABEL
                  or (node.node_tree and node.node_tree.name.startswith(KEY_GROUP_NAME)))]
     _need(len(keys) <= 1, '面部材质有多个主光色阶组')
@@ -840,7 +891,7 @@ def _cast_normal_consumers(tree, cast_output, diffuse_normal):
     _need(isinstance(scene, bpy.types.Scene) and material and material.node_tree == tree
           and _input_source(diffuse_normal) == cast_output,
           '逐灯法向与原面部材质没有共同所有权')
-    _, key = _face_groups(scene, material)
+    _, key = _face_groups(scene, material, retained_surface=True)
     _need(key is not None and key.get(KEY_DIFFUSE, diffuse_normal.node.name) == diffuse_normal.node.name,
           '主光色阶来自不同的原 Diffuse')
     original = json.loads(cast_output.node[sdf_cast._ORIGINAL])
@@ -1049,7 +1100,8 @@ def bind(scene, target, index, role, *, mask=None, uv_name=''):
     _need(role in (ROLE_FACE, ROLE_HAIR, ROLE_COLOR), '未知逐灯着色角色')
     material = _material_context(scene, target, index)
     tree = material.node_tree
-    _need(not material.get(STAGE), '此材质已有 5.3 光照')
+    _need(not material.get(STAGE) and not material.get(DIRECTIONAL_STAGE),
+          '此材质已有 5.3 光照')
     _need(PALETTE_REF not in material,
           '材质已有未识别的 5.3 调色属性')
     output = tree.get_output_node('EEVEE')
@@ -1144,7 +1196,7 @@ def bind(scene, target, index, role, *, mask=None, uv_name=''):
 
 
 def has_hair_stage(material):
-    if bpy.app.version[:2] != (5, 3) or not material.get(STAGE):
+    if not is_supported_host(bpy.app.version) or not material.get(STAGE):
         return False
     stage = material.node_tree.nodes.get(material[STAGE])
     return stage is not None and stage.get(STAGE) == PROFILE and stage.get(ROLE) == ROLE_HAIR
@@ -1249,16 +1301,19 @@ def add_eyelid_control(scene, material):
 
 def original_surface_socket(destination):
     """Resolve the original Surface ingress of a signed wrapper for old authors."""
-    if len(destination.links) != 1:
-        return destination
-    node = destination.links[0].from_node
-    if node.get(STAGE) != PROFILE:
-        return destination
-    original = node.inputs.get('Original Surface')
-    _need(node.bl_idname == 'ShaderNodeGroup' and is_owned_group(node.node_tree)
-          and original is not None and len(original.links) == 1,
-          '5.3 光照包裹节点的原材质入口已变化')
-    return original
+    # Directional lighting may wrap a legacy 5.3 material without touching its graph.
+    for _ in range(2):
+        if len(destination.links) != 1:
+            break
+        node = destination.links[0].from_node
+        if node.get(STAGE) != PROFILE:
+            break
+        original = node.inputs.get('Original Surface')
+        _need(node.bl_idname == 'ShaderNodeGroup' and is_owned_group(node.node_tree)
+              and original is not None and len(original.links) == 1,
+              '5.3 光照包裹节点的原材质入口已变化')
+        destination = original
+    return destination
 
 
 def save_upgrade(destination):

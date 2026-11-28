@@ -131,7 +131,8 @@ class TOONVIEWPORT_PT_line_functions(bpy.types.Panel):
         layout=self.layout
         try:rows=_rows(context.scene)
         except Exception:layout.label(text='请先加载可编辑样式');return
-        material=context.material
+        obj=getattr(context,'active_object',None)
+        material=getattr(context,'material',None) or getattr(obj,'active_material',None)
         ref=reference(material) if material else None
         active=[r for r in rows.values() if ref in r['materials']]
         if not active:layout.operator('toon_viewport.line_function_add');return

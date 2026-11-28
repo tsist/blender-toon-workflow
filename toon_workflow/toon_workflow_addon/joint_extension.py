@@ -13,7 +13,7 @@ import shutil
 import sys
 
 IMPLEMENTATION_FILES = ('__init__.py', 'runtime_compat.py', 'band_boundary.py','band_boundary_witness.py','render_capture.py','shot_regions.py',
-                        'lighting_53.py', 'lighting_53_ui.py',
+                        'lighting_53.py', 'lighting_53_ui.py', 'directional_face_53.py', 'native_surface_witness.py',
                         'line_optics.py','media_render.py','media_render_ui.py','style_family_v2.py',
                         'joint_sampling.py', 'joint_line_adapter.py', 'pixel_coverage.py', 'line_material_colors.py', 'line_material_ui.py', 'line_image_source.py', 'line_image_affine.py',
                         'joint_render.py', 'camera_correction.py', 'joint_extension.py',

@@ -67,7 +67,7 @@ def save_exr_new(path, pixels, *, pixel_aspect=None):
         density = 72. / .0254 * min(px, py)
         image.resolution = (density / px, density / py)
         image.pixels.foreach_set(np.asarray(pixels, dtype=np.float32).reshape(-1))
-        work = Path(tempfile.mkdtemp(prefix='.toon-exr-', dir=path.parent))
+        work = Path(tempfile.mkdtemp(prefix='.x-', dir=path.parent))
         staged = work / 'pixels.exr'
         image.save_render(str(staged), scene=scene)
         with staged.open('r+b') as stream:

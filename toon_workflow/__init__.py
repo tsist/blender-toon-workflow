@@ -1,10 +1,14 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 """Single install entry for the embedded Toon domains and Pencil backend."""
 bl_info = {
-    'name': '三渲二 · Toon Workflow', 'author': 'Blender AI',
-    'version': (0,52,1), 'blender': (5,2,1), 'category': '3D View',
+    'name': '三渲二工作台', 'author': 'Blender AI',
+    'version': (1, 0, 1), 'blender': (5, 3, 0), 'category': '3D View',
     'description': '头部法向、二维描边、镜头修形与联合渲染的统一工作台',
 }
+
+
+# Blender removes legacy bl_info when enabling an extension.
+_RELEASE_VERSION = '1.0.1'
 
 
 def _validate_payload():
@@ -12,8 +16,7 @@ def _validate_payload():
     from pathlib import Path,PurePosixPath
     root=Path(__file__).resolve().parent
     manifest=json.loads((root/'bundle.json').read_text(encoding='utf8'))
-    expected_version = '.'.join(map(str, bl_info['version']))
-    if manifest.get('schema')!='toon-unified-bundle.v1' or manifest.get('version')!=expected_version:
+    if manifest.get('schema')!='toon-unified-bundle.v1' or manifest.get('version')!=_RELEASE_VERSION:
         raise RuntimeError('三渲二安装包身份不匹配')
     files=manifest.get('files')
     if type(files) is not dict or not 1<=len(files)<=512:

@@ -1,0 +1,13 @@
+schema_version = "1.0.0"
+id = "toon_workflow"
+version = "1.0.1"
+name = "三渲二工作台"
+tagline = "色阶材质、面部影形、二维描边与线色输出"
+maintainer = "Blender AI"
+type = "add-on"
+tags = ["3D View"]
+blender_version_min = "5.3.0"
+license = ["SPDX:GPL-3.0-or-later"]
+
+[permissions]
+files = "读取工作副本和样式，保存渲染与线稿"

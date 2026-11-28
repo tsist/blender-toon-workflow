@@ -28,6 +28,7 @@ class AuthorSettings(bpy.types.PropertyGroup):
 class TOONVIEWPORT_OT_author_file(bpy.types.Operator):
     bl_idname='toon_viewport.author_file';bl_label='自主作者文件';bl_options={'REGISTER','UNDO'}
     action:EnumProperty(items=[(n,n,'') for n in ('NEW','IMPORT','APPEND','EXPORT','PRESET','RESET','LOAD_PRESET','SAVE_PRESET','WORKSPACE','SHAPE','OVERRIDE','REMOVE_OVERRIDE','OUTPUT','CLEANUP','FIX_NAMES','PREVIEW')])
+    use_current_scope_values:BoolProperty(default=False, options={'HIDDEN'})
     def execute(self,context):
         scene=context.scene;s=scene.toon_author_files
         try:
@@ -37,7 +38,18 @@ class TOONVIEWPORT_OT_author_file(bpy.types.Operator):
             elif self.action=='EXPORT':F.export_style(scene,bpy.path.abspath(s.path))
             elif self.action=='WORKSPACE':H.workspace(context,name=s.label)
             elif self.action=='SHAPE':H.selection_generator(context,label=s.label,mode=s.shape_mode,image=s.shape_image,ray_target=s.shape_target,threshold=s.shape_threshold,border_only=s.shape_border)
-            elif self.action=='OVERRIDE':O.set_scope(scene,json.loads(s.overrides),view_layer=context.view_layer.name if s.scope=='LAYER' else None)
+            elif self.action=='OVERRIDE':
+                layer = context.view_layer.name if s.scope=='LAYER' else None
+                if self.use_current_scope_values:
+                    pencil = scene.toon_viewport_preview
+                    document = O.read(scene)
+                    values = document['scene'] if layer is None else document['layers'].get(layer, {})
+                    values.setdefault('settings', {}).update(
+                        {name: list(getattr(pencil, name)) if name=='line_color' else getattr(pencil, name)
+                         for name in O.FIELDS})
+                else:
+                    values = json.loads(s.overrides)
+                O.set_scope(scene,values,view_layer=layer)
             elif self.action=='REMOVE_OVERRIDE':O.remove_scope(scene,view_layer=context.view_layer.name if s.scope=='LAYER' else None)
             elif self.action=='OUTPUT':
                 result=O.request(bpy.path.abspath(s.path),context,keyed_only=s.keyed_only)
@@ -92,9 +104,11 @@ def draw(layout,context):
     if s.shape_mode in ('NOISE','IMAGE'):layout.prop(s,'shape_threshold')
     row=layout.row(align=True)
     row.operator('toon_viewport.author_file',text='清理失效作者引用').action='CLEANUP';row.operator('toon_viewport.author_file',text='按唯一名称修复引用').action='FIX_NAMES'
-    layout.separator();layout.prop(s,'scope');layout.prop(s,'overrides')
+    layout.separator();layout.prop(s,'scope')
     row=layout.row(align=True)
-    row.operator('toon_viewport.author_file',text='应用范围覆盖').action='OVERRIDE';row.operator('toon_viewport.author_file',text='移除覆盖').action='REMOVE_OVERRIDE'
+    op=row.operator('toon_viewport.author_file',text='用当前参数覆盖此范围')
+    op.action='OVERRIDE';op.use_current_scope_values=True
+    row.operator('toon_viewport.author_file',text='移除覆盖').action='REMOVE_OVERRIDE'
     layout.prop(s,'keyed_only');layout.operator('toon_viewport.author_file',text='按范围导出').action='OUTPUT'
     layout.prop(s,'worker_timeout');layout.prop(s,'abort_on_error')
     layout.label(text='输出程序：当前 Blender（独立后台工作进程）')

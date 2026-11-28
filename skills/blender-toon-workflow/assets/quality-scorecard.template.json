@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0",
+  "task_id": "",
+  "stage": "",
+  "blender_version": "5.3.0",
+  "blender_build": "02f0899d78e3",
+  "source_sha256": "",
+  "target_level": "L2",
+  "achieved_level": null,
+  "status": "not_run",
+  "passed": false,
+  "hard_gates_passed": false,
+  "reviewer_role": "",
+  "review_scope": "",
+  "blocking_issues": [],
+  "gradients": {
+    "G1_engineering": { "score": null, "max": 15, "applicable": true, "notes": "", "evidence": [] },
+    "G2_structure_topology": { "score": null, "max": 25, "applicable": true, "notes": "", "evidence": [] },
+    "G3_reference_fidelity": { "score": null, "max": 25, "applicable": true, "notes": "", "evidence": [] },
+    "G4_shading_continuity": { "score": null, "max": 20, "applicable": true, "notes": "", "evidence": [] },
+    "G5_delivery_polish": { "score": null, "max": 15, "applicable": true, "notes": "", "evidence": [] }
+  },
+  "total_score": null,
+  "scoring_signature": {
+    "reviewer": "",
+    "minimum_gradient_ratio": null
+  },
+  "toon_review": {
+    "plugin_version": "",
+    "implementation_sha256": "",
+    "scene": "",
+    "view_layer": "",
+    "camera": "",
+    "frames": [],
+    "resolution": [],
+    "render_engine": "",
+    "output_profile": "",
+    "color_and_alpha": "",
+    "hard_gate_checks": {
+      "G1_cold_reopen_dependencies_slots_drivers": { "status": "not_run", "evidence": [] },
+      "G1_transforms_data_maps_and_visibility": { "status": "not_run", "evidence": [] },
+      "G2_scale_axes_origin_and_collections": { "status": "not_run", "evidence": [] },
+      "G2_visible_topology_and_poles": { "status": "not_run", "evidence": [] }
+    },
+    "checks": {
+      "cold_reopen": { "status": "not_run", "evidence": [] },
+      "reference_style": { "status": "not_run", "evidence": [] },
+      "locked_camera_head_turn": { "status": "not_run", "evidence": [] },
+      "key_light_change": { "status": "not_run", "evidence": [] },
+      "fill_light_isolation": { "status": "not_run", "evidence": [] },
+      "camera_orbit": { "status": "not_run", "evidence": [] },
+      "locked_camera_directional_light_sweep": { "status": "not_run", "evidence": [] },
+      "continuous_frames": { "status": "not_run", "evidence": [] },
+      "character_rebind": { "status": "not_run", "evidence": [] },
+      "indoor_outdoor_transfer": { "status": "not_run", "evidence": [] },
+      "layer_reconstruction": { "status": "not_run", "evidence": [] },
+      "job_recovery": { "status": "not_run", "evidence": [] }
+    },
+    "manual_adjustments": [],
+    "manual_minutes": null,
+    "job_wall_seconds": null,
+    "peak_memory_gib": null
+  }
+}

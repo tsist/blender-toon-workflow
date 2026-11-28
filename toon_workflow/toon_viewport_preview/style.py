@@ -107,13 +107,13 @@ _OBJECT_BINDING_FIELDS = {'logical_id', 'source_name'}
 _MATERIAL_BINDING_FIELDS = {'logical_name', 'source_name'}
 
 SIZE_SCALE_DEPENDENCY = {
-    'module': 'toon_image_cpu.relative_size',
+    'module': 'toon_viewport_preview._support.relative_size',
     'function': 'resolve_size_scale',
     'schema': 'toon.line-size-resolution.v1',
     'reason': 'Explicit original bridge unit transform; this package does not copy or alter it.',
     'load_order': [
         'packaged toon_viewport_preview/_support/relative_size.py',
-        'development sibling tools/toon_image_cpu/relative_size.py loaded by path',
+        'relative-size support bundled with the viewport preview',
     ],
 }
 
